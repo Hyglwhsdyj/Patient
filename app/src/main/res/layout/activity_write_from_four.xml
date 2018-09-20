@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.ais.patient.activity.main.WriteFromThirdActivity">
+    <include layout="@layout/view_main_title"/>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#FFFEFDCD"
+                android:paddingTop="@dimen/dimens_9"
+                android:paddingRight="@dimen/dimens_14"
+                android:paddingBottom="@dimen/dimens_10">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_tag"
+                    android:layout_marginLeft="@dimen/dimens_16"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1、以下所列问题，均指当前症状。以往出现而现在已经没有的症状，不在此例，如果觉得有必要提及，可填写补充说明。
+2、急性病以当前情况为准，慢性病以近三天情况为准。
+3、题目均为选填，但越详细的问诊单越能帮助医生更精准地为您辩证开方。"
+                    android:textColor="#ffc19a48"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="@dimen/dimens_8"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/dimens_10"
+                android:background="@color/white"
+                android:paddingTop="@dimen/dimens_20"
+                android:paddingBottom="@dimen/dimens_20">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="01"
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/dimens_15"
+                    android:background="@drawable/shape_write_other"
+                    android:textColor="@color/color_main"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="02"
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/dimens_15"
+                    android:background="@drawable/shape_write_other"
+                    android:textColor="@color/color_main"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="03"
+                    android:layout_marginRight="@dimen/dimens_15"
+                    android:gravity="center"
+                    android:background="@drawable/shape_write_other"
+                    android:textColor="@color/color_main"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="04"
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/dimens_15"
+                    android:background="@drawable/shape_write_first"
+                    android:textColor="@color/white" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="05"
+                    android:gravity="center"
+                    android:background="@drawable/shape_write_other"
+                    android:textColor="@color/color_main"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/dimens_10">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="身体感觉"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/dimens_17"
+                    android:paddingBottom="@dimen/dimens_17"
+                    android:textColor="#ff333333"
+                    android:textSize="15sp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_1"
+                    android:background="@color/color_line"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dimens_18"
+                    android:paddingBottom="@dimen/dimens_20"
+                    android:paddingLeft="@dimen/dimens_15"
+                    android:paddingRight="@dimen/dimens_15"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="身体感觉（可多选）"
+                        android:textColor="#ff333333"
+                        android:textSize="14sp" />
+
+                    <com.zhy.view.flowlayout.TagFlowLayout
+                        android:id="@+id/id_flowlayout1"
+                        app:max_select="-1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_20">
+                    </com.zhy.view.flowlayout.TagFlowLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_1"
+                    android:background="@color/color_line"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dimens_18"
+                    android:paddingBottom="@dimen/dimens_20"
+                    android:paddingLeft="@dimen/dimens_15"
+                    android:paddingRight="@dimen/dimens_15"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="手脚"
+                        android:textColor="#ff333333"
+                        android:textSize="14sp" />
+
+                    <com.zhy.view.flowlayout.TagFlowLayout
+                        android:id="@+id/id_flowlayout2"
+                        app:max_select="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_20">
+                    </com.zhy.view.flowlayout.TagFlowLayout>
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_1"
+                    android:background="@color/color_line"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dimens_18"
+                    android:paddingBottom="@dimen/dimens_20"
+                    android:paddingLeft="@dimen/dimens_15"
+                    android:paddingRight="@dimen/dimens_15"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="出汗（可多选）（可多选）"
+                        android:textColor="#ff333333"
+                        android:textSize="14sp" />
+
+                    <com.zhy.view.flowlayout.TagFlowLayout
+                        android:id="@+id/id_flowlayout3"
+                        app:max_select="-1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_20">
+                    </com.zhy.view.flowlayout.TagFlowLayout>
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_1"
+                    android:background="@color/color_line"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dimens_18"
+                    android:paddingBottom="@dimen/dimens_20"
+                    android:paddingLeft="@dimen/dimens_15"
+                    android:paddingRight="@dimen/dimens_15"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="头咽部（可多选）"
+                        android:textColor="#ff333333"
+                        android:textSize="14sp" />
+
+                    <com.zhy.view.flowlayout.TagFlowLayout
+                        android:id="@+id/id_flowlayout4"
+                        app:max_select="-1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_20">
+                    </com.zhy.view.flowlayout.TagFlowLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_1"
+                    android:background="@color/color_line"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dimens_18"
+                    android:paddingBottom="@dimen/dimens_20"
+                    android:paddingLeft="@dimen/dimens_15"
+                    android:paddingRight="@dimen/dimens_15"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="咳嗽和痰（可多选）"
+                        android:textColor="#ff333333"
+                        android:textSize="14sp" />
+
+                    <com.zhy.view.flowlayout.TagFlowLayout
+                        android:id="@+id/id_flowlayout5"
+                        app:max_select="-1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_20">
+                    </com.zhy.view.flowlayout.TagFlowLayout>
+                </LinearLayout>
+
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_1"
+                    android:background="@color/color_line"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dimens_18"
+                    android:paddingBottom="@dimen/dimens_20"
+                    android:paddingLeft="@dimen/dimens_15"
+                    android:paddingRight="@dimen/dimens_15"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="胸腹部（可多选）"
+                        android:textColor="#ff333333"
+                        android:textSize="14sp" />
+
+                    <com.zhy.view.flowlayout.TagFlowLayout
+                        android:id="@+id/id_flowlayout6"
+                        app:max_select="-1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_20">
+                    </com.zhy.view.flowlayout.TagFlowLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_1"
+                    android:background="@color/color_line"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dimens_18"
+                    android:paddingBottom="@dimen/dimens_20"
+                    android:paddingLeft="@dimen/dimens_15"
+                    android:paddingRight="@dimen/dimens_15"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="身体（可多选）"
+                        android:textColor="#ff333333"
+                        android:textSize="14sp" />
+
+                    <com.zhy.view.flowlayout.TagFlowLayout
+                        android:id="@+id/id_flowlayout7"
+                        app:max_select="-1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_20">
+                    </com.zhy.view.flowlayout.TagFlowLayout>
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_1"
+                    android:background="@color/color_line"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dimens_18"
+                    android:paddingBottom="@dimen/dimens_20"
+                    android:paddingLeft="@dimen/dimens_15"
+                    android:paddingRight="@dimen/dimens_15"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="生活习惯（可多选）"
+                        android:textColor="#ff333333"
+                        android:textSize="14sp" />
+
+                    <com.zhy.view.flowlayout.TagFlowLayout
+                        android:id="@+id/id_flowlayout8"
+                        app:max_select="-1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_20">
+                    </com.zhy.view.flowlayout.TagFlowLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/dimens_18"
+                android:paddingBottom="@dimen/dimens_15"
+                android:paddingLeft="@dimen/dimens_15"
+                android:paddingRight="@dimen/dimens_15"
+                android:background="@color/white"
+                android:layout_marginTop="@dimen/dimens_10">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="是否有可察觉的原因引起上述症状？比如饮食、服药、情绪、劳累、环境、气候等"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/et_other"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ff333333"
+                    android:textSize="13sp"
+                    android:gravity="start"
+                    android:hint="例如：近期经常做仰卧起坐、打羽毛球、暴饮暴食等"
+                    android:background="@drawable/shape_prescription_detail"
+                    android:layout_marginTop="@dimen/dimens_15"/>
+
+                <TextView
+                    android:id="@+id/tv_text_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0/250"
+                    android:layout_marginTop="@dimen/dimens_10"
+                    android:textColor="#ff858891"
+                    android:textSize="12sp"
+                    android:gravity="right"/>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/dimens_15">
+        <TextView
+            android:id="@+id/tv_last"
+            android:layout_width="@dimen/dimens_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="上一步"
+            android:gravity="center"
+            android:paddingTop="@dimen/dimens_15"
+            android:paddingBottom="@dimen/dimens_15"
+            android:textColor="@color/white"
+            android:layout_marginRight="@dimen/dimens_10"
+            android:background="@drawable/shape_add_pratient"/>
+
+        <TextView
+            android:id="@+id/tv_next"
+            android:layout_width="@dimen/dimens_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="下一步"
+            android:gravity="center"
+            android:paddingTop="@dimen/dimens_15"
+            android:paddingBottom="@dimen/dimens_15"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_add_pratient"/>
+    </LinearLayout>
+</LinearLayout>

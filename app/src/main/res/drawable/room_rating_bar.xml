@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--这里表示默认的样式-->
+    <item
+        android:id="@android:id/background"
+        android:drawable="@drawable/ic_star"  />
+    <!--这里表示选中和滑动的样式-->
+    <item
+        android:id="@android:id/secondaryProgress"
+        android:drawable="@drawable/ic_saved" />
+    <item
+        android:id="@android:id/progress"
+        android:drawable="@drawable/ic_saved" />
+</layer-list>

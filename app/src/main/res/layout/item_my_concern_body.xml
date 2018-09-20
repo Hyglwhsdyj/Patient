@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/dimens_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingTop="19dp">
+
+        <com.ais.patient.widget.CircleImageView
+            android:id="@+id/iv_doctor_photo"
+            android:layout_width="@dimen/dimens_50"
+            android:layout_height="@dimen/dimens_50"
+            android:layout_marginLeft="@dimen/dimens_15" />
+
+        <TextView
+            android:id="@+id/tv_doctor_depart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dimens_15"
+            android:background="@drawable/bg_yellow_whilte_round9"
+            android:paddingBottom="@dimen/dimens_4"
+            android:paddingLeft="@dimen/dimens_11"
+            android:paddingRight="@dimen/dimens_11"
+            android:paddingTop="@dimen/dimens_4"
+            android:text="中医内科"
+            android:textColor="@color/color_yellow"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_doctor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimens_16"
+            android:layout_toRightOf="@+id/iv_doctor_photo"
+            android:text="徐建龙  主任医师"
+            android:textColor="@color/color_main"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_doctor_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_doctor_name"
+            android:layout_marginLeft="@dimen/dimens_16"
+            android:layout_marginTop="@dimen/dimens_14"
+            android:layout_toRightOf="@+id/iv_doctor_photo"
+            android:text="医院机构：上海浦东医院："
+            android:textColor="@color/black_6"
+            android:textSize="13sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_doctor_position"
+            android:layout_marginBottom="@dimen/dimens_25"
+            android:layout_marginLeft="@dimen/dimens_16"
+            android:layout_marginTop="@dimen/dimens_6"
+            android:layout_toRightOf="@+id/iv_doctor_photo"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_doctor_begood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="擅长："
+                android:textColor="@color/black_6"
+                android:textSize="13sp" />
+
+            <com.ais.patient.widget.WarpLinearLayout
+                android:id="@+id/tv_good"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></com.ais.patient.widget.WarpLinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/base_line_layout"></include>
+</LinearLayout>

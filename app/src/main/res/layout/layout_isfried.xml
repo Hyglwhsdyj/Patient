@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/ll_photographs">
+    <TextView
+        android:id="@+id/tv_isFried"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_15"
+        android:gravity="center"
+        android:paddingTop="@dimen/dimens_15"
+        android:paddingBottom="@dimen/dimens_15"
+        android:background="@color/white"
+        android:textColor="@color/color_main"
+        android:text="代煎"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_1"
+        android:background="@color/color_line"/>
+    <TextView
+        android:id="@+id/tv_notFried"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_15"
+        android:gravity="center"
+        android:paddingTop="@dimen/dimens_15"
+        android:paddingBottom="@dimen/dimens_15"
+        android:background="@color/white"
+        android:textColor="@color/color_main"
+        android:text="不代煎"/>
+</LinearLayout>

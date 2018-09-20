@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:id="@+id/register_root_view"
+    tools:context="com.ais.patient.activity.mine.AfterSalesActivity">
+    <include layout="@layout/view_main_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <LinearLayout
+            style="@style/LinearLayoutStyle"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="问题描述"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="输入问题描述详情"
+                    android:textColor="#ff999999"
+                    android:textSize="12sp"
+                    />
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/et_content"
+                android:layout_width="match_parent"
+                android:layout_height="118dp"
+                android:layout_marginTop="@dimen/dimens_5"
+                android:background="@color/white"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dimens_15"
+            android:paddingRight="@dimen/dimens_15">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="上传图片："
+                android:textColor="#ff333333"
+                android:textSize="14sp"
+                android:layout_marginTop="@dimen/dimens_18" />
+
+            <com.ais.patient.widget.NetstedGridView
+                android:id="@+id/mNetstedGridView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:horizontalSpacing="10dp"
+                android:numColumns="3"
+                android:verticalSpacing="@dimen/dimens_10"
+                android:layout_marginTop="@dimen/dimens_15"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="温馨提示：为保障双方权益，请至少上传一张问题产品图片。"
+                android:textColor="#ff999999"
+                android:textSize="12sp"
+                android:layout_marginTop="@dimen/dimens_15"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_commit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_add_pratient"
+        android:text="提交售后"
+        android:padding="@dimen/dimens_15"
+        android:layout_margin="@dimen/dimens_15"
+        android:gravity="center"
+        android:textColor="#ffffffff"
+        android:textSize="15sp"/>
+</LinearLayout>

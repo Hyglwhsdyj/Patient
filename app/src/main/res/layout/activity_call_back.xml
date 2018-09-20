@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.ais.patient.activity.mine.CallBackActivity">
+    <include layout="@layout/view_main_title"/>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_margin="@dimen/dimens_15"
+                android:padding="@dimen/dimens_17">
+                <EditText
+                    android:id="@+id/et_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@color/white"
+                    android:hint="请输入您的宝贵意见，我们将积极改进"
+                    android:gravity="start"
+                    android:textSize="@dimen/sp_14"/>
+                <TextView
+                    android:id="@+id/tv_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0/300"
+                    android:layout_marginTop="@dimen/dimens_5"
+                    android:textColor="#ff3aa2fc"
+                    android:textSize="14sp"
+                    android:gravity="right"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_commit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="提交"
+                android:textColor="#ffffffff"
+                android:textSize="14sp"
+                android:layout_margin="@dimen/dimens_15"
+                android:padding="@dimen/dimens_16"
+                android:gravity="center"
+                android:background="@drawable/shape_back"/>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

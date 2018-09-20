@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.ais.patient.activity.mine.AppraiseDetialActivity">
+    <include layout="@layout/view_main_title"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/dimens_15"
+                android:background="@drawable/shape_msg_bg">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="服务内容"
+                    android:textColor="#ff333333"
+                    android:textSize="15sp"
+                    android:padding="@dimen/dimens_15"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_1"
+                    android:background="@color/color_line"
+                    android:layout_marginLeft="@dimen/dimens_15"
+                    android:layout_marginRight="@dimen/dimens_15"/>
+
+                <TextView
+                    android:id="@+id/tv_serviceName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="陈xx医生线下面诊服务"
+                    android:textColor="#ff333333"
+                    android:textSize="15sp"
+                    android:padding="@dimen/dimens_15"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/dimens_15"
+                android:layout_marginRight="@dimen/dimens_15"
+                android:paddingRight="@dimen/dimens_15"
+                android:paddingTop="@dimen/dimens_30"
+                android:paddingBottom="@dimen/dimens_30"
+                android:background="@drawable/shape_msg_bg">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="服务态度"
+                        android:layout_centerInParent="true"
+                        android:textColor="#ff333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/reMake"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="重新评价"
+                        android:textColor="#ff2c4da8"
+                        android:textSize="12sp"
+                        android:layout_alignParentRight="true"/>
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.AppCompatRatingBar
+                    android:id="@+id/popup_ratingbar"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:isIndicator="false"
+                    android:layout_marginTop="@dimen/dimens_15"
+                    style="?attr/ratingBarStyleIndicator"
+                    android:theme="@style/RatingBar" />
+                <RadioGroup
+                    android:id="@+id/mRadioGroup1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dimens_20">
+
+                    <RadioButton
+                        android:id="@+id/rd_attitude1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="@dimen/sp_12"
+                        android:text="态度好"
+                        android:layout_marginRight="@dimen/dimens_10"
+                        android:textColor="@color/seleted_color_appraise"
+                        android:padding="@dimen/dimens_12"
+                        android:background="@drawable/seleted_apprice"/>
+
+                    <RadioButton
+                        android:id="@+id/rd_attitude2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="@dimen/sp_12"
+                        android:text="态度一般"
+                        android:layout_marginRight="@dimen/dimens_10"
+                        android:textColor="@color/seleted_color_appraise"
+                        android:padding="@dimen/dimens_12"
+                        android:background="@drawable/seleted_apprice"/>
+
+                    <RadioButton
+                        android:id="@+id/rd_attitude3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="@dimen/sp_12"
+                        android:text="态度不佳"
+                        android:textColor="@color/seleted_color_appraise"
+                        android:padding="@dimen/dimens_12"
+                        android:background="@drawable/seleted_apprice"/>
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/dimens_15"
+                android:layout_marginRight="@dimen/dimens_15"
+                android:paddingRight="@dimen/dimens_15"
+                android:layout_marginTop="@dimen/dimens_15"
+                android:paddingTop="@dimen/dimens_30"
+                android:paddingBottom="@dimen/dimens_30"
+                android:background="@drawable/shape_msg_bg">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="回复速度"
+                        android:layout_centerInParent="true"
+                        android:textColor="#ff333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/reMake2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="重新评价"
+                        android:textColor="#ff2c4da8"
+                        android:textSize="12sp"
+                        android:layout_alignParentRight="true"/>
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.AppCompatRatingBar
+                    android:id="@+id/popup_ratingbar2"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:layout_marginTop="@dimen/dimens_15"
+                    style="?attr/ratingBarStyleIndicator"
+                    android:theme="@style/RatingBar"
+                    android:isIndicator="false"/>
+                <RadioGroup
+                    android:id="@+id/mRadioGroup2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dimens_20">
+
+                    <RadioButton
+                        android:id="@+id/rd_speed1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="@dimen/sp_12"
+                        android:text="回复及时"
+                        android:layout_marginRight="@dimen/dimens_10"
+                        android:textColor="@color/seleted_color_appraise"
+                        android:padding="@dimen/dimens_12"
+                        android:background="@drawable/seleted_apprice"/>
+
+                    <RadioButton
+                        android:id="@+id/rd_speed2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="@dimen/sp_12"
+                        android:text="回复时间较长"
+                        android:layout_marginRight="@dimen/dimens_10"
+                        android:textColor="@color/seleted_color_appraise"
+                        android:padding="@dimen/dimens_12"
+                        android:background="@drawable/seleted_apprice"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/dimens_15"
+                android:layout_marginLeft="@dimen/dimens_15"
+                android:layout_marginRight="@dimen/dimens_15"
+                android:paddingRight="@dimen/dimens_15"
+                android:paddingTop="@dimen/dimens_30"
+                android:paddingBottom="@dimen/dimens_30"
+                android:background="@drawable/shape_msg_bg">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="处方疗效"
+                        android:layout_centerInParent="true"
+                        android:textColor="#ff333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/reMake3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="重新评价"
+                        android:textColor="#ff2c4da8"
+                        android:textSize="12sp"
+                        android:layout_alignParentRight="true"/>
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.AppCompatRatingBar
+                    android:id="@+id/popup_ratingbar3"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:layout_marginTop="@dimen/dimens_15"
+                    style="?attr/ratingBarStyleIndicator"
+                    android:theme="@style/RatingBar"
+                    android:isIndicator="false"/>
+                <RadioGroup
+                    android:id="@+id/mRadioGroup3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dimens_20">
+
+                    <RadioButton
+                        android:id="@+id/rd_medical1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="@dimen/sp_12"
+                        android:text="效果很好，见效快"
+                        android:layout_marginRight="@dimen/dimens_10"
+                        android:textColor="@color/seleted_color_appraise"
+                        android:padding="@dimen/dimens_12"
+                        android:background="@drawable/seleted_apprice"/>
+
+                    <RadioButton
+                        android:id="@+id/rd_medical2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="@dimen/sp_12"
+                        android:text="效果一般"
+                        android:layout_marginRight="@dimen/dimens_10"
+                        android:textColor="@color/seleted_color_appraise"
+                        android:padding="@dimen/dimens_12"
+                        android:background="@drawable/seleted_apprice"/>
+
+                    <RadioButton
+                        android:id="@+id/rd_medical3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="@dimen/sp_12"
+                        android:text="没什么效果"
+                        android:textColor="@color/seleted_color_appraise"
+                        android:padding="@dimen/dimens_12"
+                        android:background="@drawable/seleted_apprice"/>
+                </RadioGroup>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_commit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="提交"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_15"
+                android:padding="@dimen/dimens_15"
+                android:layout_marginLeft="@dimen/dimens_15"
+                android:layout_marginRight="@dimen/dimens_15"
+                android:layout_marginTop="@dimen/dimens_20"
+                android:layout_marginBottom="@dimen/dimens_20"
+                android:gravity="center"
+                android:background="@drawable/shape_add_pratient"/>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

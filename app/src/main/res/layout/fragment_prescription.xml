@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <include layout="@layout/view_main_title"/>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.youth.banner.Banner
+                android:id="@+id/mBanner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimens_150"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/dimens_14">
+                <EditText
+                    android:id="@+id/et_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="输入疾病，进行相关疾病秘方查询"
+                    android:textColorHint="#ff999999"
+                    android:textSize="14sp"
+                    android:paddingLeft="@dimen/dimens_10"
+                    android:paddingTop="@dimen/dimens_13"
+                    android:paddingBottom="@dimen/dimens_13"
+                    android:background="@drawable/shape_search_disease"/>
+                <TextView
+                    android:id="@+id/tv_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="确定"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:paddingTop="@dimen/dimens_13"
+                    android:paddingBottom="@dimen/dimens_13"
+                    android:paddingLeft="@dimen/dimens_23"
+                    android:paddingRight="@dimen/dimens_23"
+                    android:background="@drawable/shape_search_disease_btn"/>
+            </LinearLayout>
+
+            <com.ais.patient.widget.NetstedListView
+                android:id="@+id/mNetstedListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"/>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.ais.patient.activity.main.ChatOnLineDetailActivity">
+    <include layout="@layout/view_main_title2"/>
+
+    <TextView
+        android:id="@+id/tv_addmsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="你可以完善问诊单，方便医生更好为您诊断 >"
+        android:textColor="#ffc19a48"
+        android:textSize="12sp"
+        android:background="#FFFEFDCD"
+        android:gravity="center"
+        android:paddingTop="@dimen/dimens_6"
+        android:paddingBottom="@dimen/dimens_6"/>
+</LinearLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dimens_12"
+        android:paddingLeft="@dimen/dimens_15"
+        android:paddingBottom="@dimen/dimens_12"
+        android:paddingRight="@dimen/dimens_15"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <com.ais.patient.widget.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_logo"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/dimens_10"
+            android:layout_marginLeft="@dimen/dimens_15">
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="白敬亭"
+                android:textColor="#ff333333"
+                android:textSize="15sp"
+                android:shadowRadius="3.0" />
+            <TextView
+                android:id="@+id/tv_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="男    21岁"
+                android:textColor="#ff666666"
+                android:textSize="13sp"
+                android:shadowColor="#ffdddddd"
+                android:shadowDx="0"
+                android:shadowDy="1"
+                android:layout_marginTop="@dimen/dimens_10"
+                android:shadowRadius="3.0" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_see_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查看资料"
+            android:textSize="@dimen/sp_15"
+            android:textColor="@color/color_yellow"
+            android:background="@drawable/shape_patient_bg"
+            android:padding="@dimen/dimens_5"/>
+    </LinearLayout>
+</LinearLayout>

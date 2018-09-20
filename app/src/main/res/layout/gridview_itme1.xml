@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/white"
+        android:layout_centerInParent="true">
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/delete"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/delete"
+            android:padding="@dimen/dimens_5"
+            android:background="@drawable/shape_delete_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/img_photo"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@mipmap/ic_add_gv"
+            android:text="添加照片"
+            android:background="@drawable/shape_add_bg"
+            android:drawablePadding="@dimen/dimens_5"
+            android:textSize="@dimen/sp_9"
+            android:textColor="#FFC4C9D5"
+            android:padding="@dimen/dimens_28"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

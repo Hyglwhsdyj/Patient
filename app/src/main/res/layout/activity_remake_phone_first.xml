@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.ais.patient.activity.login.RemakePhoneActivity">
+    <include layout="@layout/view_main_title"/>
+
+    <LinearLayout
+        style="@style/LinearLayoutStyle"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dimens_0"
+        android:paddingBottom="@dimen/dimens_0">
+
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="请输入登录密码"
+            android:textColor="#ffcccccc"
+            android:textSize="14sp"
+            android:paddingTop="@dimen/dimens_18"
+            android:paddingBottom="@dimen/dimens_18"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="下一步"
+        android:background="@drawable/shape_add_pratient"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:paddingTop="@dimen/dimens_15"
+        android:paddingBottom="@dimen/dimens_15"
+        android:layout_marginTop="@dimen/dimens_20"
+        android:layout_marginLeft="@dimen/dimens_38"
+        android:layout_marginRight="@dimen/dimens_38"/>
+</LinearLayout>

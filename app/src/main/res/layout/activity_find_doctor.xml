@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.ais.patient.activity.main.FindDoctorActivity">
+    <include layout="@layout/view_main_title"/>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shape_search_doctor">
+
+                    <EditText
+                        android:id="@+id/et_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="@dimen/dimens_15"
+                        android:hint="搜医生、科室、病症"
+                        android:textColorHint="#FF999999"
+                        android:textSize="@dimen/sp_13"
+                        android:drawableLeft="@mipmap/ic_search"
+                        android:drawablePadding="@dimen/dimens_5"
+                        android:paddingTop="@dimen/dimens_9"
+                        android:paddingBottom="@dimen/dimens_9"
+                        android:background="@null"
+                        android:paddingLeft="@dimen/dimens_20"
+                        android:textColor="@color/color_main" />
+
+                    <TextView
+                        android:id="@+id/tv_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="搜索"
+                        android:layout_marginLeft="@dimen/dimens_5"
+                        android:textSize="@dimen/sp_13"
+                        android:textColor="@color/white"
+                        android:paddingLeft="@dimen/dimens_8"
+                        android:paddingRight="@dimen/dimens_8"
+                        android:paddingTop="@dimen/dimens_5"
+                        android:paddingBottom="@dimen/dimens_5"
+                        android:background="@drawable/shape_add_pratient"
+                        android:layout_marginRight="@dimen/dimens_15"/>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dimens_34"
+                    android:paddingRight="@dimen/dimens_34"
+                    android:paddingTop="@dimen/dimens_8"
+                    android:paddingBottom="@dimen/dimens_8">
+
+                    <TextView
+                        android:id="@+id/tv_complex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="综合排序"
+                        android:textColor="#ff333333"
+                        android:textSize="13sp"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/dimens_10"
+                        android:paddingBottom="@dimen/dimens_10"
+                        android:drawablePadding="@dimen/dimens_3"
+                        android:drawableRight="@mipmap/ic_pull"/>
+
+                    <TextView
+                        android:id="@+id/tv_appraise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="评分排序"
+                        android:textColor="#ff333333"
+                        android:textSize="13sp"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/dimens_10"
+                        android:paddingBottom="@dimen/dimens_10"
+                        android:layout_centerInParent="true"
+                        android:drawablePadding="@dimen/dimens_3"
+                        android:drawableRight="@mipmap/ic_pull"/>
+
+                    <TextView
+                        android:id="@+id/tv_choose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="筛选"
+                        android:textColor="#ff333333"
+                        android:textSize="13sp"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/dimens_10"
+                        android:paddingBottom="@dimen/dimens_10"
+                        android:layout_alignParentRight="true"
+                        android:drawablePadding="@dimen/dimens_3"
+                        android:drawableRight="@mipmap/ic_choose"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="以下医生擅长治疗[妇科炎症]"
+                    android:textColor="#ff999999"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/dimens_7"
+                    android:paddingBottom="@dimen/dimens_7"
+                    android:background="#FFEFF1F6"/>
+            </LinearLayout>
+
+            <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+                android:id="@+id/define_sliding_bga"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/mRecycleView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:scrollbars="none">
+
+                </android.support.v7.widget.RecyclerView>
+            </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

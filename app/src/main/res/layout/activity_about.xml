@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
+    tools:context="com.ais.patient.activity.mine.AboutActivity">
+    <include layout="@layout/view_main_title"/>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dimens_15"
+            android:paddingRight="@dimen/dimens_15"
+            android:paddingTop="@dimen/dimens_13"
+            android:paddingBottom="@dimen/dimens_19">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dimens_20"
+                android:paddingRight="@dimen/dimens_20"
+                android:layout_marginTop="@dimen/dimens_13">
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="爱尚中医"
+                    android:textColor="#ff3aa2fc"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="——中医移动诊疗平台"
+                    android:textColor="#ff3aa2fc"
+                    android:textSize="14sp"
+                    android:layout_marginTop="@dimen/dimens_10"
+                    android:layout_below="@id/tv_name"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_about"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tv_html"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_20"/>
+            <!--
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="我们是谁？"
+                android:textColor="#ffbc9761"
+                android:textSize="16sp"
+                android:layout_marginTop="@dimen/dimens_20"/>
+
+            <TextView
+                android:id="@+id/tv_weAre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="以人工智能为亮点、以医生和互联网技术为支撑、以实体医疗机构和上游供应链为依托，构建服务医生和大众的的综合性、全产业链的O2O智慧中医药平台。"
+                android:textColor="#ff333333"
+                android:textSize="14sp"
+                android:layout_marginTop="@dimen/dimens_10"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="我们的服务"
+                android:textColor="#ffbc9761"
+                android:textSize="16sp"
+                android:layout_marginTop="@dimen/dimens_25"/>
+
+            <TextView
+                android:id="@+id/tv_our_serive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" 我们邀请了全国上千名有高级资质（三年内将有5万好中医入驻）、有多年临床经验的优质中医，为全国老百姓提供高效便捷的慢病、疑难病线上复诊开方、线下面诊预约，常见病线上及时诊断开方，同时我们与全国几十家上市药厂战略合作、股份合作为用户送药到家、健康监测管理等一条龙服务，我们对疑难病患者更有一套专业、科学、全面的中医药调治方案，让好中医、好中药、好服务与普罗大众零距离。"
+                android:textColor="#ff333333"
+                android:textSize="14sp"
+                android:layout_marginTop="@dimen/dimens_10"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="联系我们"
+                android:textColor="#ffbc9761"
+                android:textSize="16sp"
+                android:layout_marginTop="@dimen/dimens_25"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dimens_10"
+                android:paddingRight="@dimen/dimens_10"
+                android:layout_marginTop="@dimen/dimens_25">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="公司地址："
+                    android:textColor="#ff333333"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp"
+                    android:text="平台地址：深圳市宝安智谷科技园A座\n医馆地址：深圳市罗湖区大华商务中心、深圳宝安区裕安二路63号3楼（上海、北京医馆筹建中）                  "
+                    android:layout_marginLeft="@dimen/dimens_15"
+                    android:paddingTop="@dimen/dimens_15"
+                    android:paddingBottom="@dimen/dimens_15"
+                    android:background="@color/white"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimens_1"
+                android:background="@color/color_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dimens_10"
+                android:paddingRight="@dimen/dimens_10">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="联系电话："
+                    android:textColor="#ff333333"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tv_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp"
+                    android:text="400666502/ 0755-23575204"
+                    android:layout_marginLeft="@dimen/dimens_15"
+                    android:paddingTop="@dimen/dimens_15"
+                    android:paddingBottom="@dimen/dimens_15"
+                    android:background="@color/white"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimens_1"
+                android:background="@color/color_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dimens_10"
+                android:paddingRight="@dimen/dimens_10">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="客服邮箱："
+                    android:textColor="#ff333333"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tv_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="@dimen/dimens_15"
+                    android:paddingTop="@dimen/dimens_15"
+                    android:paddingBottom="@dimen/dimens_15"
+                    android:background="@color/white"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimens_1"
+                android:background="@color/color_line"/>-->
+
+            <!--<TextView
+                android:id="@+id/tv_commit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="提交"
+                android:padding="@dimen/dimens_15"
+                android:layout_marginTop="@dimen/dimens_30"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_16"
+                android:background="@drawable/shape_add_pratient"/>-->
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dimens_20"
+        android:paddingRight="@dimen/dimens_20"
+        android:paddingTop="@dimen/dimens_20"
+        android:layout_margin="@dimen/dimens_15"
+        android:background="@drawable/shape_prescription">
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="秘制烧伤高"
+            android:textColor="@color/color_yellow"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:drawablePadding="@dimen/dimens_10"
+            android:drawableLeft="@mipmap/ic_cloud_left"
+            android:drawableRight="@mipmap/ic_cloud_right"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_line_hor"
+            android:layout_marginTop="@dimen/dimens_17"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="产品与疗法名称："
+                android:textColor="#FF392011"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/dimens_13"/>
+            <TextView
+                android:id="@+id/tv_function"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="使用与各种烧伤、烫伤、见效快"
+                android:textColor="#ff666666"
+                android:textSize="12sp"
+                android:layout_marginTop="@dimen/dimens_13"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/dimens_13">
+            <TextView
+                android:id="@+id/tv_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="秘方介绍："
+                android:textColor="#FF392011"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv_introduce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="功能主治：使用与各种烧伤、烫伤、见效快"
+                android:textColor="#ff666666"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_1"
+            android:background="@color/color_line"
+            android:layout_marginTop="@dimen/dimens_13"/>
+
+        <TextView
+            android:id="@+id/tv_toDatial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查看详情"
+            android:padding="@dimen/dimens_15"
+            android:textColor="#ff666666"
+            android:textSize="12sp"
+            android:gravity="center" />
+    </LinearLayout>
+</LinearLayout>

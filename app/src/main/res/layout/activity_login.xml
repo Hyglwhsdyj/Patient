@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
+    tools:context="com.ais.patient.activity.login.LoginActivity">
+    <include layout="@layout/view_main_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="98dp"
+        android:paddingLeft="@dimen/dimens_40"
+        android:paddingRight="@dimen/dimens_40">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="手机号"
+            android:textColor="#ff999999"
+            android:textSize="11sp"
+            android:gravity="center_vertical"
+            android:drawableLeft="@mipmap/ic_phone"
+            android:drawablePadding="@dimen/dimens_4"/>
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:textSize="@dimen/sp_18"
+            android:textColor="@color/color_main"
+            android:layout_marginTop="@dimen/dimens_12"
+            android:layout_marginBottom="@dimen/dimens_11"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_2"
+            android:background="#E8E8E8"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="密码"
+            android:layout_marginTop="@dimen/dimens_30"
+            android:textColor="#ff999999"
+            android:textSize="11sp"
+            android:gravity="center_vertical"
+            android:drawableLeft="@mipmap/ic_password"
+            android:drawablePadding="@dimen/dimens_4"/>
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:textSize="@dimen/sp_18"
+            android:textColor="@color/color_main"
+            android:layout_marginTop="@dimen/dimens_10"
+            android:layout_marginBottom="@dimen/dimens_10"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_1"
+            android:background="#E8E8E8"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimens_30">
+            <CheckBox
+                android:id="@+id/CheckBox_isRemenber"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="记住密码"
+                android:layout_centerVertical="true"
+                android:textColor="#ff666666"
+                android:textSize="12sp"/>
+            <TextView
+                android:id="@+id/tv_forgetPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="忘记密码"
+                android:layout_alignParentRight="true"
+                android:textColor="#ffbc9761"
+                android:textSize="12sp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="登录"
+            android:textColor="#ffffffff"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:paddingTop="@dimen/dimens_15"
+            android:paddingBottom="@dimen/dimens_15"
+            android:layout_marginTop="@dimen/dimens_15"
+            android:background="@drawable/shape_login"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/dimens_24">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="还没有爱尚中医的账号? "
+                android:textColor="#ff666666"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/tv_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="立即注册"
+                android:textColor="#ffbc9761"
+                android:textSize="12sp" />
+    </LinearLayout>
+</LinearLayout>
+
+</LinearLayout>

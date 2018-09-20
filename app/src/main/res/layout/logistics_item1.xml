@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/dimens_10"
+    android:paddingBottom="@dimen/dimens_10">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingBottom="@dimen/dimens_5"
+        android:paddingTop="@dimen/dimens_5"
+        android:background="#FFBC9761">
+
+        <TextView
+            android:id="@+id/tv_logisticsNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_main"
+            android:textSize="@dimen/sp_10"
+            android:layout_marginRight="@dimen/dimens_10"/>
+
+
+        <TextView
+            android:id="@+id/tv_logisticsName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_main"
+            android:textSize="@dimen/sp_10"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018/05/02 16:23:34"
+            android:textColor="#ffffffff"
+            android:textSize="10sp"
+            android:layout_gravity="center"
+            android:paddingTop="@dimen/dimens_3"
+            android:paddingBottom="@dimen/dimens_3"
+            android:paddingLeft="@dimen/dimens_10"
+            android:paddingRight="@dimen/dimens_10"
+            android:background="@drawable/shape_msg_item"
+            android:layout_marginTop="@dimen/dimens_18"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/dimens_15"
+            android:layout_marginTop="@dimen/dimens_15"
+            android:layout_marginLeft="@dimen/dimens_15"
+            android:layout_marginRight="@dimen/dimens_15"
+            android:background="@drawable/shape_msg_bg">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="评价提醒"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:drawablePadding="@dimen/dimens_10"
+                    android:drawableLeft="@mipmap/ic_main_msg"/>
+
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_18"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="您好，您的咨询已结束，请对杨青青医生的回复进行评价。客服：4000838008"
+                android:textColor="#ff666666"
+                android:textSize="12sp"
+                android:layout_marginTop="@dimen/dimens_15"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

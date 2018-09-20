@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/register_root_view"
+    android:fitsSystemWindows="true"
+    tools:context="com.ais.patient.activity.main.BuyMedicineActivity">
+    <include layout="@layout/view_main_coupons"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_above="@+id/layout_bottom"
+        android:layout_below="@+id/layout_title">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/ordonnance_detail_base_info_layout"></include>
+
+            <com.ais.patient.widget.NetstedListView
+                android:id="@+id/mNetstedListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_isFried"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimens_50"
+                android:layout_marginBottom="@dimen/dimens_10"
+                android:background="@color/white">
+
+                <View
+                    android:layout_width="@dimen/dimens_3"
+                    android:layout_height="@dimen/dimens_12"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dimens_15"
+                    android:background="@color/color_yellow"></View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dimens_26"
+                    android:text="@string/if_replace_decoct"
+                    android:textColor="@color/color_main"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_isFried"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dimens_15"
+                    android:drawableRight="@mipmap/ic_to"
+                    android:textColor="@color/black_8"
+                    android:textSize="12sp" />
+
+
+            </RelativeLayout>
+
+            <include layout="@layout/ordonnance_detail_order_price_layout"></include>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimens_50"
+                android:layout_marginTop="@dimen/dimens_10"
+                android:background="@color/white">
+
+                <View
+                    android:layout_width="@dimen/dimens_3"
+                    android:layout_height="@dimen/dimens_12"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dimens_15"
+                    android:background="@color/color_yellow"></View>
+
+                <TextView
+                    android:id="@+id/tv_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dimens_26"
+                    android:text="配送地址"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_moren"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="默认配送地址"
+                    android:textColor="#ffffffff"
+                    android:layout_toRightOf="@id/tv_2"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dimens_10"
+                    android:paddingTop="@dimen/dimens_4"
+                    android:paddingBottom="@dimen/dimens_4"
+                    android:paddingLeft="@dimen/dimens_6"
+                    android:paddingRight="@dimen/dimens_6"
+                    android:textSize="10sp"
+                    android:background="@drawable/shape_add_pratient"/>
+
+                <TextView
+                    android:id="@+id/tv_addAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="添加新地址"
+                    android:padding="@dimen/dimens_15"
+                    android:textColor="#ff4a73d2"
+                    android:textSize="12sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
+            </RelativeLayout>
+
+            <include layout="@layout/base_line_layout"></include>
+
+            <include layout="@layout/ordonnance_detail_adress_layout"></include>
+
+            <LinearLayout
+                android:id="@+id/logistics_tracking_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_10"
+                android:layout_marginBottom="@dimen/dimens_10"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_50"
+                    android:background="@color/white">
+
+                    <View
+                        android:layout_width="@dimen/dimens_3"
+                        android:layout_height="@dimen/dimens_12"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dimens_15"
+                        android:background="@color/color_yellow"></View>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dimens_26"
+                        android:text="优惠券"
+                        android:textColor="#ff333333"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true">
+                        <TextView
+                            android:id="@+id/tv_cardnum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_12"
+                            android:textColor="#FFFF7E00"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="张可用"
+                            android:textColor="#FF666666"
+                            android:textSize="12sp"
+                            android:paddingRight="@dimen/dimens_15"
+                            android:drawableRight="@mipmap/ic_to"/>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <include layout="@layout/base_line_layout"></include>
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        style="@style/LinearLayoutStyle"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本次实付"
+            android:textColor="#ff333333"
+            android:textSize="13sp" />
+        <TextView
+            android:id="@+id/tv_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15"
+            android:textColor="@color/color_yellow_light"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="元"
+            android:textColor="#ff333333"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tv_wechat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="微信支付"
+            android:layout_gravity="right"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:paddingTop="@dimen/dimens_14"
+            android:paddingBottom="@dimen/dimens_14"
+            android:paddingLeft="@dimen/dimens_50"
+            android:paddingRight="@dimen/dimens_50"
+            android:background="@drawable/shape_wechat_bg"/>
+    </LinearLayout>
+
+</LinearLayout>

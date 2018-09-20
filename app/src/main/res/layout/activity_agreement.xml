@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.ais.patient.activity.login.AgreementActivity">
+
+    <include layout="@layout/view_main_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:paddingTop="@dimen/dimens_23"
+        android:paddingLeft="@dimen/dimens_15"
+        android:paddingRight="@dimen/dimens_15"
+        android:paddingBottom="@dimen/dimens_15">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_13"
+            android:text="用户注册协议"
+            android:textColor="@color/color_main"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_13"
+            android:text="免责声明"
+            android:layout_marginTop="@dimen/dimens_30"
+            android:textColor="#FF999999"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_13"
+            android:layout_marginTop="@dimen/dimens_5"
+            android:text="1、您需知晓并同意：您使用本平台购买的医疗服务皆为医师在平安正阳互联网中医医院（tons备案多点执业）提供，与医师的第一执业医疗机构无关。
+2、本平台仅为患者提供在线复诊服务，非复诊患者请到线下就诊。
+
+"
+            android:textColor="@color/color_main"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_13"
+            android:text="用户注册协议"
+            android:textColor="#FF999999"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_13"
+            android:layout_marginTop="@dimen/dimens_5"
+            android:text="本协议是您（也称“用户”）与小鹿医馆客户端软件、小鹿医馆公众号、小鹿医馆在线公众号、小鹿医馆在线小程序（以下简称“小鹿医馆”）之间就医疗服务等相关事宜所订立的协议，即视为已完全同意并接受本协议并愿意受其约束，本协议即构成对双方有约束力的法律文件；您若不同意本协议的任何条款，请不要点选“注册”，也不要偶买或使用本平台提供的任何服务。您应承诺享有履行本协议的资格和能力，如您是未成年人，您还应要求您的监护人仔细阅读本协议，并取得他/他们的同意。"
+            android:textColor="@color/color_main"/>
+    </LinearLayout>
+</LinearLayout>

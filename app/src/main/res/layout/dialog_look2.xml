@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/ic_temp" />
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_video"
+            android:layout_marginRight="@dimen/dimens_5"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="尽量选择"
+            android:textColor="#ff333333"
+            android:textSize="13sp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="后置摄像头、自然光"
+            android:textColor="@color/color_yellow"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下拍摄"
+            android:textColor="#ff333333"
+            android:textSize="13sp"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="舌苔舌底"
+        android:textColor="#ffffffff"
+        android:textSize="12sp"
+        android:layout_marginTop="@dimen/dimens_15"
+        android:paddingTop="@dimen/dimens_4"
+        android:paddingBottom="@dimen/dimens_4"
+        android:paddingLeft="@dimen/dimens_7"
+        android:paddingRight="@dimen/dimens_7"
+        android:background="@drawable/shape_temp"/>-->
+</LinearLayout>

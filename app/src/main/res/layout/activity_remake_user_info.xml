@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:id="@+id/register_root_view"
+    tools:context="com.ais.patient.activity.mine.RemakeUserInfoActivity">
+    <include layout="@layout/view_main_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@color/white"
+        android:layout_centerInParent="true">
+        <LinearLayout
+            android:id="@+id/ll_upload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="@dimen/dimens_35"
+            android:paddingBottom="@dimen/dimens_35">
+            <ImageView
+                android:id="@+id/iv_head_icon"
+                android:layout_width="74dp"
+                android:layout_height="74dp" />
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_main"
+                android:textSize="15sp"
+                android:layout_marginTop="@dimen/dimens_10"
+                android:layout_marginBottom="@dimen/dimens_10"/>
+
+            <TextView
+                android:id="@+id/tv_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上传头像"
+                android:textColor="@color/color_main"
+                android:textSize="10sp"
+                android:drawablePadding="@dimen/dimens_2"
+                android:drawableLeft="@mipmap/ic_take_pic" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dimens_25"
+            android:paddingRight="@dimen/dimens_15">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="姓名："
+                android:textColor="#ff333333"
+                android:textSize="14sp"
+                />
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入姓名"
+                android:textSize="@dimen/sp_14"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/dimens_15"
+            android:paddingLeft="@dimen/dimens_25"
+            android:paddingRight="@dimen/dimens_15">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="性别："
+                android:textColor="#ff333333"
+                android:textSize="14sp"
+                />
+            <RadioGroup
+                android:id="@id/mRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_man"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="男"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp"/>
+
+                <RadioButton
+                    android:id="@+id/radio_women"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="女"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="@dimen/dimens_25"/>
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/dimens_15"
+            android:paddingLeft="@dimen/dimens_25"
+            android:paddingRight="@dimen/dimens_15">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="年龄："
+                android:textColor="#ff333333"
+                android:textSize="14sp"
+                />
+            <EditText
+                android:id="@+id/et_age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入年龄"
+                android:textSize="@dimen/sp_14"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_commit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_add_pratient"
+            android:text="提交"
+            android:layout_marginTop="@dimen/dimens_25"
+            android:textSize="@dimen/sp_15"
+            android:paddingTop="@dimen/dimens_15"
+            android:paddingBottom="@dimen/dimens_15"
+            android:layout_marginLeft="@dimen/dimens_15"
+            android:layout_marginRight="@dimen/dimens_15"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+    </LinearLayout>
+</LinearLayout>

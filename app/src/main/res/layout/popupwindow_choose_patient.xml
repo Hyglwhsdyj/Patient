@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/ll_type">
+
+    <ListView
+        android:id="@+id/mListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+    <TextView
+        android:id="@+id/tv_add_patient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="新建患者"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/dimens_10"
+        android:layout_marginBottom="@dimen/dimens_10"
+        android:layout_marginRight="@dimen/dimens_15"
+        android:layout_marginLeft="@dimen/dimens_15"
+        android:paddingTop="@dimen/dimens_13"
+        android:paddingBottom="@dimen/dimens_13"
+        android:background="@drawable/shape_add_pratient"/>
+
+</LinearLayout>

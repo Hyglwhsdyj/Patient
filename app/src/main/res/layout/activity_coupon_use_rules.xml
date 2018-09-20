@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.ais.patient.activity.mine.CouponUseRulesActivity">
+    <include layout="@layout/view_main_coupons"/>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/dimens_15"
+            android:layout_marginTop="@dimen/dimens_10"
+            android:background="@color/white">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="说明："
+                android:textColor="#ff333333"
+                android:textSize="15sp" />
+            <TextView
+                android:layout_marginTop="@dimen/dimens_15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="优惠券可直接用于指定类型的消费，不可转让他人，不可兑换为现金。\n
+一个订单、只能使用一张优惠券。\n
+订单优惠券，不能抵咨询费和快递费。\n
+活动优惠和优惠券优惠可累加使用。\n
+优惠券会有使用时间，过期后将不能使用。\n
+优惠券过期一个月后，将会自动清除。"
+                android:textColor="#ff333333"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="使用步骤："
+                android:textColor="#ff333333"
+                android:textSize="15sp"
+                android:layout_marginTop="@dimen/dimens_25"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_15"
+                android:text="1.选择要支付的订单或者服务并进入支付页面后。\n
+点击“优惠券”栏目，选择需要使用的优惠券，系统默认会\n
+选中优惠最大的优惠券。\n
+2.确定订单无误后，点击“支付”即生成订单，按照您所选的
+支付方式付款。\n
+3.可以进入“个人中心”“点击”“我的订单”查看订单详情。"
+                android:textColor="#ff333333"
+                android:textSize="13sp"
+                />
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

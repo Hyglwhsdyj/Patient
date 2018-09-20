@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="color_main">#333333</color>
+    <color name="white">#FFFFFF</color>
+    <color name="color_yellow">#bc9761</color>
+    <color name="color_red">#DD260B</color>
+    <color name="black_6">#666666</color>
+    <color name="black_8">#888888</color>
+    <color name="color_line">#e8e8e8</color>
+    <color name="diseaseexpertise_bg">#2E488E</color>
+    <color name="color_yellow_light">#ff7e00</color>
+    <color name="color_gray1">#EBEDF1</color>
+    <color name="blue_4">#4a73d2</color>
+    <color name="gray9">#FF999999</color>
+
+    <color name="bgColor">#F4F4F4</color>
+    <color name="text_main">#333333</color>
+    <color name="text_desc">#666666</color>
+    <color name="text_content">#666666</color>
+    <color name="text_hint">#999999</color>
+    <color name="color_green">#FF4AA84B</color>
+</resources>

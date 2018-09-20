@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.ais.patient.activity.main.ChatOnLinePaperDetailActivity">
+    <include layout="@layout/view_main_title"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dimens_18"
+                android:paddingTop="@dimen/dimens_15"
+                android:background="@color/white">
+                <TextView
+                    android:id="@+id/tv_patient_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="@dimen/dimens_1"
+                    android:background="@color/white"
+                    android:paddingBottom="@dimen/dimens_15"
+                    android:drawableLeft="@mipmap/ic_line"
+                    android:drawablePadding="@dimen/dimens_15" />
+                <LinearLayout
+                    android:id="@+id/ll_info"
+                    style="@style/LinearLayoutStyle"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/dimens_0"
+                    android:paddingBottom="0dp"
+                    android:paddingTop="0dp"
+                    android:background="@color/white">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="身高："
+                            android:textColor="#ff999999"
+                            android:textSize="12sp"
+                            android:layout_marginRight="@dimen/dimens_5"/>
+
+                        <TextView
+                            android:id="@+id/tv_height"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ff333333"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="体重："
+                            android:textColor="#ff999999"
+                            android:textSize="12sp"
+                            android:layout_marginLeft="@dimen/dimens_50"
+                            android:layout_marginRight="@dimen/dimens_5"/>
+
+                        <TextView
+                            android:id="@+id/tv_weight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ff333333"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/dimens_10">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="手机："
+                            android:textColor="#ff999999"
+                            android:textSize="12sp"
+                            android:layout_marginRight="@dimen/dimens_5"/>
+
+                        <TextView
+                            android:id="@+id/tv_phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ff333333"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="地址："
+                            android:textColor="#ff999999"
+                            android:textSize="12sp"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginRight="@dimen/dimens_5"/>
+
+                        <TextView
+                            android:id="@+id/tv_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ff333333"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/dimens_10">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="既往病历："
+                            android:textColor="#ff999999"
+                            android:textSize="12sp"
+                            android:layout_marginRight="@dimen/dimens_5"/>
+
+                        <TextView
+                            android:id="@+id/tv_bl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ff333333"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/dimens_10">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="补充描述："
+                            android:textColor="#ff999999"
+                            android:textSize="12sp"
+                            android:layout_marginRight="@dimen/dimens_5"/>
+
+                        <TextView
+                            android:id="@+id/tv_other"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ff333333"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/dimens_10"
+                android:paddingBottom="@dimen/dimens_10"
+                android:paddingTop="@dimen/dimens_15"
+                android:background="@color/white">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="患者主诉"
+                    android:layout_marginLeft="@dimen/dimens_1"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp"
+                    android:background="@color/white"
+                    android:drawableLeft="@mipmap/ic_line"
+                    android:drawablePadding="@dimen/dimens_15" />
+                <LinearLayout
+                    style="@style/LinearLayoutStyle"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="主诉："
+                        android:textColor="#ff999999"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/tv_appeal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ff333333"
+                        android:textSize="12sp"
+                        android:layout_marginLeft="@dimen/dimens_9"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/LinearLayoutStyle"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/dimens_0"
+                    android:layout_marginTop="@dimen/dimens_0">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="现病史及现在症状："
+                        android:textColor="#ff999999"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/tv_symptom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ff333333"
+                        android:textSize="12sp"
+                        android:layout_marginLeft="@dimen/dimens_9"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="舌苔照："
+                    android:textColor="#ff999999"
+                    android:textSize="12sp"
+                    android:paddingLeft="@dimen/dimens_15"/>
+
+                <com.ais.patient.widget.NetstedGridView
+                    android:id="@+id/mGridViewS"
+                    android:layout_marginTop="@dimen/dimens_9"
+                    android:numColumns="3"
+                    android:paddingLeft="@dimen/dimens_15"
+                    android:paddingRight="@dimen/dimens_15"
+                    android:verticalSpacing="@dimen/dimens_10"
+                    android:horizontalSpacing="@dimen/dimens_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="患处照片、检查报告、化验单："
+                    android:textColor="#ff999999"
+                    android:textSize="12sp"
+                    android:layout_marginTop="@dimen/dimens_10"
+                    android:paddingLeft="@dimen/dimens_15"/>
+
+                <com.ais.patient.widget.NetstedGridView
+                    android:id="@+id/mGridViewOther"
+                    android:layout_marginTop="@dimen/dimens_9"
+                    android:numColumns="3"
+                    android:paddingLeft="@dimen/dimens_15"
+                    android:paddingRight="@dimen/dimens_15"
+                    android:verticalSpacing="@dimen/dimens_10"
+                    android:horizontalSpacing="@dimen/dimens_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/dimens_10"
+                android:paddingBottom="@dimen/dimens_18"
+                android:paddingTop="@dimen/dimens_15"
+                android:background="@color/white">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="问题概要"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="@dimen/dimens_1"
+                    android:background="@color/white"
+                    android:drawableLeft="@mipmap/ic_line"
+                    android:drawablePadding="@dimen/dimens_15" />
+
+                <com.ais.patient.widget.NetstedListView
+                    android:id="@+id/mListViewMian"
+                    android:layout_marginTop="@dimen/dimens_9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

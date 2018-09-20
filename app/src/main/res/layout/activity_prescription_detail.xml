@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
+    tools:context="com.ais.patient.activity.coupons.PrescriptionDetailActivity">
+
+    <include layout="@layout/view_main_title"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/dimens_25"
+            android:paddingBottom="@dimen/dimens_20"
+            android:paddingLeft="@dimen/dimens_15"
+            android:paddingRight="@dimen/dimens_15"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="标题"
+                android:textStyle="bold"
+                android:textColor="#FF392011"
+                android:textSize="18sp"
+                android:typeface="sans"/>
+
+            <TextView
+                android:id="@+id/tv_title_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#ff333333"
+                android:textSize="13sp"
+                android:background="@drawable/shape_prescription_detail"
+                android:layout_marginTop="@dimen/dimens_15"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimens_1"
+                android:background="@color/color_line"
+                android:layout_marginTop="@dimen/dimens_18"/>
+
+            <TextView
+                android:id="@+id/tv_cou1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="产品与疗法名称"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:textColor="#FF392011"
+                android:drawableLeft="@mipmap/ic_cou1"
+                android:drawablePadding="@dimen/dimens_6"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/dimens_20"/>
+
+            <TextView
+                android:id="@+id/tv_function"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#ff333333"
+                android:textSize="13sp"
+                android:background="@drawable/shape_prescription_detail"
+                android:layout_marginTop="@dimen/dimens_15"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimens_1"
+                android:background="@color/color_line"
+                android:layout_marginTop="@dimen/dimens_18"/>
+
+            <TextView
+                android:id="@+id/tv_cou2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="秘方介绍"
+                android:gravity="center_vertical"
+                android:textColor="#FF392011"
+                android:drawableLeft="@mipmap/ic_cou2"
+                android:drawablePadding="@dimen/dimens_6"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="@dimen/dimens_20"/>
+
+            <TextView
+                android:id="@+id/tv_introduce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#ff333333"
+                android:textSize="13sp"
+                android:background="@drawable/shape_prescription_detail"
+                android:layout_marginTop="@dimen/dimens_15"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimens_1"
+                android:background="@color/color_line"
+                android:layout_marginTop="@dimen/dimens_18"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_15">
+                <TextView
+                    android:id="@+id/tv_cou3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="医生简介"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:textColor="#FF392011"
+                    android:drawableLeft="@mipmap/ic_cou3"
+                    android:drawablePadding="@dimen/dimens_6"
+                    android:textStyle="bold"
+                    android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/tv_chat_online"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="在线问诊"
+                    android:textColor="#ffbb7e3c"
+                    android:textSize="12sp"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="@dimen/dimens_11"
+                    android:paddingRight="@dimen/dimens_11"
+                    android:paddingTop="@dimen/dimens_6"
+                    android:paddingBottom="@dimen/dimens_6"
+                    android:background="@drawable/shape_chat_online"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_doctor_introduce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#ff333333"
+                android:textSize="13sp"
+                android:background="@drawable/shape_prescription_detail"
+                android:layout_marginTop="@dimen/dimens_15"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimens_1"
+                android:background="@color/color_line"
+                android:layout_marginTop="@dimen/dimens_18"/>
+
+            <TextView
+                android:id="@+id/tv_cou4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="康复病例"
+                android:layout_marginTop="@dimen/dimens_20"
+                android:gravity="center_vertical"
+                android:textColor="#FF392011"
+                android:drawableLeft="@mipmap/ic_cou4"
+                android:drawablePadding="@dimen/dimens_6"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_cases"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#ff333333"
+                android:textSize="13sp"
+                android:background="@drawable/shape_prescription_detail"
+                android:layout_marginTop="@dimen/dimens_15"/>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

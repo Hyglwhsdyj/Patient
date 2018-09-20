@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="中医外科"
+        android:lines="1"
+        android:textColor="#ff333333"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dimens_0"
+        android:paddingRight="@dimen/dimens_0"
+        android:background="@drawable/shape_diseaseexpertise2"/>
+</LinearLayout>

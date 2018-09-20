@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/ll_photographs">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="选择日期"
+        android:gravity="center"
+        android:textColor="@color/color_main"
+        android:background="@color/white"
+        android:textSize="@dimen/sp_15"
+        android:paddingTop="@dimen/dimens_18"
+        android:paddingBottom="@dimen/dimens_18"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_1"
+        android:background="@color/color_line"/>
+    <ListView
+        android:id="@+id/mListView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@color/white"/>
+</LinearLayout>

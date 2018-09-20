@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dimens_20"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <View
+                android:layout_width="@dimen/dimens_0"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#ffe8e8e8" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="主诉示例"
+                android:textColor="#ffbc9761"
+                android:textSize="12sp"
+                android:paddingLeft="@dimen/dimens_20"
+                android:paddingRight="@dimen/dimens_20"/>
+            <View
+                android:layout_width="@dimen/dimens_0"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#ffe8e8e8" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="口渴多饮3月，肢体末端麻木1月。"
+            android:textColor="#ff333333"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/dimens_14"
+            android:layout_marginBottom="@dimen/dimens_20"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <View
+                android:layout_width="@dimen/dimens_0"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#ffe8e8e8" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="主诉示例"
+                android:textColor="#ffbc9761"
+                android:textSize="12sp"
+                android:paddingLeft="@dimen/dimens_20"
+                android:paddingRight="@dimen/dimens_20"/>
+            <View
+                android:layout_width="@dimen/dimens_0"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#ffe8e8e8" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3月来口干多饮，四肢无力，饭量正常。体重减轻约10斤，未到医院检查及治疗。1个月前出现四肢麻木，一肢体末端为主，双侧基本对称，伴有视物模糊，但无复视。不伴有胸闷胸痛，无尿急，尿痛，无颈部肿块。昨来我院检查，侧空腹血糖为14.1mmol/L,门诊以糖尿病收入院。病来患者精神稍软，纳佳，睡眠欠安，大小便尚调，体重下降约5Kg。"
+            android:textColor="#ff333333"
+            android:textSize="13sp"
+            android:layout_marginTop="@dimen/dimens_18"/>
+
+    </LinearLayout>
+
+</LinearLayout>

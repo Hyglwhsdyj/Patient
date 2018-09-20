@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">患者端</string>
+    <string name="comment_doctor">评价医生</string>
+    <string name="base_info">基本信息</string>
+    <string name="name">姓名：</string>
+    <string name="sex">性别：</string>
+    <string name="man">男</string>
+    <string name="woman">女</string>
+    <string name="age">年龄：</string>
+    <string name="phone">手机：</string>
+    <string name="medical_history">既往病史：</string>
+    <string name="describe">补充描述：</string>
+    <string name="visit_time">就诊时间：</string>
+    <string name="pay_time">支付时限：</string>
+    <string name="iless_resume">病症简述：</string>
+    <string name="diagnose_suggest">诊断建议：</string>
+    <string name="medicinal_materials">药材</string>
+    <string name="common">共</string>
+    <string name="taste">味，每贴</string>
+    <string name="do_medicinal">药品制作：</string>
+    <string name="stick">贴</string>
+    <string name="if_replace_decoct">是否代煎</string>
+    <string name="diagnosis_fee">诊  金：</string>
+    <string name="momeny_unit">元</string>
+    <string name="medicine_price">药  费：</string>
+    <string name="make_price">制作费：</string>
+    <string name="transport_price">运  费：</string>
+    <string name="receiving_address">收货地址</string>
+    <string name="logistics_tracking">物流跟踪</string>
+    <string name="prescription_detail">处方单详情</string>
+    <string name="myconcern">我的关注</string>
+    <string name="cancel_concern">取消关注</string>
+    <string name="look_detail">查看详情</string>
+
+    <string name="agora_name">OpenVideoCall</string>
+    <string name="agora_id">59cb7855bb97446da1fe023907f805d3</string>
+</resources>

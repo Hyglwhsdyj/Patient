@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dimens_23"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dimens_15"
+        android:paddingRight="@dimen/dimens_15"
+        android:paddingBottom="@dimen/dimens_10"
+        android:layout_marginTop="@dimen/dimens_20">
+
+        <TextView
+            android:id="@+id/tv_doctor_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="预约医生：陈xx"
+            android:textColor="#ff333333"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="预约医生：陈xx"
+            android:textColor="#ff333333"
+            android:textSize="12sp"
+            android:layout_marginTop="@dimen/dimens_7"/>
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="预约医生：陈xx"
+            android:textColor="#ff333333"
+            android:textSize="12sp"
+            android:layout_marginTop="@dimen/dimens_7"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/shape_prescription_detail"
+            android:layout_marginTop="@dimen/dimens_15">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="订单状态：未支付"
+                    android:textColor="#ff858891"
+                    android:textSize="12sp"
+                    android:layout_marginRight="@dimen/dimens_15"/>
+                <TextView
+                    android:id="@+id/tv_countdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14:55"
+                    android:visibility="gone"
+                    android:textColor="#ffbc9761"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="温馨提醒：该专家预约人数较多，为了您能顺利预约成功，请在15分钟内支付完成，未支付的预约将被取消。"
+                android:textColor="#ff858891"
+                android:textSize="12sp"
+                android:layout_marginTop="@dimen/dimens_8"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_1"
+            android:background="@color/color_line"
+            android:layout_marginTop="@dimen/dimens_20"
+            android:layout_marginBottom="@dimen/dimens_10"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="right">
+            <TextView
+                android:id="@+id/tv_toPay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="去支付"
+                android:visibility="gone"
+                android:textColor="#ffffffff"
+                android:textSize="13sp"
+                android:paddingTop="@dimen/dimens_8"
+                android:paddingBottom="@dimen/dimens_8"
+                android:paddingLeft="@dimen/dimens_16"
+                android:paddingRight="@dimen/dimens_16"
+                android:background="@drawable/shape_add_pratient"/>
+
+            <TextView
+                android:id="@+id/tv_cancal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ff333333"
+                android:textSize="13sp"
+                android:paddingTop="@dimen/dimens_8"
+                android:paddingBottom="@dimen/dimens_8"
+                android:paddingLeft="@dimen/dimens_16"
+                android:paddingRight="@dimen/dimens_16"
+                android:background="@drawable/shape_cancel_order"
+                android:layout_marginLeft="@dimen/dimens_10"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

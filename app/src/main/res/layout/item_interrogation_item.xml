@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tv_labName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="饮食情况"
+        android:textColor="#ff333333"
+        android:textSize="14sp"
+        android:background="#FFFEF6C7"
+        android:gravity="center"
+        android:paddingTop="@dimen/dimens_18"
+        android:paddingBottom="@dimen/dimens_18"/>
+
+    <com.ais.patient.widget.NetstedListView
+        android:id="@+id/mNetstedListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

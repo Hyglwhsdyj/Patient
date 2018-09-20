@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.ais.patient.activity.mine.MyAdressActivity">
+
+    <include
+        android:id="@+id/layout_title"
+        layout="@layout/view_main_title"></include>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mRecycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:scrollbars="none">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/tv_add"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dimens_15"
+        android:layout_marginLeft="@dimen/dimens_15"
+        android:layout_marginRight="@dimen/dimens_15"
+        android:background="@drawable/bg_yellow_round4"
+        android:gravity="center"
+        android:text="增加收货人"
+        android:textColor="#ffffffff"
+        android:textSize="15sp" />
+</LinearLayout>

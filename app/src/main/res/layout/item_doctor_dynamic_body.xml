@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_10"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dimens_15"
+        android:paddingTop="@dimen/dimens_19">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.ais.patient.widget.CircleImageView
+                android:id="@+id/iv_doctor_photo"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
+                android:layout_marginLeft="@dimen/dimens_15" />
+
+            <TextView
+                android:id="@+id/tv_doctor_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimens_17"
+                android:layout_toRightOf="@+id/iv_doctor_photo"
+                android:text="陈xx医生发布了新动态"
+                android:textColor="@color/color_main"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_dynamic_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_doctor_name"
+                android:layout_marginLeft="@dimen/dimens_17"
+                android:layout_marginTop="@dimen/dimens_7"
+                android:layout_toRightOf="@+id/iv_doctor_photo"
+                android:text="熬夜的危害"
+                android:textColor="@color/black_6"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+
+        <com.ais.patient.widget.NetstedGridView
+            android:id="@+id/mNetstedGridView"
+            android:visibility="gone"
+            android:horizontalSpacing="@dimen/dimens_6"
+            android:verticalSpacing="@dimen/dimens_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="3"
+            android:padding="@dimen/dimens_15"/>
+    </LinearLayout>
+
+    <include layout="@layout/base_line_layout"></include>
+</LinearLayout>

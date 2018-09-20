@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
+
+    <FrameLayout
+        android:id="@+id/framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_0"
+        android:layout_weight="1"
+        android:layout_above="@+id/mRadioGroup"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_1"
+        android:background="@color/white" />
+    <RadioGroup
+        android:id="@+id/mRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/dimens_8"
+        android:paddingTop="@dimen/dimens_8">
+        <RadioButton
+            android:tag="0"
+            android:id="@+id/radioMain"
+            android:layout_width="@dimen/dimens_0"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:text="首页"
+            android:gravity="center"
+            android:textSize="@dimen/sp_13"
+            android:textColor="@color/seleted_color_mian"
+            android:drawableTop="@drawable/seleted_mian"
+            android:drawablePadding="@dimen/dimens_4"/>
+
+        <RadioButton
+            android:tag="1"
+            android:id="@+id/radioSeedoctor"
+            android:layout_width="@dimen/dimens_0"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:text="看病"
+            android:gravity="center"
+            android:textSize="@dimen/sp_13"
+            android:textColor="@color/seleted_color_mian"
+            android:drawableTop="@drawable/seleted_doctor"
+            android:drawablePadding="@dimen/dimens_4"/>
+
+        <RadioButton
+            android:tag="2"
+            android:layout_width="@dimen/dimens_0"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:text="秘方"
+            android:textSize="@dimen/sp_13"
+            android:textColor="@color/seleted_color_mian"
+            android:gravity="center"
+            android:drawableTop="@drawable/seleted_prescription"
+            android:drawablePadding="@dimen/dimens_4"/>
+
+        <RadioButton
+            android:tag="3"
+            android:layout_width="@dimen/dimens_0"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:text="我的"
+            android:textSize="@dimen/sp_13"
+            android:textColor="@color/seleted_color_mian"
+            android:gravity="center"
+            android:drawableTop="@drawable/seleted_mine"
+            android:drawablePadding="@dimen/dimens_4"/>
+    </RadioGroup>
+
+</LinearLayout>

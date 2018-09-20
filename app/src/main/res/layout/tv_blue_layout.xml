@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_blue"
+        android:layout_marginLeft="@dimen/dimens_5"
+        android:paddingLeft="@dimen/dimens_13"
+        android:paddingRight="@dimen/dimens_13"
+        android:paddingTop="@dimen/dimens_5"
+        android:paddingBottom="@dimen/dimens_5"
+        android:background="@drawable/bg_gray_round4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="糖尿病"
+        android:textColor="@color/diseaseexpertise_bg"
+        android:textSize="11sp" />
+
+</LinearLayout>
