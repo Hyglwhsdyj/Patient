@@ -16,6 +16,7 @@ import com.ais.patient.R;
 import com.ais.patient.activity.login.LoginActivity;
 import com.ais.patient.activity.main.MessageActivity;
 import com.ais.patient.base.BaseFragment;
+import com.ais.patient.been.Customer;
 import com.ais.patient.been.HttpBaseBean;
 import com.ais.patient.been.UsrInfomation;
 import com.ais.patient.http.BaseCallback;
@@ -23,6 +24,12 @@ import com.ais.patient.http.RetrofitFactory;
 import com.ais.patient.util.ToastUtils;
 import com.ais.patient.util.UserUtils;
 import com.ais.patient.widget.CircleTransform;
+import com.netease.nim.uikit.api.NimUIKit;
+import com.netease.nim.uikit.business.session.activity.P2PMessageActivity;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.nimlib.sdk.auth.AuthService;
+import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -203,6 +210,42 @@ public class MineFragment extends BaseFragment {
                 startActivity(new Intent(context,MyPatientListActivity.class));
                 break;
             case R.id.rl_8:
+                Call<HttpBaseBean<Customer>> call = RetrofitFactory.getInstance(context).getServiceId();
+                new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<Customer>() {
+
+
+                    @Override
+                    public void onSuccess(Customer customer, String info) {
+                        if (customer!=null){
+
+                            final String Im_customer_accid = customer.getIm_customer_accid();
+                            LoginInfo loginInfo = new LoginInfo(customer.getIm_accid(), customer.getIm_token());// config...
+                            NIMClient.getService(AuthService.class).login(loginInfo).setCallback(new RequestCallback<LoginInfo>() {
+                                @Override
+                                public void onSuccess(LoginInfo param) {
+                                        /*NimUIKit.loginSuccess(param.getAccount());
+                                        NimUIKit.startP2PSession(context,Im_customer_accid);*/
+                                    P2PMessageActivity.start(context,Im_customer_accid,null,null,"医生","","");
+                                }
+
+                                @Override
+                                public void onFailed(int code) {
+                                    ToastUtils.show(context,"登录失败");
+                                }
+
+                                @Override
+                                public void onException(Throwable exception) {
+                                    ToastUtils.show(context,"登录异常");
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String info) {
+
+                    }
+                });
                 break;
             case R.id.rl_9:
                 startActivity(new Intent(context,RecommendUsActivity.class));

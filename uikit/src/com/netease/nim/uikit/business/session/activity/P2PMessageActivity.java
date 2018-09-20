@@ -232,9 +232,18 @@ public class P2PMessageActivity extends BaseMessageActivity {
     protected void initToolBar() {
        /* ToolBarOptions options = new NimToolBarOptions();
         setToolBar(R.id.toolbar, options);*/
+
         Toolbar toolbar = (Toolbar) findView(R.id.toolbar);
         TextView tvBack = (TextView) toolbar.findViewById(R.id.tv_back);
+        TextView tvTitle = (TextView) toolbar.findViewById(R.id.tv_title);
         TextView tvDoctor = (TextView)toolbar.findViewById(R.id.tv_doctor);
+
+        String recordId = getIntent().getStringExtra("recordId");
+        if (recordId.equals("")){
+            tvDoctor.setVisibility(View.GONE);
+            tvTitle.setText("在线客服");
+        }
+
         tvBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -11,10 +11,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -125,7 +127,27 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initEvent() {
-
+        ivRobotLong.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent arg1) {
+                int action=arg1.getAction();
+                if(action==MotionEvent.ACTION_DOWN){//按下时，缩小
+                    ScaleAnimation sa=new  ScaleAnimation(1.0f, 0.85f,1.0f,0.85f,Animation.RELATIVE_TO_SELF
+                            ,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+                    sa.setDuration(100);//时间
+                    sa.setFillAfter(true);//此句尤其注意,不写的话,你按下,他动画过后马上恢复原样。这句代码就是阻止它恢复
+                    ivRobotLong.startAnimation(sa);
+                }else if(action==MotionEvent.ACTION_UP){//松开，放大恢复
+                    ScaleAnimation   sa=new  ScaleAnimation(0.85f, 1.0f,0.85f,1.0f,Animation.RELATIVE_TO_SELF
+                            ,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+                    sa.setDuration(100);//时间
+                    sa.setFillAfter(true);
+                    ivRobotLong.startAnimation(sa);
+                    startActivity(new Intent(context, RobotFindDoctorActivity.class));
+                }
+                return false;
+            }
+        });
         /**
          * 下拉刷新
          */
@@ -328,7 +350,7 @@ public class HomeFragment extends BaseFragment {
                 startActivityForResult(new Intent(context, MessageActivity.class), 0);
                 break;
             case R.id.iv_robot_long:
-                startActivity(new Intent(context, RobotFindDoctorActivity.class));
+
                 break;
             case R.id.iv_roobot:
                 startActivity(new Intent(context, RobotFindDoctorActivity.class));

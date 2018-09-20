@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ais.patient.R;
@@ -17,6 +18,7 @@ import com.ais.patient.been.MyPatient;
 import com.ais.patient.http.BaseCallback;
 import com.ais.patient.http.RetrofitFactory;
 import com.ais.patient.widget.recycleview.DefineBAGRefreshWithLoadView;
+import com.bumptech.glide.Glide;
 import com.pacific.adapter.RecyclerAdapter;
 import com.pacific.adapter.RecyclerAdapterHelper;
 
@@ -82,6 +84,8 @@ public class MyPatientListActivity extends MYBaseActivity implements BGARefreshL
         adapter = new RecyclerAdapter<MyPatient>(context, R.layout.my_patient_item,list) {
             @Override
             protected void convert(RecyclerAdapterHelper helper, final MyPatient item) {
+                ImageView ivHead = (ImageView) helper.getItemView().findViewById(R.id.iv_img);
+                Glide.with(context).load(item.getImage()).into(ivHead);
                 helper.setText(R.id.tv_name,item.getName());
                 helper.setText(R.id.tv_msg,item.getSex()+"      "+item.getAge());
                 helper.setOnClickListener(R.id.tv_see_detail, new View.OnClickListener() {

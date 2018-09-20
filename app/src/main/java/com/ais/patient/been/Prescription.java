@@ -21,6 +21,15 @@ public class Prescription {
     private String function;
     private String introduce;
     private String secret_id;
+    private String coverImage;
+
+    public String getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
+    }
 
     public String getTitle() {
         return title;

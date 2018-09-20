@@ -11,6 +11,7 @@ import com.ais.patient.been.ChatOnLineList;
 import com.ais.patient.been.ChatOnLinePaper;
 import com.ais.patient.been.ChatOnlineMsg;
 import com.ais.patient.been.Coupons;
+import com.ais.patient.been.Customer;
 import com.ais.patient.been.DoctorDynamicRespone;
 import com.ais.patient.been.DoctorMeetingTime;
 import com.ais.patient.been.DoctorMsg;
@@ -855,8 +856,25 @@ public interface IRetrofitServer {
     @GET("/api/patient/list_page.json")
     Call<HttpBaseBean<List<MyPatient>>> gteMyPatientList(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
-
+    /**
+     * 健康档案列表
+     * @param pageNum
+     * @param pageSize
+     * @param patientId
+     * @param customTime
+     * @param startTime
+     * @param endTime
+     * @return
+     */
     @GET("/api/order/inquiry/list_record.json")
     Call<HttpBaseBean<List<ChatOnLineList>>> gteHealthRecord(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize,
     @Query("patientId") String patientId,@Query("customTime") int customTime,@Query("startTime") String startTime,@Query("endTime")String endTime);
+
+
+    /**
+     * 客服 id
+     * @return
+     */
+    @GET("/api/user/im_info.json")
+    Call<HttpBaseBean<Customer>> getServiceId();
 }

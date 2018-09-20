@@ -65,9 +65,7 @@ public class RobotFindDoctorActivity extends MYBaseActivity implements TextWatch
     private Context context;
     private String symptom="";
     private FlowGroupView mFlowGroupView;
-    private List<String> diseases;
     private Adapter<String> adapter;
-    private List<SymptomReback.DoctorsBean> doctors;
     private List<String> dominanceDiseases;
     private List<SymptomReback.DominanceDoctorsBean> dominanceDoctors;
     private List<String> recessiveDiseases;
@@ -131,6 +129,10 @@ public class RobotFindDoctorActivity extends MYBaseActivity implements TextWatch
 
                         llMsg.setVisibility(View.VISIBLE);
 
+                        if (dominanceDiseases.size()<4){
+                            tvFindMore.setVisibility(View.GONE);
+                        }
+
                     }
 
                     @Override
@@ -140,89 +142,98 @@ public class RobotFindDoctorActivity extends MYBaseActivity implements TextWatch
                 });
                 break;
             case R.id.tv_normal:
-                Adapter<String> adapter = new Adapter<String>(context,R.layout.diseasr_item2, dominanceDiseases) {
-                    @Override
-                    protected void convert(AdapterHelper helper, String item) {
-                        helper.setText(R.id.tv_text,item);
-                    }
-                };
-                mMabDisease.setAdapter(adapter);
-                if (doctors.size()<4){
+                if (dominanceDiseases.size()>0){
+                    Adapter<String> adapter = new Adapter<String>(context,R.layout.diseasr_item2, dominanceDiseases) {
+                        @Override
+                        protected void convert(AdapterHelper helper, String item) {
+                            helper.setText(R.id.tv_text,item);
+                        }
+                    };
+                    mMabDisease.setAdapter(adapter);
+                }
+
+                if (dominanceDoctors.size()<4){
                     tvFindMore.setVisibility(View.GONE);
                 }
-                RecyclerAdapter<SymptomReback.DominanceDoctorsBean> adapter1 = new RecyclerAdapter<SymptomReback.DominanceDoctorsBean>(context, R.layout.main_doctor_item,dominanceDoctors) {
-                    @Override
-                    protected void convert(RecyclerAdapterHelper helper, final SymptomReback.DominanceDoctorsBean item) {
-                        ImageView ivIcon = (ImageView) helper.getItemView().findViewById(R.id.iv_icon);
-                        Picasso.with(context).load(item.getImage()).transform(new CircleTransform()).into(ivIcon);
-                        helper.setText(R.id.tv_name,item.getName());
-                        helper.setText(R.id.tv_title,item.getTitles());
-                        helper.setText(R.id.tv_depart,item.getDepart());
-                        helper.setText(R.id.tv_medicalInstitutions,item.getMedicalInstitutions());
-                        helper.setText(R.id.tv_fee,item.getFee()+"元/次");
-                        final List<String> diseaseExpertise = item.getDiseaseExpertise();
-                        mFlowGroupView = (FlowGroupView) helper.getItemView().findViewById(R.id.mFlowGroupView);
-                        if (diseaseExpertise!=null && diseaseExpertise.size()>0){
-                            for (int i = 0; i < diseaseExpertise.size(); i++) {
-                                addTextView(diseaseExpertise.get(i));
+                if (dominanceDoctors.size()>0){
+                    RecyclerAdapter<SymptomReback.DominanceDoctorsBean> adapter1 = new RecyclerAdapter<SymptomReback.DominanceDoctorsBean>(context, R.layout.main_doctor_item,dominanceDoctors) {
+                        @Override
+                        protected void convert(RecyclerAdapterHelper helper, final SymptomReback.DominanceDoctorsBean item) {
+                            ImageView ivIcon = (ImageView) helper.getItemView().findViewById(R.id.iv_icon);
+                            Picasso.with(context).load(item.getImage()).transform(new CircleTransform()).into(ivIcon);
+                            helper.setText(R.id.tv_name,item.getName());
+                            helper.setText(R.id.tv_title,item.getTitles());
+                            helper.setText(R.id.tv_depart,item.getDepart());
+                            helper.setText(R.id.tv_medicalInstitutions,item.getMedicalInstitutions());
+                            helper.setText(R.id.tv_fee,item.getFee()+"元/次");
+                            final List<String> diseaseExpertise = item.getDiseaseExpertise();
+                            mFlowGroupView = (FlowGroupView) helper.getItemView().findViewById(R.id.mFlowGroupView);
+                            if (diseaseExpertise!=null && diseaseExpertise.size()>0){
+                                for (int i = 0; i < diseaseExpertise.size(); i++) {
+                                    addTextView(diseaseExpertise.get(i));
+                                }
                             }
+                            helper.getItemView().setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    String id = item.getDoctorId();
+                                    Intent intent = new Intent(context,DoctorInfomationActivity.class);
+                                    intent.putExtra("id",id);
+                                    startActivity(intent);
+                                }
+                            });
                         }
-                        helper.getItemView().setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                String id = item.getDoctorId();
-                                Intent intent = new Intent(context,DoctorInfomationActivity.class);
-                                intent.putExtra("id",id);
-                                startActivity(intent);
-                            }
-                        });
-                    }
-                };
-                mRecyclerView.setAdapter(adapter1);
+                    };
+                    mRecyclerView.setAdapter(adapter1);
+                }
+
                 break;
             case R.id.tv_yin:
-                Adapter<String> adapter2 = new Adapter<String>(context,R.layout.diseasr_item2, recessiveDiseases) {
-                    @Override
-                    protected void convert(AdapterHelper helper, String item) {
-                        helper.setText(R.id.tv_text,item);
-                    }
-                };
-                mMabDisease.setAdapter(adapter2);
-                if (doctors.size()<4){
-                    tvFindMore.setVisibility(View.GONE);
-                }
-                RecyclerAdapter<SymptomReback.RecessiveDoctorsBean> adapter3 = new RecyclerAdapter<SymptomReback.RecessiveDoctorsBean>(context, R.layout.main_doctor_item,recessiveDoctors) {
-                    @Override
-                    protected void convert(RecyclerAdapterHelper helper, final SymptomReback.RecessiveDoctorsBean item) {
-                        ImageView ivIcon = (ImageView) helper.getItemView().findViewById(R.id.iv_icon);
-                        Picasso.with(context).load(item.getImage()).transform(new CircleTransform()).into(ivIcon);
-                        helper.setText(R.id.tv_name,item.getName());
-                        helper.setText(R.id.tv_title,item.getTitles());
-                        helper.setText(R.id.tv_depart,item.getDepart());
-                        helper.setText(R.id.tv_medicalInstitutions,item.getMedicalInstitutions());
-                        helper.setText(R.id.tv_fee,item.getFee()+"元/次");
-                        final List<String> diseaseExpertise = item.getDiseaseExpertise();
-                        mFlowGroupView = (FlowGroupView) helper.getItemView().findViewById(R.id.mFlowGroupView);
-                        if (diseaseExpertise!=null && diseaseExpertise.size()>0){
-                            for (int i = 0; i < diseaseExpertise.size(); i++) {
-                                addTextView(diseaseExpertise.get(i));
-                            }
+                if (recessiveDiseases.size()>0){
+                    Adapter<String> adapter2 = new Adapter<String>(context,R.layout.diseasr_item2, recessiveDiseases) {
+                        @Override
+                        protected void convert(AdapterHelper helper, String item) {
+                            helper.setText(R.id.tv_text,item);
                         }
-                        helper.getItemView().setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                String id = item.getDoctorId();
-                                Intent intent = new Intent(context,DoctorInfomationActivity.class);
-                                intent.putExtra("id",id);
-                                startActivity(intent);
+                    };
+                    mMabDisease.setAdapter(adapter2);
+                }
+
+                if (recessiveDoctors.size()>0){
+                    RecyclerAdapter<SymptomReback.RecessiveDoctorsBean> adapter3 = new RecyclerAdapter<SymptomReback.RecessiveDoctorsBean>(context, R.layout.main_doctor_item,recessiveDoctors) {
+                        @Override
+                        protected void convert(RecyclerAdapterHelper helper, final SymptomReback.RecessiveDoctorsBean item) {
+                            ImageView ivIcon = (ImageView) helper.getItemView().findViewById(R.id.iv_icon);
+                            Picasso.with(context).load(item.getImage()).transform(new CircleTransform()).into(ivIcon);
+                            helper.setText(R.id.tv_name,item.getName());
+                            helper.setText(R.id.tv_title,item.getTitles());
+                            helper.setText(R.id.tv_depart,item.getDepart());
+                            helper.setText(R.id.tv_medicalInstitutions,item.getMedicalInstitutions());
+                            helper.setText(R.id.tv_fee,item.getFee()+"元/次");
+                            final List<String> diseaseExpertise = item.getDiseaseExpertise();
+                            mFlowGroupView = (FlowGroupView) helper.getItemView().findViewById(R.id.mFlowGroupView);
+                            if (diseaseExpertise!=null && diseaseExpertise.size()>0){
+                                for (int i = 0; i < diseaseExpertise.size(); i++) {
+                                    addTextView(diseaseExpertise.get(i));
+                                }
                             }
-                        });
-                    }
-                };
-                mRecyclerView.setAdapter(adapter3);
+                            helper.getItemView().setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    String id = item.getDoctorId();
+                                    Intent intent = new Intent(context,DoctorInfomationActivity.class);
+                                    intent.putExtra("id",id);
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+                    };
+                    mRecyclerView.setAdapter(adapter3);
+                }
+
                 break;
             case R.id.tv_find_more:
-                String disease = diseases.get(0);
+                String disease = dominanceDiseases.get(0);
                 Intent intent = new Intent(this, FindDoctorActivity.class);
                 intent.putExtra("disease",disease);
                 startActivity(intent);

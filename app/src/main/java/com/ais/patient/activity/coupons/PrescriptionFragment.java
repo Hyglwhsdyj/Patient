@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ais.patient.R;
@@ -21,6 +22,7 @@ import com.ais.patient.http.RetrofitFactory;
 import com.ais.patient.util.BannerImageLoader;
 import com.ais.patient.util.ToastUtils;
 import com.ais.patient.widget.NetstedListView;
+import com.bumptech.glide.Glide;
 import com.pacific.adapter.Adapter;
 import com.pacific.adapter.AdapterHelper;
 import com.youth.banner.Banner;
@@ -90,6 +92,8 @@ public class PrescriptionFragment extends BaseFragment {
                     Adapter<Prescription> adapter = new Adapter<Prescription>(context, R.layout.prescription_item, prescriptions) {
                         @Override
                         protected void convert(AdapterHelper helper, final Prescription item) {
+                            ImageView ivCoverImg = helper.getItemView().findViewById(R.id.iv_coverImage);
+
                             TextView tv_title = helper.getItemView().findViewById(R.id.tv_title);
                             TextView tv1 = helper.getItemView().findViewById(R.id.tv_1);
                             TextView tv2 = helper.getItemView().findViewById(R.id.tv_2);
@@ -102,7 +106,7 @@ public class PrescriptionFragment extends BaseFragment {
                             tv1.setTypeface(tf);
                             tv2.setTypeface(tf);
 
-
+                            Glide.with(context).load(item.getCoverImage()).into(ivCoverImg);
                             helper.setText(R.id.tv_title, item.getTitle());
                             helper.setText(R.id.tv_function, item.getFunction());
                             helper.setText(R.id.tv_introduce, item.getIntroduce());
