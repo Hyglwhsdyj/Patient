@@ -80,6 +80,11 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
     TextView tvCardnum;
     @BindView(R.id.tv_total_price)
     TextView tvTotalPrice;
+    @BindView(R.id.tv_express)
+    TextView tvExpress;
+
+    boolean isExpress=false;
+
     private String doctorId;
     private Context context;
     private double fee;
@@ -218,7 +223,7 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
 
     }
 
-    @OnClick({R.id.tv_back, R.id.tl_time, R.id.tl_card, R.id.tv_wechat})
+    @OnClick({R.id.tv_back, R.id.tl_time,R.id.tv_express, R.id.tl_card, R.id.tv_wechat})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_back:
@@ -226,6 +231,23 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
                 break;
             case R.id.tl_time:
                 showPopWindow();
+                break;
+            case R.id.tv_express:
+                isExpress = !isExpress;
+
+                if (isExpress){
+                    tvExpress.setText("取消加急");
+                    fee = fee*2;
+                    tvFee.setText("￥"+fee+"/次");
+                    tvTotalPrice.setText(fee+"");
+
+                }else {
+                    tvExpress.setText("我要加急");
+                    fee = fee/2;
+                    tvFee.setText("￥"+fee+"/次");
+                    tvTotalPrice.setText(fee+"");
+                }
+
                 break;
             case R.id.tl_card:
                 Intent intent = new Intent(this,CouponsActivity.class);

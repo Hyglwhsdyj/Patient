@@ -86,7 +86,7 @@
                     android:text="约见线下面诊"
                     android:textColor="#FFE02E14"
                     android:textStyle="bold"
-                    android:textSize="13sp"
+                    android:textSize="15sp"
                     android:layout_centerVertical="true"
                     android:drawablePadding="@dimen/dimens_5"
                     android:drawableLeft="@mipmap/ic_make_meet"/>
@@ -181,6 +181,46 @@
                     android:layout_marginTop="@dimen/dimens_20"/>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_marginTop="@dimen/dimens_10">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="康复案例"
+                    android:textColor="#ffe02e14"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:paddingTop="@dimen/dimens_12"
+                    android:paddingBottom="@dimen/dimens_12"
+                    android:paddingLeft="@dimen/dimens_15"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_1"
+                    android:background="@color/color_line"/>
+
+                <com.ais.patient.widget.NetstedListView
+                    android:id="@+id/mListView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_more3"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="查看更多案例"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dimens_10"
+                    android:paddingTop="@dimen/dimens_5"
+                    android:paddingBottom="@dimen/dimens_15"/>
+            </LinearLayout>
+
             <RelativeLayout
                 android:id="@+id/rl_announcement"
                 style="@style/LinearLayoutStyle"
@@ -204,6 +244,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"/>
             </RelativeLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimens_1"

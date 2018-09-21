@@ -21,6 +21,8 @@ import com.ais.patient.been.DoctorTime;
 import com.ais.patient.been.FactFee;
 import com.ais.patient.been.FindDoctor;
 import com.ais.patient.been.HaveMeet;
+import com.ais.patient.been.HealthTemp;
+import com.ais.patient.been.HealthTempDetail;
 import com.ais.patient.been.HttpBaseBean;
 import com.ais.patient.been.ImInfo;
 import com.ais.patient.been.ImageUpload;
@@ -334,6 +336,14 @@ public interface IRetrofitServer {
     Call<HttpBaseBean<WetChat>> requestWechat(@Body ConcurrentHashMap<String, Object> urlParams);
 
     /**
+     * 提交在线问诊订单(加急)
+     * @param urlParams
+     * @return
+     */
+    @POST("/api/order/inquiry/save_urgent_apply.json")
+    Call<HttpBaseBean<WetChat>> requestExpressWechat(@Body ConcurrentHashMap<String, Object> urlParams);
+
+    /**
      * 提交在线下面诊订单订单
      *
      * @param urlParams
@@ -550,7 +560,7 @@ public interface IRetrofitServer {
      * @return
      */
     @POST("/api/pay_order/to_pay.json")
-    Call<HttpBaseBean<WetChat>> toPayChatOnline(@Query("businessId") String businessId, @Query("businessType") String businessType);
+    Call<HttpBaseBean<WetChat>> toPayChatOnline(@Query("businessId") String businessId, @Query("businessType") String businessType,@Query("clientType") String clientType);
 
     /**
      * 中药调理服务订单支付
@@ -877,4 +887,22 @@ public interface IRetrofitServer {
      */
     @GET("/api/user/im_info.json")
     Call<HttpBaseBean<Customer>> getServiceId();
+
+    /**
+     * 医生主页--康复病例
+     * @param doctorId
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @GET("/api/doctor/list_cases_cure.json")
+    Call<HttpBaseBean<List<HealthTemp>>> gteHealthTempList(@Query("doctorId") String doctorId, @Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
+
+    /**
+     * 康复病例 详情
+     * @param id
+     * @return
+     */
+    @GET("/api/doctor/cases_cure_info.json")
+    Call<HttpBaseBean<HealthTempDetail>> gteHealthTempDetail(@Query("id") String id);
 }

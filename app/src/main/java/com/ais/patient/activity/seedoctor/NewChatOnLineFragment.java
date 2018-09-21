@@ -255,7 +255,7 @@ public class NewChatOnLineFragment extends Fragment implements BGARefreshLayout.
                 UserUtils.saveChatOnLineDOCTORID(context,doctorId);
                 UserUtils.saveChatOnLineRECORDID(context,recordId);
                 mRecordId = recordId;
-                Call<HttpBaseBean<WetChat>> call = RetrofitFactory.getInstance(context).toPayChatOnline(recordId, "dr_inquiry");
+                Call<HttpBaseBean<WetChat>> call = RetrofitFactory.getInstance(context).toPayChatOnline(recordId, "dr_inquiry","APP");
                 new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<WetChat>() {
 
                     @Override

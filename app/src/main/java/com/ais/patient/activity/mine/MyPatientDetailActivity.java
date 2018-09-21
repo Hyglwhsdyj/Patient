@@ -3,6 +3,8 @@ package com.ais.patient.activity.mine;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -27,6 +29,8 @@ import com.ais.patient.util.ToastUtils;
 import com.ais.patient.util.UserUtils;
 import com.ais.patient.widget.CustomDatePicker;
 import com.ais.patient.widget.EmptyView;
+import com.ais.patient.widget.MyScrollView;
+import com.ais.patient.widget.VpSwipeRefreshLayout;
 import com.netease.nim.uikit.business.session.activity.P2PMessageActivity;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallback;
@@ -68,6 +72,9 @@ public class MyPatientDetailActivity extends MYBaseActivity {
     TextView tvEndTime;
     @BindView(R.id.mRecycleView)
     RecyclerView mRecycleView;
+    @BindView(R.id.mNestedScrollView)
+    MyScrollView mScrollView;
+
     @BindView(R.id.mRadioGroup)
     RadioGroup mRadioGroup;
     @BindView(R.id.rdb_1)
@@ -95,6 +102,7 @@ public class MyPatientDetailActivity extends MYBaseActivity {
     private ChatOnlineAdapter adapter;
     private CustomDatePicker customDatePicker1;
     private CustomDatePicker customDatePicker2;
+    private int pageNum=1;
 
 
     @Override
@@ -107,6 +115,8 @@ public class MyPatientDetailActivity extends MYBaseActivity {
         context = this;
         mEmptyView.setVisibility(View.VISIBLE);
         mRecycleView.setLayoutManager(new LinearLayoutManager(this));
+        mRecycleView.setNestedScrollingEnabled(false);
+
         rdb1.setChecked(true);
         customTime = 0;
         initDatePicker();
@@ -190,6 +200,29 @@ public class MyPatientDetailActivity extends MYBaseActivity {
                     customTime = 2;
                 } else if (checkedId == R.id.rdb_4) {
                     customTime = 3;
+                }
+            }
+        });
+
+
+        /**
+         * 上拉加载
+         */
+        mScrollView.setOnScrollListener(new MyScrollView.OnScrollListener() {
+            @Override
+            public void onScroll(int scrollY) {
+                final int myScrollViewHeight = mScrollView.getHeight();
+                int height = mScrollView.getChildAt(0).getHeight();
+
+                if (scrollY == height - myScrollViewHeight) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            pageNum++;
+                            setData();
+                        }
+                    }, 500);
+
                 }
             }
         });
@@ -303,30 +336,37 @@ public class MyPatientDetailActivity extends MYBaseActivity {
             }else if (TextUtils.isEmpty(endTime)) {
                 showToast("请选择结束时间");
             }else {
-                Call<HttpBaseBean<List<ChatOnLineList>>> call = RetrofitFactory.getInstance(this).gteHealthRecord(1, 10, id, customTime, startTime, endTime);
+                Call<HttpBaseBean<List<ChatOnLineList>>> call = RetrofitFactory.getInstance(this).gteHealthRecord(pageNum, 10, id, customTime, startTime, endTime);
                 new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<List<ChatOnLineList>>() {
 
                     @Override
                     public void onSuccess(List<ChatOnLineList> chatOnLineLists, String info) {
+                        if (chatOnLineLists.size()<1){
+                            showToast("没有记录了");
+                        }
                         list.addAll(chatOnLineLists);
                         adapter.notifyDataSetChanged();
+
                     }
 
                     @Override
                     public void onFailure(String info) {
                         ToastUtils.show(context, info);
+
                     }
                 });
             }
         }else {
-            Call<HttpBaseBean<List<ChatOnLineList>>> call = RetrofitFactory.getInstance(this).gteHealthRecord(1, 300, id, customTime, startTime, endTime);
+            Call<HttpBaseBean<List<ChatOnLineList>>> call = RetrofitFactory.getInstance(this).gteHealthRecord(pageNum, 10, id, customTime, startTime, endTime);
             new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<List<ChatOnLineList>>() {
 
 
                 @Override
                 public void onSuccess(List<ChatOnLineList> chatOnLineLists, String info) {
-                    list.addAll(chatOnLineLists);
-                    adapter.notifyDataSetChanged();
+                    if (chatOnLineLists.size()>0){
+                        list.addAll(chatOnLineLists);
+                        adapter.notifyDataSetChanged();
+                    }
                 }
 
                 @Override

@@ -28,8 +28,6 @@ public class PrescriptionDetailActivity extends MYBaseActivity {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.tv_title_main)
-    TextView tvTitleMain;
     @BindView(R.id.tv_function)
     TextView tvFunction;
     @BindView(R.id.tv_introduce)
@@ -126,7 +124,7 @@ public class PrescriptionDetailActivity extends MYBaseActivity {
 
                         String title = prescriptionDetail.getTitle();
                         if (title != null) {
-                            tvTitleMain.setText(title);
+                            tvTitle.setText(title);
                         }
 
                         final String cases = prescriptionDetail.getCases();

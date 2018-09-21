@@ -167,8 +167,31 @@
                     android:textColor="#ffff7e00"
                     android:textSize="13sp"
                     android:layout_gravity="right"/>
+
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:gravity="center"
+                android:paddingTop="@dimen/dimens_10"
+                android:paddingBottom="@dimen/dimens_20">
+
+                <TextView
+                    android:id="@+id/tv_express"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我要加急"
+                    android:textColor="#ffffffff"
+                    android:textSize="13sp"
+                    android:paddingTop="@dimen/dimens_14"
+                    android:paddingBottom="@dimen/dimens_14"
+                    android:paddingLeft="@dimen/dimens_60"
+                    android:paddingRight="@dimen/dimens_60"
+                    android:background="@drawable/shape_add_pratient"/>
+            </LinearLayout>
             <RelativeLayout
                 style="@style/LinearLayoutStyle">
                 <TextView

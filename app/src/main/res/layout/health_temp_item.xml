@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dimens_15"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="案例1：急性鼻咽炎"
+                android:textColor="#ff333333"
+                android:textSize="15sp"
+                android:layout_marginRight="@dimen/dimens_10"/>
+
+            <TextView
+                android:id="@+id/tv_look"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="查看案例"
+                android:textColor="#ffbc9761"
+                android:textSize="12sp"
+                android:paddingTop="@dimen/dimens_5"
+                android:paddingBottom="@dimen/dimens_5"
+                android:paddingLeft="@dimen/dimens_7"
+                android:paddingRight="@dimen/dimens_7"
+                android:background="@drawable/shape_search_disease"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_marginTop="@dimen/dimens_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018-01-08"
+            android:textColor="#ff888888"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="厌食是小儿时期的一种常见病症，小儿厌食症早期症状有哪
+些?通过哪些症状可以诊断小儿厌食症，我们一起来看看...."
+            android:textColor="#ff888888"
+            android:textSize="13sp"
+            android:layout_marginTop="@dimen/dimens_10"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_1"
+        android:background="@color/color_line"/>
+</LinearLayout>

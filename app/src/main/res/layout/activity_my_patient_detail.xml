@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"/>
-    <android.support.v4.widget.NestedScrollView
+
+    <com.ais.patient.widget.MyScrollView
+        android:id="@+id/mNestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -320,6 +322,6 @@
             </LinearLayout>
 
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </com.ais.patient.widget.MyScrollView>
 
 </LinearLayout>

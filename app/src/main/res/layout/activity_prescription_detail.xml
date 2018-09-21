@@ -25,29 +25,6 @@
             android:background="@color/white">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="标题"
-                android:textStyle="bold"
-                android:textColor="#FF392011"
-                android:textSize="18sp"
-                android:typeface="sans"/>
-
-            <TextView
-                android:id="@+id/tv_title_main"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#ff333333"
-                android:textSize="13sp"
-                android:background="@drawable/shape_prescription_detail"
-                android:layout_marginTop="@dimen/dimens_15"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimens_1"
-                android:background="@color/color_line"
-                android:layout_marginTop="@dimen/dimens_18"/>
-
-            <TextView
                 android:id="@+id/tv_cou1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

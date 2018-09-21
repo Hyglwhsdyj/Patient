@@ -2,6 +2,7 @@ package com.ais.patient.activity.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -11,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -27,9 +27,9 @@ import com.ais.patient.activity.mine.DoctorDetailActivity;
 import com.ais.patient.adapter.MyGridViewAdapter;
 import com.ais.patient.base.MYBaseActivity;
 import com.ais.patient.been.AppraiseDetail;
-import com.ais.patient.been.AppraiseList;
 import com.ais.patient.been.DoctorMsg;
 import com.ais.patient.been.HaveMeet;
+import com.ais.patient.been.HealthTemp;
 import com.ais.patient.been.HttpBaseBean;
 import com.ais.patient.been.ImInfo;
 import com.ais.patient.http.BaseCallback;
@@ -38,7 +38,6 @@ import com.ais.patient.http.RetrofitFactory;
 import com.ais.patient.util.BannerImageLoader;
 import com.ais.patient.util.ToastUtils;
 import com.ais.patient.widget.CircleTransform;
-import com.ais.patient.widget.FlowGroupView;
 import com.ais.patient.widget.MyScrollView;
 import com.ais.patient.widget.NetstedGridView;
 import com.ais.patient.widget.NetstedListView;
@@ -123,6 +122,8 @@ public class DoctorInfomationActivity extends MYBaseActivity {
     TextView tvTotal;
     @BindView(R.id.mListView)
     NetstedListView mListView;
+    @BindView(R.id.mListView2)
+    NetstedListView mListView2;
     @BindView(R.id.mProgressBar)
     ProgressBar mProgressBar;
     @BindView(R.id.tv_more)
@@ -131,17 +132,28 @@ public class DoctorInfomationActivity extends MYBaseActivity {
     LinearLayout llMore;
     @BindView(R.id.mScrollView)
     MyScrollView mScrollView;
+    @BindView(R.id.tv_more3)
+    TextView tvMore3;
     private String baseUrl;
     private Context context;
     private boolean appointment;
     private List<DoctorMsg.ArticlesBean> articles = new ArrayList<>();
     private List<DoctorMsg.ArticlesBean> articlesBeans = new ArrayList<>();
+
+    List<HealthTemp> healthList = new ArrayList<>();
+    List<HealthTemp> healthListAll = new ArrayList<>();
+
     private RecyclerAdapter<DoctorMsg.ArticlesBean> adapter;
     private String doctorId;
     private String appraiseUrl;
 
     private int pageNum = 1;
     private int pageSize = 10;
+
+    private int pageNum2 = 1;
+    private int pageSize2 = 100;
+
+
     List<AppraiseDetail.DataBean> list = new ArrayList<>();
     private boolean inquiry;
     public DoctorMsg doctorMsg2;
@@ -151,6 +163,7 @@ public class DoctorInfomationActivity extends MYBaseActivity {
     private AlertDialog alertDialog;
     private List<String> diseaseList = new ArrayList<>();
     private MyGridViewAdapter myGridViewAdapter;
+    private Adapter<HealthTemp> healthTempAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -170,19 +183,19 @@ public class DoctorInfomationActivity extends MYBaseActivity {
             appraiseUrl = "api/doctor/appraise/" + doctorId;
         }
 
-        myGridViewAdapter = new MyGridViewAdapter(this,diseaseList);
+        myGridViewAdapter = new MyGridViewAdapter(this, diseaseList);
         mNetstedGridView.setAdapter(myGridViewAdapter);
         mNetstedGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (diseaseList.size()>4){
-                    if (position==diseaseList.size()-1){
-                        if (diseaseList.get(position).equals("查看更多")){
+                if (diseaseList.size() > 4) {
+                    if (position == diseaseList.size() - 1) {
+                        if (diseaseList.get(position).equals("查看更多")) {
                             diseaseList.clear();
                             diseaseList.addAll(diseaseExpertise);
                             diseaseList.add("收起更多");
                             myGridViewAdapter.notifyDataSetChanged();
-                        }else {
+                        } else {
                             diseaseList.clear();
                             for (int i = 0; i < 5; i++) {
                                 diseaseList.add(diseaseExpertise.get(i));
@@ -194,6 +207,26 @@ public class DoctorInfomationActivity extends MYBaseActivity {
                 }
             }
         });
+
+        healthTempAdapter = new Adapter<HealthTemp>(context, R.layout.health_temp_item, healthList) {
+            @Override
+            protected void convert(AdapterHelper helper, final HealthTemp item) {
+                helper.setText(R.id.tv_title, item.getTitle());
+                helper.setText(R.id.tv_time, item.getTime());
+                helper.setText(R.id.tv_content, item.getContent());
+                TextView tvLook = helper.getItemView().findViewById(R.id.tv_look);
+                tvLook.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String cureId = item.getCureId();
+                        Intent intent = new Intent(context, HealthTempDetailActivity.class);
+                        intent.putExtra("id", cureId);
+                        startActivity(intent);
+                    }
+                });
+            }
+        };
+        mListView2.setAdapter(healthTempAdapter);
     }
 
     /**
@@ -212,10 +245,10 @@ public class DoctorInfomationActivity extends MYBaseActivity {
         cbMore1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     tvIntrol.setMaxLines(Integer.MAX_VALUE);//把TextView行数显示取消掉
                     cbMore1.setText("收起更多");
-                }else {
+                } else {
                     tvIntrol.setMaxLines(3);//超过10行就设置只能显示10行
                     cbMore1.setText("查看更多");
                 }
@@ -349,7 +382,7 @@ public class DoctorInfomationActivity extends MYBaseActivity {
                         tvBackNumber.setText("诊疗案例" + caseNum + "个");
 
                         int experience = doctorMsg.getClinicalExperience();
-                        tvRevisit.setText("临床经验"+experience+"年");
+                        tvRevisit.setText("临床经验" + experience + "年");
 
                         double fee = doctorMsg.getFee();
                         tvFee.setText(fee + "元/次");
@@ -373,14 +406,14 @@ public class DoctorInfomationActivity extends MYBaseActivity {
                         }
 
                         diseaseExpertise = doctorMsg.getDiseaseExpertise();
-                        if (diseaseExpertise.size()>5){
+                        if (diseaseExpertise.size() > 5) {
                             diseaseList.clear();
                             for (int i = 0; i < 5; i++) {
                                 diseaseList.add(diseaseExpertise.get(i));
                             }
                             diseaseList.add("查看更多");
                             myGridViewAdapter.notifyDataSetChanged();
-                        }else {
+                        } else {
                             diseaseList.clear();
                             diseaseList.addAll(diseaseExpertise);
                             myGridViewAdapter.notifyDataSetChanged();
@@ -388,14 +421,14 @@ public class DoctorInfomationActivity extends MYBaseActivity {
 
 
                         List<String> jobPhotos = doctorMsg.getJobPhotos();
-                        if (jobPhotos!=null && jobPhotos.size()>0){
+                        if (jobPhotos != null && jobPhotos.size() > 0) {
                             mBanner.setImageLoader(new BannerImageLoader());
                             //mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);//设置圆形指示器与标题
                             //mBanner.setIndicatorGravity(BannerConfig.CENTER);//设置指示器位置
                             mBanner.setImages(jobPhotos);//设置图片源
                             //banner.setBannerTitles(null);//设置标题源
                             mBanner.start();
-                        }else {
+                        } else {
                             mBanner.setVisibility(View.GONE);
                         }
 
@@ -415,17 +448,17 @@ public class DoctorInfomationActivity extends MYBaseActivity {
                                 protected void convert(RecyclerAdapterHelper helper, final DoctorMsg.ArticlesBean item) {
                                     LinearLayout llPic = helper.getItemView().findViewById(R.id.ll_pic);
                                     String type = item.getArticleType();
-                                    if (type.equals("5")){
+                                    if (type.equals("5")) {
                                         llPic.setVisibility(View.VISIBLE);
-                                    }else {
+                                    } else {
                                         llPic.setVisibility(View.GONE);
                                     }
-                                    if (type.equals("5")){
+                                    if (type.equals("5")) {
                                         helper.setVisible(R.id.tv_title, false);
                                         helper.setVisible(R.id.tv_time, true);
-                                    }else if (type.equals("6")){
+                                    } else if (type.equals("6")) {
                                         helper.setVisible(R.id.tv_title, false);
-                                    }else if (type.equals("1")){
+                                    } else if (type.equals("1")) {
                                         //全部显示
                                         helper.setVisible(R.id.tv_title, true);
                                         helper.setVisible(R.id.tv_time, true);
@@ -465,8 +498,8 @@ public class DoctorInfomationActivity extends MYBaseActivity {
                                     helper.getItemView().setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            Intent intent  = new Intent(context, DoctorDetailActivity.class);
-                                            intent.putExtra("id",item.getArticleId());
+                                            Intent intent = new Intent(context, DoctorDetailActivity.class);
+                                            intent.putExtra("id", item.getArticleId());
                                             startActivity(intent);
                                         }
                                     });
@@ -478,17 +511,17 @@ public class DoctorInfomationActivity extends MYBaseActivity {
                                 protected void convert(RecyclerAdapterHelper helper, final DoctorMsg.ArticlesBean item) {
                                     LinearLayout llPic = helper.getItemView().findViewById(R.id.ll_pic);
                                     String type = item.getArticleType();
-                                    if (type.equals("5")){
+                                    if (type.equals("5")) {
                                         llPic.setVisibility(View.VISIBLE);
-                                    }else {
+                                    } else {
                                         llPic.setVisibility(View.GONE);
                                     }
-                                    if (type.equals("5")){
+                                    if (type.equals("5")) {
                                         helper.setVisible(R.id.tv_title, false);
                                         helper.setVisible(R.id.tv_time, true);
-                                    }else if (type.equals("6")){
+                                    } else if (type.equals("6")) {
                                         helper.setVisible(R.id.tv_title, false);
-                                    }else if (type.equals("1")){
+                                    } else if (type.equals("1")) {
                                         //全部显示
                                         helper.setVisible(R.id.tv_title, true);
                                         helper.setVisible(R.id.tv_time, true);
@@ -501,20 +534,20 @@ public class DoctorInfomationActivity extends MYBaseActivity {
                                     ImageView iv2 = (ImageView) helper.getItemView().findViewById(R.id.iv2);
                                     ImageView iv3 = (ImageView) helper.getItemView().findViewById(R.id.iv3);
                                     List<String> articlePics = item.getArticlePics();
-                                    if (articlePics.size()<1){
+                                    if (articlePics.size() < 1) {
                                         llPic.setVisibility(View.GONE);
-                                    }else if (articlePics.size() == 1) {
+                                    } else if (articlePics.size() == 1) {
                                         if (articlePics.get(0) != null) {
                                             Picasso.with(context).load(articlePics.get(0)).into(iv1);
                                         }
-                                    }else if (articlePics.size() == 2) {
+                                    } else if (articlePics.size() == 2) {
                                         if (articlePics.get(0) != null) {
                                             Picasso.with(context).load(articlePics.get(0)).into(iv1);
                                         }
                                         if (articlePics.get(1) != null) {
                                             Picasso.with(context).load(articlePics.get(1)).into(iv2);
                                         }
-                                    }else if (articlePics.size() == 3 || articlePics.size()>3) {
+                                    } else if (articlePics.size() == 3 || articlePics.size() > 3) {
                                         if (articlePics.get(0) != null) {
                                             Picasso.with(context).load(articlePics.get(0)).into(iv1);
                                         }
@@ -528,8 +561,8 @@ public class DoctorInfomationActivity extends MYBaseActivity {
                                     helper.getItemView().setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            Intent intent  = new Intent(context, DoctorDetailActivity.class);
-                                            intent.putExtra("id",item.getArticleId());
+                                            Intent intent = new Intent(context, DoctorDetailActivity.class);
+                                            intent.putExtra("id", item.getArticleId());
                                             startActivity(intent);
                                         }
                                     });
@@ -548,63 +581,50 @@ public class DoctorInfomationActivity extends MYBaseActivity {
         }
 
         /**
+         * 获取康复案例
+         */
+        loadHeadTemp();
+
+
+        /**
          * 获取用户评价
          */
         loadAppraise();
     }
 
-    /*private void addTextView(String str) {
-        TextView child = new TextView(context);
-        ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(ViewGroup.MarginLayoutParams.WRAP_CONTENT, ViewGroup.MarginLayoutParams.WRAP_CONTENT);
-        params.setMargins(10, 10, 10, 10);
-        child.setLayoutParams(params);
-        child.setBackgroundResource(R.drawable.shape_diseaseexpertise2);
-        child.setText(str);
-        child.setTextColor(context.getResources().getColor(R.color.color_main));
-        mFlowGroupView.addView(child);
-    }*/
+    private void loadHeadTemp() {
+        Call<HttpBaseBean<List<HealthTemp>>> call = RetrofitFactory.getInstance(this).gteHealthTempList(doctorId, pageNum2, pageSize2);
+        new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<List<HealthTemp>>() {
 
-   /* private void addTextView2(String str,int index) {
-        TextView child = new TextView(context);
-        ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(ViewGroup.MarginLayoutParams.WRAP_CONTENT, ViewGroup.MarginLayoutParams.WRAP_CONTENT);
-        params.setMargins(10, 10, 10, 10);
-        child.setLayoutParams(params);
-        child.setBackgroundResource(R.drawable.shape_diseaseexpertise3);
-        child.setText(str);
-        child.setTextColor(context.getResources().getColor(R.color.color_yellow));
-        if (index==0){
-            child.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mFlowGroupView.removeAllViews();
-                    for (int i = 0; i < diseaseExpertise.size(); i++) {
-                        addTextView(diseaseExpertise.get(i));
-                    }
-                    addTextView2("收起更多",1);
-                }
-            });
-        }else {
-            child.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mFlowGroupView.removeAllViews();
-                    if (diseaseExpertise.size()>5){
-                        for (int i = 0; i < 5; i++) {
-                            addTextView(diseaseExpertise.get(i));
+            @Override
+            public void onSuccess(List<HealthTemp> healthTemps, String info) {
+
+                if (healthTemps != null) {
+                    healthListAll.addAll(healthTemps);
+
+
+                    if (healthTemps.size()>3){
+                        tvMore3.setVisibility(View.VISIBLE);
+                        for (int i = 0; i < 3; i++) {
+                            healthList.add(healthTemps.get(i));
                         }
-                        addTextView2("查看更多",0);
+                        healthTempAdapter.addAll(healthList);
                     }else {
-                        for (int i = 0; i < diseaseExpertise.size(); i++) {
-                            addTextView(diseaseExpertise.get(i));
-                        }
+                        healthList.addAll(healthTemps);
+                        healthTempAdapter.addAll(healthList);
+                        tvMore3.setVisibility(View.GONE);
                     }
                 }
-            });
+            }
 
-        }
+            @Override
+            public void onFailure(String info) {
 
-        mFlowGroupView.addView(child);
-    }*/
+            }
+        });
+    }
+
+
     /**
      * 获取用户评价
      */
@@ -619,11 +639,11 @@ public class DoctorInfomationActivity extends MYBaseActivity {
                     AppraiseDetail body = response.body();
 
                     int code = body.getCode();
-                    if (code==200){
+                    if (code == 200) {
 
                         AppraiseDetail.PageBean page = body.getPage();
                         int total = page.getTotal();
-                        tvTotal.setText("总评价（"+total+"条）");
+                        tvTotal.setText("总评价（" + total + "条）");
 
                         List<AppraiseDetail.DataBean> data = body.getData();
                         if (data.size() > 0) {
@@ -631,19 +651,19 @@ public class DoctorInfomationActivity extends MYBaseActivity {
                             mProgressBar.setVisibility(View.VISIBLE);
                             tvMore.setVisibility(View.VISIBLE);
                             tvMore.setText("加载中...");
-                            Adapter<AppraiseDetail.DataBean> adapter = new Adapter<AppraiseDetail.DataBean>(context,R.layout.appraiselist_item,list) {
+                            Adapter<AppraiseDetail.DataBean> adapter = new Adapter<AppraiseDetail.DataBean>(context, R.layout.appraiselist_item, list) {
                                 @Override
                                 protected void convert(AdapterHelper helper, AppraiseDetail.DataBean item) {
-                                    helper.setText(R.id.tv_name,item.getName());
-                                    helper.setText(R.id.tv_time,item.getTime());
+                                    helper.setText(R.id.tv_name, item.getName());
+                                    helper.setText(R.id.tv_time, item.getTime());
 
                                     List<AppraiseDetail.DataBean.ItemsBean> items = item.getItems();
                                     NetstedListView mNetstedListView = (NetstedListView) helper.getItemView().findViewById(R.id.mNetstedListView);
-                                    Adapter<AppraiseDetail.DataBean.ItemsBean> adapter1 = new Adapter<AppraiseDetail.DataBean.ItemsBean>(context,R.layout.appraise_item,items) {
+                                    Adapter<AppraiseDetail.DataBean.ItemsBean> adapter1 = new Adapter<AppraiseDetail.DataBean.ItemsBean>(context, R.layout.appraise_item, items) {
                                         @Override
                                         protected void convert(AdapterHelper helper, AppraiseDetail.DataBean.ItemsBean item) {
-                                            helper.setText(R.id.tv_item_name,item.getItem());
-                                            AppCompatRatingBar ratingBar =(AppCompatRatingBar)helper.getItemView().findViewById(R.id.popup_ratingbar);
+                                            helper.setText(R.id.tv_item_name, item.getItem());
+                                            AppCompatRatingBar ratingBar = (AppCompatRatingBar) helper.getItemView().findViewById(R.id.popup_ratingbar);
                                             ratingBar.setRating((float) item.getScore());
                                         }
                                     };
@@ -668,7 +688,7 @@ public class DoctorInfomationActivity extends MYBaseActivity {
         }
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_chatonline, R.id.rl_make_meet, R.id.rl_announcement, R.id.tv_more2,R.id.tv_look_post})
+    @OnClick({R.id.iv_back, R.id.tv_chatonline, R.id.rl_make_meet, R.id.rl_announcement, R.id.tv_more2, R.id.tv_look_post,R.id.tv_more3})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -681,14 +701,14 @@ public class DoctorInfomationActivity extends MYBaseActivity {
                         @Override
                         public void onSuccess(final HaveMeet haveMeet, String info) {
 
-                            if (haveMeet!=null && !TextUtils.isEmpty(haveMeet.getRecordId())){
-                                if (haveMeet.getStatus().equals("PAY_SUCCESS")){
+                            if (haveMeet != null && !TextUtils.isEmpty(haveMeet.getRecordId())) {
+                                if (haveMeet.getStatus().equals("PAY_SUCCESS")) {
                                     final Call<HttpBaseBean<ImInfo>> call = RetrofitFactory.getInstance(context).getImInfo(haveMeet.getRecordId());
                                     new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<ImInfo>() {
 
                                         @Override
                                         public void onSuccess(ImInfo imInfo, String info) {
-                                            if (imInfo!=null){
+                                            if (imInfo != null) {
                                                 final String im_doctor_accid = imInfo.getIm_doctor_accid();
                                                 LoginInfo loginInfo = new LoginInfo(imInfo.getIm_accid(), imInfo.getIm_token());// config...
                                                 NIMClient.getService(AuthService.class).login(loginInfo).setCallback(new RequestCallback<LoginInfo>() {
@@ -696,17 +716,17 @@ public class DoctorInfomationActivity extends MYBaseActivity {
                                                     public void onSuccess(LoginInfo param) {
                                                     /*NimUIKit.loginSuccess(param.getAccount());
                                                     NimUIKit.startP2PSession(context,im_doctor_accid);*/
-                                                        P2PMessageActivity.start(context,im_doctor_accid,null,null,"0",haveMeet.getRecordId(),doctorId);
+                                                        P2PMessageActivity.start(context, im_doctor_accid, null, null, "0", haveMeet.getRecordId(), doctorId);
                                                     }
 
                                                     @Override
                                                     public void onFailed(int code) {
-                                                        ToastUtils.show(context,"登录失败");
+                                                        ToastUtils.show(context, "登录失败");
                                                     }
 
                                                     @Override
                                                     public void onException(Throwable exception) {
-                                                        ToastUtils.show(context,"登录异常");
+                                                        ToastUtils.show(context, "登录异常");
                                                     }
                                                 });
                                             }
@@ -717,19 +737,19 @@ public class DoctorInfomationActivity extends MYBaseActivity {
 
                                         }
                                     });
-                                }else {
-                                    startActivity(new Intent(context,MainActivity.class));
+                                } else {
+                                    startActivity(new Intent(context, MainActivity.class));
                                 }
 
-                            }else {
-                                Intent intent = new Intent(context,BuyOnlineSeriveActivity.class);
-                                intent.putExtra("doctorId",doctorId);
-                                intent.putExtra("image",doctorMsg2.getImage());
-                                intent.putExtra("name",doctorMsg2.getName());
-                                intent.putExtra("depart",doctorMsg2.getDepart());
-                                intent.putExtra("titles",doctorMsg2.getTitles());
-                                intent.putExtra("medicalInstitutions",doctorMsg2.getMedicalInstitutions());
-                                intent.putExtra("diseaseExpertise",(Serializable) doctorMsg2.getDiseaseExpertise());
+                            } else {
+                                Intent intent = new Intent(context, BuyOnlineSeriveActivity.class);
+                                intent.putExtra("doctorId", doctorId);
+                                intent.putExtra("image", doctorMsg2.getImage());
+                                intent.putExtra("name", doctorMsg2.getName());
+                                intent.putExtra("depart", doctorMsg2.getDepart());
+                                intent.putExtra("titles", doctorMsg2.getTitles());
+                                intent.putExtra("medicalInstitutions", doctorMsg2.getMedicalInstitutions());
+                                intent.putExtra("diseaseExpertise", (Serializable) doctorMsg2.getDiseaseExpertise());
                                 startActivity(intent);
                             }
 
@@ -747,13 +767,13 @@ public class DoctorInfomationActivity extends MYBaseActivity {
             case R.id.rl_make_meet:
                 if (appointment) {
                     Intent intent = new Intent(context, BuyMeetingSeriveActivity.class);
-                    intent.putExtra("doctorId",doctorId);
-                    intent.putExtra("image",doctorMsg2.getImage());
-                    intent.putExtra("name",doctorMsg2.getName());
-                    intent.putExtra("depart",doctorMsg2.getDepart());
-                    intent.putExtra("titles",doctorMsg2.getTitles());
-                    intent.putExtra("medicalInstitutions",doctorMsg2.getMedicalInstitutions());
-                    intent.putExtra("diseaseExpertise",(Serializable) doctorMsg2.getDiseaseExpertise());
+                    intent.putExtra("doctorId", doctorId);
+                    intent.putExtra("image", doctorMsg2.getImage());
+                    intent.putExtra("name", doctorMsg2.getName());
+                    intent.putExtra("depart", doctorMsg2.getDepart());
+                    intent.putExtra("titles", doctorMsg2.getTitles());
+                    intent.putExtra("medicalInstitutions", doctorMsg2.getMedicalInstitutions());
+                    intent.putExtra("diseaseExpertise", (Serializable) doctorMsg2.getDiseaseExpertise());
                     startActivity(intent);
                 } else {
                     showToast("该医生没有开通线下面诊");
@@ -762,14 +782,24 @@ public class DoctorInfomationActivity extends MYBaseActivity {
             case R.id.rl_announcement:
                 break;
             case R.id.tv_more2:
-
-                Intent intent = new Intent(context,DoctorNewsListActivity.class);
-                intent.putExtra("doctorId",doctorId);
-                intent.putExtra("doctorName",name);
+                Intent intent = new Intent(context, DoctorNewsListActivity.class);
+                intent.putExtra("doctorId", doctorId);
+                intent.putExtra("doctorName", name);
                 startActivity(intent);
                 break;
             case R.id.tv_look_post:
                 alertDialog.show();
+                break;
+            case R.id.tv_more3:
+                if (tvMore3.getText().toString().equals("查看更多案例")){
+                    healthTempAdapter.clear();
+                    healthTempAdapter.addAll(healthListAll);
+                    tvMore3.setText("收起更多");
+                }else {
+                    healthTempAdapter.clear();
+                    healthTempAdapter.addAll(healthList);
+                    tvMore3.setText("查看更多案例");
+                }
                 break;
         }
     }
@@ -778,7 +808,7 @@ public class DoctorInfomationActivity extends MYBaseActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_doctor_pic, null, false);
         ListView mListView = view.findViewById(R.id.mListView);
-        Adapter<String> adapter = new Adapter<String>(this,R.layout.dialog_doctor_pic_item,certificatePics) {
+        Adapter<String> adapter = new Adapter<String>(this, R.layout.dialog_doctor_pic_item, certificatePics) {
             @Override
             protected void convert(AdapterHelper helper, String item) {
                 ImageView ivPic = helper.getItemView().findViewById(R.id.iv_pic);
@@ -790,5 +820,12 @@ public class DoctorInfomationActivity extends MYBaseActivity {
         alertDialog = builder.create();
     }
 
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 
 }

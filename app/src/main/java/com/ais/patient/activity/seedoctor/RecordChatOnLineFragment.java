@@ -187,7 +187,7 @@ public class RecordChatOnLineFragment extends Fragment implements BGARefreshLayo
         adapter.setOnIntemClickLister(new ChatOnlineAdapter.onIntemClickLister() {
             @Override
             public void toPay(String doctorId, String recordId) {
-                Call<HttpBaseBean<WetChat>> call = RetrofitFactory.getInstance(context).toPayChatOnline(recordId, "dr_inquiry");
+                Call<HttpBaseBean<WetChat>> call = RetrofitFactory.getInstance(context).toPayChatOnline(recordId, "dr_inquiry","APP");
                 new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<WetChat>() {
 
                     @Override

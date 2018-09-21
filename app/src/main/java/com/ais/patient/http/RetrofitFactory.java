@@ -16,7 +16,7 @@ public class RetrofitFactory {
 
     private static final String BASE_URL_PATH = ".5aszy.com";
 
-    private static final int urlSwitch = 0;
+    private static final int urlSwitch = 1;
 
     private static Retrofit.Builder builder;
     private static IRetrofitServer retrofitServer;

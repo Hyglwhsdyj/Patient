@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:text="厌食是小儿时期的一种常见病症"
             android:textColor="#ff888888"
+            android:maxLines="5"
             android:textSize="13sp"
             android:layout_marginTop="@dimen/dimens_10"/>
         <LinearLayout
