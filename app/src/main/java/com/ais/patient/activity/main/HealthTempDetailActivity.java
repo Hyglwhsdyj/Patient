@@ -27,8 +27,6 @@ public class HealthTempDetailActivity extends MYBaseActivity {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.tv_msg)
-    TextView tvMsg;
     @BindView(R.id.tv_disease)
     TextView tvDisease;
     @BindView(R.id.tv_disease_before)
@@ -41,6 +39,7 @@ public class HealthTempDetailActivity extends MYBaseActivity {
     NetstedListView mListView2;
     private String id;
     private Context context;
+    private TextView tvMsg;
 
 
     @Override
@@ -54,7 +53,7 @@ public class HealthTempDetailActivity extends MYBaseActivity {
         showProgressDialog();
         id = getIntent().getStringExtra("id");
         tvTitle.setText("康复案例");
-
+        tvMsg = (TextView) findViewById(R.id.tv_title2);
     }
 
     @Override
@@ -70,9 +69,13 @@ public class HealthTempDetailActivity extends MYBaseActivity {
             @Override
             public void onSuccess(HealthTempDetail healthTempDetail, String info) {
                 if (healthTempDetail != null) {
-                    tvMsg.setText(healthTempDetail.getName()+"："+healthTempDetail.getSex()+","+healthTempDetail.getAge()+"岁");
+                    String name = healthTempDetail.getName();
+                    String sex = healthTempDetail.getSex();
+                    String age = healthTempDetail.getAge();
+                    tvMsg.setText(name+"："+sex+","+age+"岁");
                     tvDisease.setText(healthTempDetail.getDisease());
-                    tvAfterInfo.setText(healthTempDetail.getBeforeInfo());
+                    tvDiseaseBefore.setText(healthTempDetail.getBeforeInfo());
+                    tvAfterInfo.setText(healthTempDetail.getAfterInfo());
 
                     List<String> beforeImage = healthTempDetail.getBeforeImage();
                     if (beforeImage!=null && beforeImage.size()>0){

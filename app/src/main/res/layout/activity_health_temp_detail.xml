@@ -36,7 +36,7 @@
                 android:drawableLeft="@mipmap/ic_line"/>
 
             <TextView
-                android:id="@+id/tv_msg"
+                android:id="@+id/tv_title2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#ff666666"
