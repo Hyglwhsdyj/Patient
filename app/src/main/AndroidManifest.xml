@@ -226,7 +226,8 @@
         <activity android:name=".activity.main.BigImageViewActivity" />
         <activity android:name=".activity.mine.MyPatientListActivity" />
         <activity android:name=".activity.mine.MyPatientDetailActivity" />
-        <activity android:name=".activity.main.HealthTempDetailActivity"></activity>
+        <activity android:name=".activity.main.HealthTempDetailActivity" />
+        <activity android:name=".activity.main.MakeSurePayActivity"></activity>
     </application>
 
 </manifest>

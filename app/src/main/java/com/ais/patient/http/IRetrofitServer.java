@@ -10,6 +10,7 @@ import com.ais.patient.been.BuyMedicine;
 import com.ais.patient.been.ChatOnLineList;
 import com.ais.patient.been.ChatOnLinePaper;
 import com.ais.patient.been.ChatOnlineMsg;
+import com.ais.patient.been.CheckPay;
 import com.ais.patient.been.Coupons;
 import com.ais.patient.been.Customer;
 import com.ais.patient.been.DoctorDynamicRespone;
@@ -342,6 +343,14 @@ public interface IRetrofitServer {
      */
     @POST("/api/order/inquiry/save_urgent_apply.json")
     Call<HttpBaseBean<WetChat>> requestExpressWechat(@Body ConcurrentHashMap<String, Object> urlParams);
+
+    /**
+     * 请求该接口判断是否真正支付成功 加急
+     * @param urlParams
+     * @return
+     */
+    @POST("/api/order/inquiry/check_pay.json")
+    Call<HttpBaseBean<CheckPay>> makeSureExpress(@Body ConcurrentHashMap<String, Object> urlParams);
 
     /**
      * 提交在线下面诊订单订单

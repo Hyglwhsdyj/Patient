@@ -146,7 +146,7 @@ public class MyPatientListActivity extends MYBaseActivity implements BGARefreshL
 
             @Override
             public void onFailure(String info) {
-
+                showToast(info);
             }
         });
     }
@@ -177,14 +177,10 @@ public class MyPatientListActivity extends MYBaseActivity implements BGARefreshL
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 
     @OnClick(R.id.tv_back)
     public void onViewClicked() {
+        finish();
     }
+
 }

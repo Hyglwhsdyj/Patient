@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -23,6 +25,7 @@ import com.ais.patient.activity.mine.MyOrdonnanceActivity;
 import com.ais.patient.activity.mine.MyReservationActivity;
 import com.ais.patient.base.MYBaseActivity;
 import com.ais.patient.been.ChatOnlineMsg;
+import com.ais.patient.been.CheckPay;
 import com.ais.patient.been.DoctorMsg;
 import com.ais.patient.been.DoctorTime;
 import com.ais.patient.been.FactFee;
@@ -236,11 +239,29 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
                 isExpress = !isExpress;
 
                 if (isExpress){
-                    tvExpress.setText("取消加急");
-                    fee = fee*2;
-                    tvFee.setText("￥"+fee+"/次");
-                    tvTotalPrice.setText(fee+"");
-
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    View inflate = LayoutInflater.from(this).inflate(R.layout.dialog_cancel, null, false);
+                    builder.setView(inflate);
+                    final AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                    TextView tvCancel = (TextView) inflate.findViewById(R.id.tv_cancel);
+                    TextView tvOk = (TextView) inflate.findViewById(R.id.tv_ok);
+                    tvCancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
+                        }
+                    });
+                    tvOk.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            tvExpress.setText("取消加急");
+                            fee = fee*2;
+                            tvFee.setText("￥"+fee+"/次");
+                            tvTotalPrice.setText(fee+"");
+                            alertDialog.dismiss();
+                        }
+                    });
                 }else {
                     tvExpress.setText("我要加急");
                     fee = fee/2;
@@ -256,7 +277,11 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
                 startActivityForResult(intent,0);
                 break;
             case R.id.tv_wechat:
-                requestWechat();
+                if (isExpress){
+                    requestWechatExpress();
+                }else {
+                    requestWechat();
+                }
                 break;
         }
     }
@@ -313,61 +338,140 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
         });
     }
 
+    private void requestWechatExpress() {
+        UserUtils.saveChatOnLineOrMeeting(this,100);
+        AjaxParams ajaxParams = new AjaxParams();
+        ajaxParams.put("payType","weixinpay_app");
+        ajaxParams.put("fromType","ANDROID");
+        ajaxParams.put("doctorId",doctorId);
+        if (couponId!=null && !TextUtils.isEmpty(couponId)){
+            ajaxParams.put("couponId",couponId);
+        }
+        ConcurrentHashMap<String, Object> urlParams = ajaxParams.getUrlParams();
+        Log.e("BuyOnlineSeriveActivity", "requestWechat: "+urlParams.toString());
+        Call<HttpBaseBean<WetChat>> call = RetrofitFactory.getInstance(this).requestExpressWechat(urlParams);
+        new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<WetChat>() {
+
+            @Override
+            public void onSuccess(WetChat wxPay, String info) {
+                IWXAPI api = WXAPIFactory.createWXAPI(context, wxPay.getAppid());
+                api.registerApp(wxPay.getAppid());
+
+                recordId = wxPay.getRecordId();
+                UserUtils.saveChatOnLineRECORDID(context,recordId);
+                UserUtils.saveChatOnLineDOCTORID(context,doctorId);
+
+
+                Log.e("Appid", "run: "+wxPay.getAppid());
+                PayReq payReq = new PayReq();
+                payReq.appId = wxPay.getAppid();
+                payReq.partnerId = wxPay.getPartnerid();
+                Log.e("partnerId", "run: "+wxPay.getPartnerid());
+                payReq.prepayId = wxPay.getPrepayid();
+                Log.e("prepayId", "run: "+wxPay.getPrepayid());
+                payReq.packageValue = wxPay.getPackageX();
+                Log.e("packageValue", "run: "+wxPay.getPackageX());
+                payReq.nonceStr = wxPay.getNoncestr();
+                Log.e("nonceStr", "run: "+wxPay.getNoncestr());
+                payReq.timeStamp = wxPay.getTimestamp();
+                Log.e("timeStamp", "run: "+wxPay.getTimestamp());
+                payReq.sign = wxPay.getSign();
+                Log.e("sign", "run: "+wxPay.getSign());
+                api.sendReq(payReq);
+            }
+
+            @Override
+            public void onFailure(String info) {
+                showToast(info);
+            }
+        });
+    }
+
     /**
      * 支付成功广播接收器
      */
     public class MyReceiver extends BroadcastReceiver{
 
         @Override
-        public void onReceive(Context context, Intent intent) {
+        public void onReceive(final Context context, Intent intent) {
             int errCode = intent.getIntExtra("errCode", -1);
-            if (errCode==0){
-                showProgressDialog();
-                Call<HttpBaseBean<Object>> call = RetrofitFactory.getInstance(BuyOnlineSeriveActivity.this).makePaySure(recordId,"dr_inquiry");
-                new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener() {
-                    @Override
-                    public void onSuccess(Object o, String info) {
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                //购买在线问诊
-                                Intent intent  = new Intent(BuyOnlineSeriveActivity.this, PatientInfomationActivity.class);
-                                intent.putExtra("doctorId",doctorId);
-                                intent.putExtra("recordId",recordId);
-                                if (isShowingProgressDialog()){
-                                    dismissProgressDialog();
-                                }
-                                startActivity(intent);
-                                finish();
-                            }
-                        },3000);
-                    }
+            if (isExpress){
+                if (errCode==0){
+                    AjaxParams ajaxParams = new AjaxParams();
+                    ajaxParams.put("recordId",recordId);
+                    ConcurrentHashMap<String, Object> urlParams = ajaxParams.getUrlParams();
+                    Call<HttpBaseBean<CheckPay>> call = RetrofitFactory.getInstance(context).makeSureExpress(urlParams);
+                    new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<CheckPay>() {
 
-                    @Override
-                    public void onFailure(String info) {
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                //购买在线问诊
-                                Intent intent  = new Intent(BuyOnlineSeriveActivity.this, PatientInfomationActivity.class);
-                                intent.putExtra("doctorId",doctorId);
-                                intent.putExtra("recordId",recordId);
-                                if (isShowingProgressDialog()){
-                                    dismissProgressDialog();
+                        @Override
+                        public void onSuccess(CheckPay checkPay, String info) {
+                            if (checkPay!=null){
+                                if (checkPay.getStatus()==1){
+                                    /**
+                                     * 1 支付成功
+                                     2 支付待确认，需要再请求接口
+                                     3 支付异常，订单定时取消
+                                     */
+                                    Intent intent1 = new Intent(context, MakeSurePayActivity.class);
+                                    intent1.putExtra("AdvertUrl",checkPay.getAdvertUrl());
+                                    startActivity(intent1);
                                 }
-                                startActivity(intent);
-                                finish();
                             }
-                        },3000);
-                    }
-                });
+                        }
+
+                        @Override
+                        public void onFailure(String info) {
+
+                        }
+                    });
+                }
             }else {
+                if (errCode==0){
+                    showProgressDialog();
+                    Call<HttpBaseBean<Object>> call = RetrofitFactory.getInstance(BuyOnlineSeriveActivity.this).makePaySure(recordId,"dr_inquiry");
+                    new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener() {
+                        @Override
+                        public void onSuccess(Object o, String info) {
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    //购买在线问诊
+                                    Intent intent  = new Intent(BuyOnlineSeriveActivity.this, PatientInfomationActivity.class);
+                                    intent.putExtra("doctorId",doctorId);
+                                    intent.putExtra("recordId",recordId);
+                                    if (isShowingProgressDialog()){
+                                        dismissProgressDialog();
+                                    }
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            },3000);
+                        }
 
-                //购买在线问诊
-                Intent intent2  = new Intent(BuyOnlineSeriveActivity.this, MainActivity.class);
-                startActivity(intent2);
+                        @Override
+                        public void onFailure(String info) {
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    //购买在线问诊
+                                    Intent intent  = new Intent(BuyOnlineSeriveActivity.this, PatientInfomationActivity.class);
+                                    intent.putExtra("doctorId",doctorId);
+                                    intent.putExtra("recordId",recordId);
+                                    if (isShowingProgressDialog()){
+                                        dismissProgressDialog();
+                                    }
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            },3000);
+                        }
+                    });
+                }else {
+                    //购买在线问诊
+                    Intent intent2  = new Intent(BuyOnlineSeriveActivity.this, MainActivity.class);
+                    startActivity(intent2);
+                }
             }
-
         }
     }
 
