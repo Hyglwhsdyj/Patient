@@ -107,15 +107,35 @@
                     android:background="@drawable/shape_subjects"
                     android:textColor="@color/color_yellow"/>
             </LinearLayout>
-            <TextView
-                android:id="@+id/tv_fee"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="100/次"
+                android:orientation="horizontal"
                 android:layout_marginTop="@dimen/dimens_15"
-                android:drawablePadding="@dimen/dimens_6"
-                android:textColor="@color/color_yellow"
-                android:drawableLeft="@mipmap/ic_chat"/>
+                android:drawablePadding="@dimen/dimens_6">
+
+                <TextView
+                    android:id="@+id/tv_fee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="100/次"
+                    android:textColor="@color/color_yellow"
+                    android:drawableLeft="@mipmap/ic_chat"/>
+                <TextView
+                    android:id="@+id/tv_choose_other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选择"
+                    android:visibility="gone"
+                    android:textSize="@dimen/sp_18"
+                    android:textColor="@color/white"
+                    android:paddingLeft="@dimen/dimens_15"
+                    android:paddingRight="@dimen/dimens_15"
+                    android:paddingTop="@dimen/dimens_8"
+                    android:paddingBottom="@dimen/dimens_8"
+                    android:background="@drawable/shape_add_pratient"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     <View

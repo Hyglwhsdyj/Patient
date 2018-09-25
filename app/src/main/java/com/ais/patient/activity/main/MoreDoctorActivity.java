@@ -59,6 +59,7 @@ public class MoreDoctorActivity extends MYBaseActivity {
     private RecyclerAdapter<MainDotcor.DataBean> adapter;
     List<MainDotcor.DataBean> list = new ArrayList<>();
     private FlowGroupView mFlowGroupView;
+    private int type;
 
     @Override
     protected int getLayoutId() {
@@ -69,6 +70,7 @@ public class MoreDoctorActivity extends MYBaseActivity {
     protected void initViews(Bundle savedInstanceState) {
         context = this;
         tvTitle.setText("名医推荐");
+        type = getIntent().getIntExtra("type", -1);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.setNestedScrollingEnabled(false);
         mVpSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light,
@@ -120,6 +122,12 @@ public class MoreDoctorActivity extends MYBaseActivity {
                                     startActivity(intent);
                                 }
                             });
+                            if (type==1){
+                                helper.setVisible(R.id.tv_choose_other,true);
+                            }else {
+                                helper.setVisible(R.id.tv_choose_other,false);
+                            }
+
                         }
                     };
                 }else {
