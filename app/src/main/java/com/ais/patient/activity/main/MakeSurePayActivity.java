@@ -107,6 +107,7 @@ public class MakeSurePayActivity extends MYBaseActivity {
                     finish();
                 }else if (status==2){
                     showToast("医生拒绝接诊");
+                    finish();
                 }else if (status==4){
                     timer.cancel();
                     timer = null;
@@ -128,6 +129,17 @@ public class MakeSurePayActivity extends MYBaseActivity {
                         public void onCheckedChanged(RadioGroup group, int checkedId) {
                             if (checkedId==R.id.btn1){
                                 type = 1;
+                            }else if (checkedId==R.id.btn2){
+                                type=2;
+                            }else if (checkedId==R.id.btn3){
+                                type=3;
+                            }
+                        }
+                    });
+                    tvOK.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (type==1){
                                 timer = new Timer();
                                 timerTask = new TimerTask() {
                                     @Override
@@ -137,25 +149,11 @@ public class MakeSurePayActivity extends MYBaseActivity {
                                     }
                                 };
                                 timer.schedule(timerTask,0,10000);
-                            }else if (checkedId==R.id.btn2){
-                                type=2;
-                                showToast("加急问诊取消");
-                                finish();
-                            }else if (checkedId==R.id.btn3){
-                                Intent intent = new Intent(context,OtherDoctorActivity.class);
-                                intent.putExtra("doctorId",doctorId);
-                                startActivity(intent);
-                                type=3;
-                            }
-                        }
-                    });
-                    tvOK.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (type==1){
                                 dialog.dismiss();
                             }else if (type==2){
                                 dialog.dismiss();
+                                showToast("加急问诊取消");
+                                finish();
                             }else if (type==3){
                                 dialog.dismiss();
                                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -173,8 +171,8 @@ public class MakeSurePayActivity extends MYBaseActivity {
                                 tv_yes.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        Intent intent = new Intent(context, MoreDoctorActivity.class);
-                                        intent.putExtra("type",1);
+                                        Intent intent = new Intent(context,OtherDoctorActivity.class);
+                                        intent.putExtra("doctorId",doctorId);
                                         startActivity(intent);
                                         dialog1.dismiss();
                                     }
