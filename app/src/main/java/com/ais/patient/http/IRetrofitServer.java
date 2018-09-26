@@ -217,6 +217,13 @@ public interface IRetrofitServer {
     @GET("/api/doctor/list_recommend.json")
     Call<MainDotcor> getMainDoctorList(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
+    /**
+     * 获取其他医生列表
+     * @return
+     */
+    @GET("/api/order/inquiry/get_other_doctors.json")
+    Call<MainDotcor> getOtherDoctorList(@Query("doctorId") String doctorId);
+
 
     /**
      * 首页全部数据
@@ -302,7 +309,7 @@ public interface IRetrofitServer {
     @GET("/api/coupon/available_quantity.json")
     Call<HttpBaseBean<Integer>> getQuantity(@Query("businessType") String businessType, @Query("fee") double fee);
     @GET("/api/coupon/available_quantity.json")
-    Call<HttpBaseBean<Integer>> getQuantity2(@Query("businessType") String businessType, @Query("fee") double fee,@Query("businessId")String businessId);
+    Call<HttpBaseBean<Integer>> getQuantity2(@Query("businessType") String businessType, @Query("fee") double fee, @Query("businessId") String businessId);
 
     /**
      * 优惠券列表
@@ -314,7 +321,7 @@ public interface IRetrofitServer {
     @GET("/api/coupon/available_coupons.json")
     Call<HttpBaseBean<List<Coupons>>> getCouponsList(@Query("businessType") String businessType, @Query("fee") double fee);
     @GET("/api/coupon/available_coupons.json")
-    Call<HttpBaseBean<List<Coupons>>> getCouponsList2(@Query("businessType") String businessType, @Query("fee") double fee,@Query("businessId") String businessId);
+    Call<HttpBaseBean<List<Coupons>>> getCouponsList2(@Query("businessType") String businessType, @Query("fee") double fee, @Query("businessId") String businessId);
 
     /**
      * 选择日期
@@ -350,7 +357,7 @@ public interface IRetrofitServer {
      * @param
      * @return
      */
-    @POST("/api/order/inquiry/check_pay.json")
+    @GET("/api/order/inquiry/check_pay.json")
     Call<HttpBaseBean<CheckPay>> makeSureExpress(@Query("recordId") String recordId);
 
     //
@@ -919,5 +926,4 @@ public interface IRetrofitServer {
      */
     @GET("/api/doctor/cases_cure_info.json")
     Call<HttpBaseBean<HealthTempDetail>> gteHealthTempDetail(@Query("id") String id);
-
 }

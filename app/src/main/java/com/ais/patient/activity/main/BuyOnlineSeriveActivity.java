@@ -345,7 +345,7 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
         ajaxParams.put("payType","weixinpay_app");
         ajaxParams.put("fromType","ANDROID");
         ajaxParams.put("doctorId",doctorId);
-        ajaxParams.put("settingsId",settingId);
+        //ajaxParams.put("settingsId",settingId);
         if (couponId!=null && !TextUtils.isEmpty(couponId)){
             ajaxParams.put("couponId",couponId);
         }
