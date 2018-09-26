@@ -99,6 +99,7 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
     private double minMoney;
     private String recordId;
     private MyReceiver myReceiver;
+    private String name;
 
     @Override
     protected int getLayoutId() {
@@ -112,7 +113,7 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
         Intent intent = getIntent();
         doctorId = intent.getStringExtra("doctorId");
         String image = intent.getStringExtra("image");
-        String name = intent.getStringExtra("name");
+        name = intent.getStringExtra("name");
         String titles = intent.getStringExtra("titles");
         String depart = intent.getStringExtra("depart");
         String medicalInstitutions = intent.getStringExtra("medicalInstitutions");
@@ -240,7 +241,7 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
 
                 if (isExpress){
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    View inflate = LayoutInflater.from(this).inflate(R.layout.dialog_cancel, null, false);
+                    View inflate = LayoutInflater.from(this).inflate(R.layout.dialog_express, null, false);
                     builder.setView(inflate);
                     final AlertDialog alertDialog = builder.create();
                     alertDialog.show();
@@ -344,6 +345,7 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
         ajaxParams.put("payType","weixinpay_app");
         ajaxParams.put("fromType","ANDROID");
         ajaxParams.put("doctorId",doctorId);
+        //ajaxParams.put("settingsId",settingId);
         if (couponId!=null && !TextUtils.isEmpty(couponId)){
             ajaxParams.put("couponId",couponId);
         }
@@ -397,10 +399,7 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
             int errCode = intent.getIntExtra("errCode", -1);
             if (isExpress){
                 if (errCode==0){
-                    AjaxParams ajaxParams = new AjaxParams();
-                    ajaxParams.put("recordId",recordId);
-                    ConcurrentHashMap<String, Object> urlParams = ajaxParams.getUrlParams();
-                    Call<HttpBaseBean<CheckPay>> call = RetrofitFactory.getInstance(context).makeSureExpress(urlParams);
+                    Call<HttpBaseBean<CheckPay>> call = RetrofitFactory.getInstance(context).makeSureExpress(recordId);
                     new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<CheckPay>() {
 
                         @Override
@@ -414,6 +413,9 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
                                      */
                                     Intent intent1 = new Intent(context, MakeSurePayActivity.class);
                                     intent1.putExtra("AdvertUrl",checkPay.getAdvertUrl());
+                                    intent1.putExtra("recordId",recordId);
+                                    intent1.putExtra("doctorId",doctorId);
+                                    intent1.putExtra("doctorName",name);
                                     startActivity(intent1);
                                 }
                             }
