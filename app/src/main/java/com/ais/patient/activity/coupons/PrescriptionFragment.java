@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +25,12 @@ import com.ais.patient.http.RetrofitFactory;
 import com.ais.patient.util.BannerImageLoader;
 import com.ais.patient.util.ToastUtils;
 import com.ais.patient.widget.NetstedListView;
+import com.ais.patient.widget.VpSwipeRefreshLayout;
 import com.bumptech.glide.Glide;
 import com.pacific.adapter.Adapter;
 import com.pacific.adapter.AdapterHelper;
+import com.pacific.adapter.RecyclerAdapter;
+import com.pacific.adapter.RecyclerAdapterHelper;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -47,12 +53,12 @@ public class PrescriptionFragment extends BaseFragment {
     TextView tvTitle;
     @BindView(R.id.mBanner)
     Banner mBanner;
-    @BindView(R.id.mNetstedListView)
-    NetstedListView mNetstedListView;
-    Unbinder unbinder;
+    @BindView(R.id.mSwipeRefreshLayout)
+    VpSwipeRefreshLayout mSwipeRefreshView;
+    @BindView(R.id.mRecyclerView)
+    RecyclerView mRecyclerView;
     @BindView(R.id.et_search)
     EditText etSearch;
-    Unbinder unbinder1;
     private Context context;
 
     List<Integer> imgList = new ArrayList<>();
@@ -68,6 +74,10 @@ public class PrescriptionFragment extends BaseFragment {
         context = getBaseActivity();
         tvBack.setVisibility(View.GONE);
         tvTitle.setText("传承秘方");
+        mSwipeRefreshView.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light,
+                android.R.color.holo_orange_light, android.R.color.holo_green_light);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        mRecyclerView.setNestedScrollingEnabled(false);
         /**
          * banner轮播
          */
@@ -79,7 +89,18 @@ public class PrescriptionFragment extends BaseFragment {
 
     @Override
     protected void initEvent() {
-
+        /**
+         * 下拉刷新
+         */
+        mSwipeRefreshView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                searchWord=null;
+                etSearch.getText().clear();
+                mSwipeRefreshView.setRefreshing(true);
+                initData();
+            }
+        });
     }
 
     @Override
@@ -89,9 +110,9 @@ public class PrescriptionFragment extends BaseFragment {
 
             @Override
             public void onSuccess(List<Prescription> prescriptions, String info) {
-                    Adapter<Prescription> adapter = new Adapter<Prescription>(context, R.layout.prescription_item, prescriptions) {
+                    RecyclerAdapter<Prescription> adapter = new RecyclerAdapter<Prescription>(context, R.layout.prescription_item, prescriptions) {
                         @Override
-                        protected void convert(AdapterHelper helper, final Prescription item) {
+                        protected void convert(RecyclerAdapterHelper helper, final Prescription item) {
                             ImageView ivCoverImg = helper.getItemView().findViewById(R.id.iv_coverImage);
 
                             TextView tv_title = helper.getItemView().findViewById(R.id.tv_title);
@@ -120,30 +141,22 @@ public class PrescriptionFragment extends BaseFragment {
                             });
                         }
                     };
-                    mNetstedListView.setAdapter(adapter);
+                    mRecyclerView.setAdapter(adapter);
+                if (mSwipeRefreshView.isRefreshing()) {
+                    mSwipeRefreshView.setRefreshing(false);
+                }
             }
 
             @Override
             public void onFailure(String info) {
-
+                ToastUtils.show(context,info);
+                if (mSwipeRefreshView.isRefreshing()) {
+                    mSwipeRefreshView.setRefreshing(false);
+                }
             }
         });
     }
 
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder1 = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder1.unbind();
-    }
 
     @OnClick(R.id.tv_ok)
     public void onViewClicked() {

@@ -357,7 +357,7 @@ public interface IRetrofitServer {
      * @param
      * @return
      */
-    @GET("/api/order/inquiry/check_pay.json")
+    @POST("/api/order/inquiry/check_pay.json")
     Call<HttpBaseBean<CheckPay>> makeSureExpress(@Query("recordId") String recordId);
 
     //
@@ -413,7 +413,7 @@ public interface IRetrofitServer {
      * @return
      */
     @GET("/api/interrogation/judge_patient.json")
-    Call<HttpBaseBean<PatientType>> judgePatient(@Query("recordId")String recordId);
+    Call<HttpBaseBean<PatientType>> judgePatient(@Query("recordId") String recordId);
 
     /**
      * 上传图片
@@ -471,7 +471,7 @@ public interface IRetrofitServer {
     @GET("/api/appraise/list.json")
     Call<HttpBaseBean<List<Appraise>>> getAppraiseListALL(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
     @GET("/api/appraise/list.json")
-    Call<HttpBaseBean<List<Appraise>>> getAppraiseList(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize,@Query("businessType")String businessType);
+    Call<HttpBaseBean<List<Appraise>>> getAppraiseList(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize, @Query("businessType") String businessType);
 
     /**
      * 提交评价
@@ -581,7 +581,7 @@ public interface IRetrofitServer {
      * @return
      */
     @POST("/api/pay_order/to_pay.json")
-    Call<HttpBaseBean<WetChat>> toPayChatOnline(@Query("businessId") String businessId, @Query("businessType") String businessType,@Query("clientType") String clientType);
+    Call<HttpBaseBean<WetChat>> toPayChatOnline(@Query("businessId") String businessId, @Query("businessType") String businessType, @Query("clientType") String clientType);
 
     /**
      * 中药调理服务订单支付
@@ -670,7 +670,7 @@ public interface IRetrofitServer {
      * @return
      */
     @PUT("/api/shippingaddress/set_preferred.json")
-    Call<HttpBaseBean<Object>> setMyAdressMand(@Query("id")String id);
+    Call<HttpBaseBean<Object>> setMyAdressMand(@Query("id") String id);
 
     /**
      * 提供获取指定ID的配送地址
@@ -767,7 +767,7 @@ public interface IRetrofitServer {
      * @return
      */
     @GET("/api/coupon/list.json")
-    Call<HttpBaseBean<List<MyCpupons>>> getMyCouponsList(@Query("pageNum")int pageNum, @Query("pageSize")int pageSize, @Query("type")String type);
+    Call<HttpBaseBean<List<MyCpupons>>> getMyCouponsList(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize, @Query("type") String type);
 
     /**
      * 选择优惠券后实际价格
@@ -776,7 +776,7 @@ public interface IRetrofitServer {
      * @return
      */
     @POST("/api/pay_order/get_fact_fee.json")
-    Call<HttpBaseBean<FactFee>> getRealyPrice(@Query("couponId") String couponId,@Query("fee") double fee);
+    Call<HttpBaseBean<FactFee>> getRealyPrice(@Query("couponId") String couponId, @Query("fee") double fee);
 
     /**
      * 动态详情
@@ -851,7 +851,7 @@ public interface IRetrofitServer {
      * @return
      */
     @GET
-    Call<HttpBaseBean<WichStep>> getWhichStep(@Url String url, @Query("recordId")String recordId);
+    Call<HttpBaseBean<WichStep>> getWhichStep(@Url String url, @Query("recordId") String recordId);
 
     /**
      * 支付成功后确认
@@ -859,7 +859,7 @@ public interface IRetrofitServer {
      * @return
      */
     @GET("/api/pay_order/check_pay.json")
-    Call<HttpBaseBean<Object>> makePaySure(@Query("businessId") String businessId,@Query("businessType") String businessType);
+    Call<HttpBaseBean<Object>> makePaySure(@Query("businessId") String businessId, @Query("businessType") String businessType);
 
     /**
      * 我的处方单列表等入口
@@ -899,9 +899,11 @@ public interface IRetrofitServer {
      */
     @GET("/api/order/inquiry/list_record.json")
     Call<HttpBaseBean<List<ChatOnLineList>>> gteHealthRecord(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize,
-    @Query("patientId") String patientId,@Query("customTime") int customTime,@Query("startTime") String startTime,@Query("endTime")String endTime);
+    @Query("patientId") String patientId, @Query("customTime") int customTime, @Query("startTime") String startTime, @Query("endTime") String endTime);
 
-
+    @GET("/api/order/inquiry/list_record.json")
+    Call<HttpBaseBean<List<ChatOnLineList>>> gteHealthRecord2(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize,
+                                                             @Query("patientId") String patientId, @Query("customTime") int customTime);
     /**
      * 客服 id
      * @return
@@ -926,4 +928,13 @@ public interface IRetrofitServer {
      */
     @GET("/api/doctor/cases_cure_info.json")
     Call<HttpBaseBean<HealthTempDetail>> gteHealthTempDetail(@Query("id") String id);
+
+    /**
+     * 保存选择
+     * @param recordId
+     * @param chooseType
+     * @return
+     */
+    @PUT("/api/order/inquiry/save_urgent_choose")
+    Call<HttpBaseBean<Object>> requsetExpressChoose(@Query("recordId") String recordId, @Query("chooseType") String chooseType);
 }

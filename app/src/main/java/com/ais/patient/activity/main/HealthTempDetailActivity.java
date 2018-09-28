@@ -72,7 +72,7 @@ public class HealthTempDetailActivity extends MYBaseActivity {
                     String name = healthTempDetail.getName();
                     String sex = healthTempDetail.getSex();
                     String age = healthTempDetail.getAge();
-                    tvMsg.setText(name+"："+sex+","+age+"岁");
+                    tvMsg.setText(name+"："+sex+",  "+age);
                     tvDisease.setText(healthTempDetail.getDisease());
                     tvDiseaseBefore.setText(healthTempDetail.getBeforeInfo());
                     tvAfterInfo.setText(healthTempDetail.getAfterInfo());

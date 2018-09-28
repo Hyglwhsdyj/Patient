@@ -61,7 +61,7 @@
                     android:id="@+id/iv_icon"
                     android:layout_width="@dimen/dimens_50"
                     android:layout_height="@dimen/dimens_50"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@mipmap/ic_logo"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

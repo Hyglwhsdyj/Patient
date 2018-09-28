@@ -49,7 +49,7 @@ public class ChatOnlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         void cancel(String id);
 
 
-        void onItenClick(String doctorId, String recordId,String explainState);
+        void onItenClick(String doctorId, String recordId, String explainState);
     }
 
 
@@ -86,8 +86,12 @@ public class ChatOnlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     .transform(new CircleTransform())
                     .into(holder.ivIcon);
             holder.tvName.setText(list.get(position).getName());
-            holder.tvTitle.setText(list.get(position).getTitles());
-            holder.tvDepart.setText(list.get(position).getDepart());
+            if (list.get(position).getTitles()!=null){
+                holder.tvTitle.setText(list.get(position).getTitles());
+            }
+            if (list.get(position).getDepart()!=null){
+                holder.tvDepart.setText(list.get(position).getDepart());
+            }
             String explainState = list.get(position).getExplainState();
             if (explainState.equals("1")) {
                 holder.tvExplainState.setText("24小时内图文、语音、视频咨询问诊服务");

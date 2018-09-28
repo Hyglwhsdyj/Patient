@@ -43,7 +43,7 @@ public class MyPatientListActivity extends MYBaseActivity implements BGARefreshL
     private Context context;
     private DefineBAGRefreshWithLoadView mDefineBAGRefreshWithLoadView;
     private int pageNum = 1;
-    private int pageSize = 1;
+    private int pageSize = 100;
     List<MyPatient> list = new ArrayList<>();
     private RecyclerAdapter<MyPatient> adapter;
 

@@ -15,8 +15,8 @@
 
         <com.ais.patient.widget.CircleImageView
             android:id="@+id/iv_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@mipmap/ic_logo"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,4 +57,8 @@
             android:background="@drawable/shape_patient_bg"
             android:padding="@dimen/dimens_5"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_1"
+        android:background="@color/color_line"/>
 </LinearLayout>

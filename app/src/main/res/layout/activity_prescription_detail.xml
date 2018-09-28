@@ -13,7 +13,8 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -94,20 +95,7 @@
                     android:drawablePadding="@dimen/dimens_6"
                     android:textStyle="bold"
                     android:textSize="18sp" />
-                <TextView
-                    android:id="@+id/tv_chat_online"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="在线问诊"
-                    android:textColor="#ffbb7e3c"
-                    android:textSize="12sp"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="@dimen/dimens_11"
-                    android:paddingRight="@dimen/dimens_11"
-                    android:paddingTop="@dimen/dimens_6"
-                    android:paddingBottom="@dimen/dimens_6"
-                    android:background="@drawable/shape_chat_online"
-                    android:layout_alignParentRight="true"/>
+
             </RelativeLayout>
 
             <TextView
@@ -149,4 +137,19 @@
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/tv_chat_online"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="在线问诊"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:layout_centerVertical="true"
+        android:paddingTop="@dimen/dimens_15"
+        android:paddingBottom="@dimen/dimens_15"
+        android:gravity="center"
+        android:layout_margin="@dimen/dimens_15"
+        android:background="@drawable/shape_add_pratient"
+        android:layout_alignParentRight="true"/>
 </LinearLayout>

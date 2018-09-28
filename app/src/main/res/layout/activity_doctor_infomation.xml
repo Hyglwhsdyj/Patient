@@ -41,7 +41,7 @@
                         android:layout_width="@dimen/dimens_0"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="图片、语音"
+                        android:text="图文、语音"
                         android:textSize="@dimen/sp_13"
                         android:layout_marginLeft="@dimen/dimens_10"
                         android:textColor="@color/color_main"/>
@@ -192,6 +192,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="康复案例"
+                    android:drawableLeft="@mipmap/ic_health"
+                    android:drawablePadding="@dimen/dimens_5"
                     android:textColor="#ffe02e14"
                     android:textSize="15sp"
                     android:textStyle="bold"

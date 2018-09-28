@@ -176,7 +176,7 @@ public class FlowGroupView extends ViewGroup {
      * 设置它支持 marginLayoutParams
      */
     @Override
-    public ViewGroup.LayoutParams generateLayoutParams(AttributeSet attrs) {
+    public LayoutParams generateLayoutParams(AttributeSet attrs) {
 
         return new MarginLayoutParams(getContext(),attrs);
     }

@@ -117,4 +117,7 @@ dependencies {
     compile 'com.zhy:flowlayout-lib:1.0.3'
     compile project(path: ':uikit')
     implementation files('libs/agora-sig-sdk.jar')
+
+    //视频播放
+    compile 'cn.jzvd:jiaozivideoplayer:6.3.1'
 }

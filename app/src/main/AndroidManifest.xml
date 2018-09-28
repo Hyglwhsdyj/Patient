@@ -227,7 +227,9 @@
         <activity android:name=".activity.mine.MyPatientListActivity" />
         <activity android:name=".activity.mine.MyPatientDetailActivity" />
         <activity android:name=".activity.main.HealthTempDetailActivity" />
-        <activity android:name=".activity.main.MakeSurePayActivity" />
+        <activity android:name=".activity.main.MakeSurePayActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.OtherDoctorActivity"></activity>
     </application>
 

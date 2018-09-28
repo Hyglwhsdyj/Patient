@@ -85,6 +85,7 @@ public class FindDoctorActivity extends MYBaseActivity implements BGARefreshLayo
     private String diseaseID;
     private String name;
     private int type;
+    private boolean isDisease=true;
 
     @Override
     protected int getLayoutId() {
@@ -96,6 +97,11 @@ public class FindDoctorActivity extends MYBaseActivity implements BGARefreshLayo
         Intent intent = getIntent();
         tvTitle.setText("找专家");
         searchWord = intent.getStringExtra("disease");
+        isDisease = intent.getBooleanExtra("isDisease", true);
+        if (searchWord!=null){
+            etSearch.setText(searchWord);
+            etSearch.setSelection(etSearch.getText().length());
+        }
         diseaseId = intent.getStringExtra("diseaseId");
         departId = intent.getStringExtra("departId");
         name = intent.getStringExtra("name");
@@ -365,29 +371,7 @@ public class FindDoctorActivity extends MYBaseActivity implements BGARefreshLayo
                     if (diseaesBeans!=null && diseaesBeans.size()>0){
                         diseaesList.addAll(diseaesBeans);
                         adapter2.notifyDataSetChanged();
-                        /*final Adapter<MainAllInfo.DiseaesBean> adapter = new Adapter<MainAllInfo.DiseaesBean>(FindDoctorActivity.this,R.layout.choose_item, diseaesBeans) {
-                            @Override
-                            protected void convert(final AdapterHelper helper, final MainAllInfo.DiseaesBean item) {
-                                helper.setText(R.id.tv_name,item.getDiseaseName());
-                                if (!TextUtils.isEmpty(item.getDiseaseName()) && !TextUtils.isEmpty(item.getDiseaseId())){
-                                    tvName.setText("以下医生擅长治疗["+item.getDiseaseName()+"]");
-                                }else {
-                                    tvName.setVisibility(View.GONE);
-                                }
-                                helper.getItemView().setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        diseaseId = item.getDiseaseId();
-                                        tvName.setText("以下医生擅长治疗["+item.getDiseaseName()+"]");
-                                        pageNum = 1;
-                                        handler.sendEmptyMessageDelayed(0 , 500);
-                                        popupwindow.dismiss();
-                                    }
-                                });
-                            }
 
-                        };
-                        mGridView.setAdapter(adapter);*/
                     }
                 }
 
@@ -405,22 +389,41 @@ public class FindDoctorActivity extends MYBaseActivity implements BGARefreshLayo
                     if (departsBeans!=null && departsBeans.size()>0){
                         departsList.addAll(departsBeans);
                         adapter2.notifyDataSetChanged();
-                        /*Adapter<MainAllInfo.DepartsBean> adapter = new Adapter<MainAllInfo.DepartsBean>(FindDoctorActivity.this,R.layout.choose_item,departsBeans) {
-                            @Override
-                            protected void convert(AdapterHelper helper, final MainAllInfo.DepartsBean item) {
-                                helper.setText(R.id.tv_name,item.getDepartName());
-                                helper.getItemView().setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        departId = item.getDepartId();
-                                        pageNum = 1;
-                                        handler.sendEmptyMessageDelayed(0 , 500);
-                                        popupwindow.dismiss();
-                                    }
-                                });
-                            }
-                        };
-                        mGridView.setAdapter(adapter);*/
+                    }
+                }
+
+                @Override
+                public void onFailure(String info) {
+
+                }
+            });
+        }else if (isDisease){
+            Call<HttpBaseBean<List<MainAllInfo.DiseaesBean>>> call = RetrofitFactory.getInstance(this).getNotGoodList();
+            new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<List<MainAllInfo.DiseaesBean>>() {
+
+                @Override
+                public void onSuccess(List<MainAllInfo.DiseaesBean> diseaesBeans, String info) {
+                    if (diseaesBeans!=null && diseaesBeans.size()>0){
+                        diseaesList.addAll(diseaesBeans);
+                        adapter2.notifyDataSetChanged();
+
+                    }
+                }
+
+                @Override
+                public void onFailure(String info) {
+                    showToast(info);
+                }
+            });
+        }else if (!isDisease){
+            Call<HttpBaseBean<List<MainAllInfo.DepartsBean>>> call = RetrofitFactory.getInstance(this).getDepartmentList();
+            new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<List<MainAllInfo.DepartsBean>>() {
+
+                @Override
+                public void onSuccess(List<MainAllInfo.DepartsBean> departsBeans, String info) {
+                    if (departsBeans!=null && departsBeans.size()>0){
+                        departsList.addAll(departsBeans);
+                        adapter2.notifyDataSetChanged();
                     }
                 }
 

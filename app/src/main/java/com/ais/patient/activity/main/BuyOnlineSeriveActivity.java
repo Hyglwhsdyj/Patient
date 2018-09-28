@@ -237,9 +237,8 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
                 showPopWindow();
                 break;
             case R.id.tv_express:
-                isExpress = !isExpress;
 
-                if (isExpress){
+                if (!isExpress){
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     View inflate = LayoutInflater.from(this).inflate(R.layout.dialog_express, null, false);
                     builder.setView(inflate);
@@ -256,6 +255,7 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
                     tvOk.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            isExpress = !isExpress;
                             tvExpress.setText("取消加急");
                             fee = fee*2;
                             tvFee.setText("￥"+fee+"/次");
@@ -264,6 +264,7 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
                         }
                     });
                 }else {
+                    isExpress = !isExpress;
                     tvExpress.setText("我要加急");
                     fee = fee/2;
                     tvFee.setText("￥"+fee+"/次");
@@ -398,6 +399,7 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
         public void onReceive(final Context context, Intent intent) {
             int errCode = intent.getIntExtra("errCode", -1);
             if (isExpress){
+                //18688430886 198289
                 if (errCode==0){
                     Call<HttpBaseBean<CheckPay>> call = RetrofitFactory.getInstance(context).makeSureExpress(recordId);
                     new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<CheckPay>() {

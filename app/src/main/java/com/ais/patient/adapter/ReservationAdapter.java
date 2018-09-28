@@ -31,7 +31,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
     }
     public interface onIntemClickLister{
         void toPay(String id);
-        void cancel(String id,int status);
+        void cancel(String id, int status);
     }
 
     public ReservationAdapter(Context context, List<Reservation> list) {

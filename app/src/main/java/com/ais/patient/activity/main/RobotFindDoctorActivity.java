@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.ais.patient.R;
 import com.ais.patient.base.MYBaseActivity;
 import com.ais.patient.been.HttpBaseBean;
-import com.ais.patient.been.MainDotcor;
 import com.ais.patient.been.SymptomReback;
 import com.ais.patient.http.BaseCallback;
 import com.ais.patient.http.RetrofitFactory;
@@ -61,9 +60,13 @@ public class RobotFindDoctorActivity extends MYBaseActivity implements TextWatch
     LinearLayout llMsg;
     @BindView(R.id.ll_disease)
     LinearLayout llDisease;
+    @BindView(R.id.tv_normal)
+    TextView tvNormal;
+    @BindView(R.id.tv_yin)
+    TextView tvYin;
     private String searchWord;
     private Context context;
-    private String symptom="";
+    private String symptom = "";
     private FlowGroupView mFlowGroupView;
     private Adapter<String> adapter;
     private List<String> dominanceDiseases;
@@ -95,7 +98,7 @@ public class RobotFindDoctorActivity extends MYBaseActivity implements TextWatch
 
     }
 
-    @OnClick({R.id.tv_back, R.id.tv_clear,R.id.tv_isWhat,R.id.tv_commit,R.id.tv_normal,R.id.tv_yin,R.id.tv_find_more})
+    @OnClick({R.id.tv_back, R.id.tv_clear, R.id.tv_isWhat, R.id.tv_commit, R.id.tv_normal, R.id.tv_yin, R.id.tv_find_more})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_back:
@@ -129,7 +132,7 @@ public class RobotFindDoctorActivity extends MYBaseActivity implements TextWatch
 
                         llMsg.setVisibility(View.VISIBLE);
 
-                        if (dominanceDiseases.size()<4){
+                        if (dominanceDiseases.size() < 4) {
                             tvFindMore.setVisibility(View.GONE);
                         }
 
@@ -142,33 +145,39 @@ public class RobotFindDoctorActivity extends MYBaseActivity implements TextWatch
                 });
                 break;
             case R.id.tv_normal:
-                if (dominanceDiseases.size()>0){
-                    Adapter<String> adapter = new Adapter<String>(context,R.layout.diseasr_item2, dominanceDiseases) {
+                tvNormal.setBackgroundResource(R.drawable.shape_disease_bg2);
+                tvNormal.setTextColor(getResources().getColor(R.color.white));
+
+                tvYin.setBackgroundResource(R.drawable.shape_disease_bg);
+                tvYin.setTextColor(getResources().getColor(R.color.blue_5));
+
+                if (dominanceDiseases!=null) {
+                    Adapter<String> adapter = new Adapter<String>(context, R.layout.diseasr_item2, dominanceDiseases) {
                         @Override
                         protected void convert(AdapterHelper helper, String item) {
-                            helper.setText(R.id.tv_text,item);
+                            helper.setText(R.id.tv_text, item);
                         }
                     };
                     mMabDisease.setAdapter(adapter);
                 }
 
-                if (dominanceDoctors.size()<4){
+                if (dominanceDoctors.size() < 4) {
                     tvFindMore.setVisibility(View.GONE);
                 }
-                if (dominanceDoctors.size()>0){
-                    RecyclerAdapter<SymptomReback.DominanceDoctorsBean> adapter1 = new RecyclerAdapter<SymptomReback.DominanceDoctorsBean>(context, R.layout.main_doctor_item,dominanceDoctors) {
+                if (dominanceDoctors!=null) {
+                    RecyclerAdapter<SymptomReback.DominanceDoctorsBean> adapter1 = new RecyclerAdapter<SymptomReback.DominanceDoctorsBean>(context, R.layout.main_doctor_item, dominanceDoctors) {
                         @Override
                         protected void convert(RecyclerAdapterHelper helper, final SymptomReback.DominanceDoctorsBean item) {
                             ImageView ivIcon = (ImageView) helper.getItemView().findViewById(R.id.iv_icon);
                             Picasso.with(context).load(item.getImage()).transform(new CircleTransform()).into(ivIcon);
-                            helper.setText(R.id.tv_name,item.getName());
-                            helper.setText(R.id.tv_title,item.getTitles());
-                            helper.setText(R.id.tv_depart,item.getDepart());
-                            helper.setText(R.id.tv_medicalInstitutions,item.getMedicalInstitutions());
-                            helper.setText(R.id.tv_fee,item.getFee()+"元/次");
+                            helper.setText(R.id.tv_name, item.getName());
+                            helper.setText(R.id.tv_title, item.getTitles());
+                            helper.setText(R.id.tv_depart, item.getDepart());
+                            helper.setText(R.id.tv_medicalInstitutions, item.getMedicalInstitutions());
+                            helper.setText(R.id.tv_fee, item.getFee() + "元/次");
                             final List<String> diseaseExpertise = item.getDiseaseExpertise();
                             mFlowGroupView = (FlowGroupView) helper.getItemView().findViewById(R.id.mFlowGroupView);
-                            if (diseaseExpertise!=null && diseaseExpertise.size()>0){
+                            if (diseaseExpertise != null && diseaseExpertise.size() > 0) {
                                 for (int i = 0; i < diseaseExpertise.size(); i++) {
                                     addTextView(diseaseExpertise.get(i));
                                 }
@@ -177,8 +186,8 @@ public class RobotFindDoctorActivity extends MYBaseActivity implements TextWatch
                                 @Override
                                 public void onClick(View v) {
                                     String id = item.getDoctorId();
-                                    Intent intent = new Intent(context,DoctorInfomationActivity.class);
-                                    intent.putExtra("id",id);
+                                    Intent intent = new Intent(context, DoctorInfomationActivity.class);
+                                    intent.putExtra("id", id);
                                     startActivity(intent);
                                 }
                             });
@@ -189,30 +198,35 @@ public class RobotFindDoctorActivity extends MYBaseActivity implements TextWatch
 
                 break;
             case R.id.tv_yin:
-                if (recessiveDiseases.size()>0){
-                    Adapter<String> adapter2 = new Adapter<String>(context,R.layout.diseasr_item2, recessiveDiseases) {
+                tvYin.setBackgroundResource(R.drawable.shape_disease_bg2);
+                tvYin.setTextColor(getResources().getColor(R.color.white));
+
+                tvNormal.setBackgroundResource(R.drawable.shape_disease_bg);
+                tvNormal.setTextColor(getResources().getColor(R.color.blue_5));
+                if (recessiveDiseases!=null) {
+                    Adapter<String> adapter2 = new Adapter<String>(context, R.layout.diseasr_item2, recessiveDiseases) {
                         @Override
                         protected void convert(AdapterHelper helper, String item) {
-                            helper.setText(R.id.tv_text,item);
+                            helper.setText(R.id.tv_text, item);
                         }
                     };
                     mMabDisease.setAdapter(adapter2);
                 }
 
-                if (recessiveDoctors.size()>0){
-                    RecyclerAdapter<SymptomReback.RecessiveDoctorsBean> adapter3 = new RecyclerAdapter<SymptomReback.RecessiveDoctorsBean>(context, R.layout.main_doctor_item,recessiveDoctors) {
+                if (recessiveDoctors!=null) {
+                    RecyclerAdapter<SymptomReback.RecessiveDoctorsBean> adapter3 = new RecyclerAdapter<SymptomReback.RecessiveDoctorsBean>(context, R.layout.main_doctor_item, recessiveDoctors) {
                         @Override
                         protected void convert(RecyclerAdapterHelper helper, final SymptomReback.RecessiveDoctorsBean item) {
                             ImageView ivIcon = (ImageView) helper.getItemView().findViewById(R.id.iv_icon);
                             Picasso.with(context).load(item.getImage()).transform(new CircleTransform()).into(ivIcon);
-                            helper.setText(R.id.tv_name,item.getName());
-                            helper.setText(R.id.tv_title,item.getTitles());
-                            helper.setText(R.id.tv_depart,item.getDepart());
-                            helper.setText(R.id.tv_medicalInstitutions,item.getMedicalInstitutions());
-                            helper.setText(R.id.tv_fee,item.getFee()+"元/次");
+                            helper.setText(R.id.tv_name, item.getName());
+                            helper.setText(R.id.tv_title, item.getTitles());
+                            helper.setText(R.id.tv_depart, item.getDepart());
+                            helper.setText(R.id.tv_medicalInstitutions, item.getMedicalInstitutions());
+                            helper.setText(R.id.tv_fee, item.getFee() + "元/次");
                             final List<String> diseaseExpertise = item.getDiseaseExpertise();
                             mFlowGroupView = (FlowGroupView) helper.getItemView().findViewById(R.id.mFlowGroupView);
-                            if (diseaseExpertise!=null && diseaseExpertise.size()>0){
+                            if (diseaseExpertise != null && diseaseExpertise.size() > 0) {
                                 for (int i = 0; i < diseaseExpertise.size(); i++) {
                                     addTextView(diseaseExpertise.get(i));
                                 }
@@ -221,8 +235,8 @@ public class RobotFindDoctorActivity extends MYBaseActivity implements TextWatch
                                 @Override
                                 public void onClick(View v) {
                                     String id = item.getDoctorId();
-                                    Intent intent = new Intent(context,DoctorInfomationActivity.class);
-                                    intent.putExtra("id",id);
+                                    Intent intent = new Intent(context, DoctorInfomationActivity.class);
+                                    intent.putExtra("id", id);
                                     startActivity(intent);
                                 }
                             });
@@ -235,7 +249,7 @@ public class RobotFindDoctorActivity extends MYBaseActivity implements TextWatch
             case R.id.tv_find_more:
                 String disease = dominanceDiseases.get(0);
                 Intent intent = new Intent(this, FindDoctorActivity.class);
-                intent.putExtra("disease",disease);
+                intent.putExtra("disease", disease);
                 startActivity(intent);
                 break;
         }
@@ -266,23 +280,23 @@ public class RobotFindDoctorActivity extends MYBaseActivity implements TextWatch
 
             @Override
             public void onSuccess(List<String> strings, String info) {
-                if (strings!=null && strings.size()>0){
-                    adapter = new Adapter<String>(context, R.layout.diseasr_item,strings) {
+                if (strings != null && strings.size() > 0) {
+                    adapter = new Adapter<String>(context, R.layout.diseasr_item, strings) {
                         @Override
                         protected void convert(AdapterHelper helper, final String item) {
-                            helper.setText(R.id.tv_name,item);
+                            helper.setText(R.id.tv_name, item);
                             helper.getItemView().setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     tvCommit.setVisibility(View.VISIBLE);
                                     tvClear.setVisibility(View.VISIBLE);
-                                    if (symptom.length()<1){
-                                        symptom = symptom+"+"+item;
-                                    }else {
-                                        symptom="+"+symptom+"+"+item;
+                                    if (symptom.length() < 1) {
+                                        symptom = symptom + "+" + item;
+                                    } else {
+                                        symptom = "+" + symptom + "+" + item;
                                     }
                                     symptom = symptom.substring(1, symptom.length());
-                                    tvMyDisease.setText("我的症状："+symptom);
+                                    tvMyDisease.setText("我的症状：" + symptom);
                                 }
                             });
                         }
@@ -301,5 +315,12 @@ public class RobotFindDoctorActivity extends MYBaseActivity implements TextWatch
     @Override
     public void afterTextChanged(Editable s) {
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

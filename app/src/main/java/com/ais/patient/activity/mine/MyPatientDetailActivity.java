@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -22,7 +23,10 @@ import com.ais.patient.base.MYBaseActivity;
 import com.ais.patient.been.ChatOnLineList;
 import com.ais.patient.been.HttpBaseBean;
 import com.ais.patient.been.ImInfo;
+import com.ais.patient.been.Patient;
+import com.ais.patient.been.PatientDoctor;
 import com.ais.patient.been.PatientInfo;
+import com.ais.patient.been.WetChat;
 import com.ais.patient.http.BaseCallback;
 import com.ais.patient.http.RetrofitFactory;
 import com.ais.patient.util.ToastUtils;
@@ -36,6 +40,9 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -93,10 +100,11 @@ public class MyPatientDetailActivity extends MYBaseActivity {
     RadioButton rdb4;
     @BindView(R.id.tv_search)
     TextView tvSearch;
-
+    @BindView(R.id.mSwipeRefreshLayout)
+    VpSwipeRefreshLayout mSwipeRefreshView;
     private String id;
     private Context context;
-    private int customTime = 0;
+    private int customTime;
     private String startTime;
     private String endTime;
     private ChatOnlineAdapter adapter;
@@ -116,13 +124,15 @@ public class MyPatientDetailActivity extends MYBaseActivity {
         mEmptyView.setVisibility(View.VISIBLE);
         mRecycleView.setLayoutManager(new LinearLayoutManager(this));
         mRecycleView.setNestedScrollingEnabled(false);
-
+        mSwipeRefreshView.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light,
+                android.R.color.holo_orange_light, android.R.color.holo_green_light);
         rdb1.setChecked(true);
-        customTime = 0;
+        customTime = 1;
         initDatePicker();
         id = getIntent().getStringExtra("id");
         toShowPatient(id);
         setRecyclerCommadapter();
+        setData();
     }
 
     private void toShowPatient(String id) {
@@ -175,6 +185,73 @@ public class MyPatientDetailActivity extends MYBaseActivity {
         });
     }
 
+    /** 数据填充 */
+    private void setRecyclerCommadapter() {
+        adapter = new ChatOnlineAdapter(context,list);
+        mRecycleView.setAdapter(adapter);
+        adapter.setOnIntemClickLister(new ChatOnlineAdapter.onIntemClickLister() {
+            @Override
+            public void toPay(String doctorId, String recordId) {
+            }
+
+            @Override
+            public void cancel(String id) {
+            }
+
+            @Override
+            public void onItenClick(final String doctorId, final String recordId, String explainState) {
+                if (explainState.equals("2")){
+                    //跳医生主页
+                    Intent intent = new Intent(context, DoctorInfomationActivity.class);
+                    intent.putExtra("id",doctorId);
+                    startActivity(intent);
+                }else if (explainState.equals("1")){
+                    /**
+                     * 跳问诊聊天详情
+                     */
+                    UserUtils.saveChatOnLineOrMeeting(context,100);
+                    UserUtils.saveChatOnLineDOCTORID(context,doctorId);
+                    UserUtils.saveChatOnLineRECORDID(context,recordId);
+                    final Call<HttpBaseBean<ImInfo>> call = RetrofitFactory.getInstance(context).getImInfo(recordId);
+                    new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<ImInfo>() {
+
+                        @Override
+                        public void onSuccess(ImInfo imInfo, String info) {
+                            if (imInfo!=null){
+                                final String im_doctor_accid = imInfo.getIm_doctor_accid();
+                                LoginInfo loginInfo = new LoginInfo(imInfo.getIm_accid(), imInfo.getIm_token());// config...
+                                NIMClient.getService(AuthService.class).login(loginInfo).setCallback(new RequestCallback<LoginInfo>() {
+                                    @Override
+                                    public void onSuccess(LoginInfo param) {
+                                        /*NimUIKit.loginSuccess(param.getAccount());
+                                        NimUIKit.startP2PSession(context,im_doctor_accid);*/
+                                        P2PMessageActivity.start(context,im_doctor_accid,null,null,"医生",recordId,doctorId);
+                                    }
+
+                                    @Override
+                                    public void onFailed(int code) {
+                                        ToastUtils.show(context,"登录失败");
+                                    }
+
+                                    @Override
+                                    public void onException(Throwable exception) {
+                                        ToastUtils.show(context,"登录异常");
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(String info) {
+
+                        }
+                    });
+                }
+
+            }
+
+        });
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -189,17 +266,45 @@ public class MyPatientDetailActivity extends MYBaseActivity {
 
     @Override
     protected void initEvent() {
+        /**
+         * 下拉刷新
+         */
+        mSwipeRefreshView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                pageNum = 1;
+                list.clear();
+                adapter.notifyDataSetChanged();
+                mSwipeRefreshView.setRefreshing(true);
+                setData();
+            }
+        });
+
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.rdb_1) {
-                    customTime = 0;
-                } else if (checkedId == R.id.rdb_2) {
                     customTime = 1;
-                } else if (checkedId == R.id.rdb_3) {
+                    startTime="";
+                    endTime="";
+                    tvStartTime.setText("开始时间");
+                    tvEndTime.setText("结束时间");
+                } else if (checkedId == R.id.rdb_2) {
                     customTime = 2;
-                } else if (checkedId == R.id.rdb_4) {
+                    startTime="";
+                    endTime="";
+                    tvStartTime.setText("开始时间");
+                    tvEndTime.setText("结束时间");
+                } else if (checkedId == R.id.rdb_3) {
                     customTime = 3;
+                    startTime="";
+                    endTime="";
+                } else if (checkedId == R.id.rdb_4) {
+                    customTime = 4;
+                    startTime="";
+                    endTime="";
+                    tvStartTime.setText("开始时间");
+                    tvEndTime.setText("结束时间");
                 }
             }
         });
@@ -238,74 +343,6 @@ public class MyPatientDetailActivity extends MYBaseActivity {
     /**
      * 数据填充
      */
-    private void setRecyclerCommadapter() {
-        adapter = new ChatOnlineAdapter(context, list);
-        mRecycleView.setAdapter(adapter);
-        adapter.setOnIntemClickLister(new ChatOnlineAdapter.onIntemClickLister() {
-            @Override
-            public void toPay(String doctorId, String recordId) {
-
-            }
-
-            @Override
-            public void cancel(String id) {
-
-            }
-
-            @Override
-            public void onItenClick(final String doctorId, final String recordId, String explainState) {
-                if (explainState.equals("2")) {
-                    //跳医生主页
-                    Intent intent = new Intent(context, DoctorInfomationActivity.class);
-                    intent.putExtra("id", doctorId);
-                    startActivity(intent);
-                } else if (explainState.equals("1")) {
-                    /**
-                     * 跳问诊聊天详情
-                     */
-                    UserUtils.saveChatOnLineOrMeeting(context, 100);
-                    UserUtils.saveChatOnLineDOCTORID(context, doctorId);
-                    UserUtils.saveChatOnLineRECORDID(context, recordId);
-                    final Call<HttpBaseBean<ImInfo>> call = RetrofitFactory.getInstance(context).getImInfo(recordId);
-                    new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<ImInfo>() {
-
-                        @Override
-                        public void onSuccess(ImInfo imInfo, String info) {
-                            if (imInfo != null) {
-                                final String im_doctor_accid = imInfo.getIm_doctor_accid();
-                                LoginInfo loginInfo = new LoginInfo(imInfo.getIm_accid(), imInfo.getIm_token());// config...
-                                NIMClient.getService(AuthService.class).login(loginInfo).setCallback(new RequestCallback<LoginInfo>() {
-                                    @Override
-                                    public void onSuccess(LoginInfo param) {
-                                        /*NimUIKit.loginSuccess(param.getAccount());
-                                        NimUIKit.startP2PSession(context,im_doctor_accid);*/
-                                        P2PMessageActivity.start(context, im_doctor_accid, null, null, "医生", recordId, doctorId);
-                                    }
-
-                                    @Override
-                                    public void onFailed(int code) {
-                                        ToastUtils.show(context, "登录失败");
-                                    }
-
-                                    @Override
-                                    public void onException(Throwable exception) {
-                                        ToastUtils.show(context, "登录异常");
-                                    }
-                                });
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(String info) {
-
-                        }
-                    });
-                }
-
-            }
-
-        });
-    }
 
 
     @OnClick({R.id.tv_back,R.id.tv_start_time, R.id.tv_end_time, R.id.tv_search})
@@ -315,49 +352,72 @@ public class MyPatientDetailActivity extends MYBaseActivity {
                 finish();
                 break;
             case R.id.tv_start_time:
-                customDatePicker1.show(tvStartTime.getText().toString());
+                String string = tvStartTime.getText().toString();
+                if (string!=null && string.equals("开始时间")){
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+                    String now = sdf.format(new Date());
+                    customDatePicker1.show(now);
+                }else {
+                    customDatePicker1.show(tvStartTime.getText().toString());
+                }
                 break;
             case R.id.tv_end_time:
                 // 日期格式为yyyy-MM-dd HH:mm
-                customDatePicker2.show(tvEndTime.getText().toString());
+                String string1 = tvEndTime.getText().toString();
+                if (string1!=null && string1.equals("结束时间")){
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+                    String now = sdf.format(new Date());
+                    customDatePicker2.show(now);
+                }else {
+                    customDatePicker2.show(tvEndTime.getText().toString());
+                }
                 break;
             case R.id.tv_search:
                 list.clear();
                 adapter.notifyDataSetChanged();
+                showProgressDialog();
                 setData();
                 break;
         }
     }
 
     private void setData() {
-        if (customTime == 0) {
-            if (TextUtils.isEmpty(startTime)) {
-                showToast("请选择开始时间");
-            }else if (TextUtils.isEmpty(endTime)) {
-                showToast("请选择结束时间");
-            }else {
-                Call<HttpBaseBean<List<ChatOnLineList>>> call = RetrofitFactory.getInstance(this).gteHealthRecord(pageNum, 10, id, customTime, startTime, endTime);
-                new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<List<ChatOnLineList>>() {
+        if (!TextUtils.isEmpty(startTime) && !TextUtils.isEmpty(endTime)) {
+            customTime=0;
+            Call<HttpBaseBean<List<ChatOnLineList>>> call = RetrofitFactory.getInstance(this).gteHealthRecord(pageNum, 10, id, customTime, startTime, endTime);
+            new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<List<ChatOnLineList>>() {
 
-                    @Override
-                    public void onSuccess(List<ChatOnLineList> chatOnLineLists, String info) {
-                        if (chatOnLineLists.size()<1){
-                            showToast("没有记录了");
-                        }
+                @Override
+                public void onSuccess(List<ChatOnLineList> chatOnLineLists, String info) {
+                    if (chatOnLineLists.size()>0){
                         list.addAll(chatOnLineLists);
                         adapter.notifyDataSetChanged();
-
+                    }else {
+                        if (pageNum>1){
+                            showToast("没有更多记录了");
+                        }
                     }
-
-                    @Override
-                    public void onFailure(String info) {
-                        ToastUtils.show(context, info);
-
+                    if (mSwipeRefreshView.isRefreshing()) {
+                        mSwipeRefreshView.setRefreshing(false);
                     }
-                });
-            }
+                    if (isShowingProgressDialog()){
+                        dismissProgressDialog();
+                    }
+                }
+
+                @Override
+                public void onFailure(String info) {
+                    ToastUtils.show(context, info);
+                    if (mSwipeRefreshView.isRefreshing()) {
+                        mSwipeRefreshView.setRefreshing(false);
+                    }
+                    if (isShowingProgressDialog()){
+                        dismissProgressDialog();
+                    }
+                }
+            });
         }else {
-            Call<HttpBaseBean<List<ChatOnLineList>>> call = RetrofitFactory.getInstance(this).gteHealthRecord(pageNum, 10, id, customTime, startTime, endTime);
+            Call<HttpBaseBean<List<ChatOnLineList>>> call = RetrofitFactory.getInstance(this).gteHealthRecord2(pageNum, 10, id, customTime);
             new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<List<ChatOnLineList>>() {
 
 
@@ -366,25 +426,40 @@ public class MyPatientDetailActivity extends MYBaseActivity {
                     if (chatOnLineLists.size()>0){
                         list.addAll(chatOnLineLists);
                         adapter.notifyDataSetChanged();
+                    }else {
+                        if (pageNum>1){
+                            showToast("没有更多记录了");
+                        }
+                    }
+                    if (mSwipeRefreshView.isRefreshing()) {
+                        mSwipeRefreshView.setRefreshing(false);
+                    }
+                    if (isShowingProgressDialog()){
+                        dismissProgressDialog();
                     }
                 }
 
                 @Override
                 public void onFailure(String info) {
                     ToastUtils.show(context, info);
+                    if (mSwipeRefreshView.isRefreshing()) {
+                        mSwipeRefreshView.setRefreshing(false);
+                    }
+                    if (isShowingProgressDialog()){
+                        dismissProgressDialog();
+                    }
                 }
             });
         }
-
     }
 
 
 
     private void initDatePicker() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
         String now = sdf.format(new Date());
         tvStartTime.setText(now);
-        tvEndTime.setText(now);
+        tvEndTime.setText(now);*/
 
         // 回调接口，获得选中的时间
         // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行

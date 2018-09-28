@@ -104,6 +104,7 @@ public class DepartmentListActivity extends MYBaseActivity {
                 }else {
                     Intent intent = new Intent(this,FindDoctorActivity.class);
                     intent.putExtra("disease",search);
+                    intent.putExtra("isDisease",false);
                     startActivity(intent);
                 }
                 break;

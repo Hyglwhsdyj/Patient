@@ -69,7 +69,8 @@ public class HomeFragment extends BaseFragment {
     Banner mBanner;
     @BindView(R.id.iv_robot_long)
     ImageView ivRobotLong;
-
+    @BindView(R.id.iv_h)
+    ImageView ivH;
     @BindView(R.id.mNestedScrollView)
     MyScrollView mScrollView;
 
@@ -137,12 +138,14 @@ public class HomeFragment extends BaseFragment {
                     sa.setDuration(100);//时间
                     sa.setFillAfter(true);//此句尤其注意,不写的话,你按下,他动画过后马上恢复原样。这句代码就是阻止它恢复
                     ivRobotLong.startAnimation(sa);
+                    ivH.startAnimation(sa);
                 }else if(action==MotionEvent.ACTION_UP){//松开，放大恢复
                     ScaleAnimation   sa=new  ScaleAnimation(0.85f, 1.0f,0.85f,1.0f,Animation.RELATIVE_TO_SELF
                             ,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
                     sa.setDuration(100);//时间
                     sa.setFillAfter(true);
                     ivRobotLong.startAnimation(sa);
+                    ivH.startAnimation(sa);
                     startActivity(new Intent(context, RobotFindDoctorActivity.class));
                 }
                 return false;

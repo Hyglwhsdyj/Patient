@@ -52,6 +52,7 @@
                 android:textSize="@dimen/sp_16"
                 android:textColor="@color/grey6"
                 android:button="@null"
+                android:drawablePadding="@dimen/dimens_5"
                 android:drawableLeft="@drawable/select_pay_choose"/>
             <RadioButton
                 android:id="@+id/btn2"
@@ -61,6 +62,7 @@
                 android:textSize="@dimen/sp_16"
                 android:textColor="@color/grey6"
                 android:button="@null"
+                android:drawablePadding="@dimen/dimens_5"
                 android:layout_marginTop="@dimen/dimens_5"
                 android:drawableLeft="@drawable/select_pay_choose"/>
             <RadioButton
@@ -70,6 +72,7 @@
                 android:text="选择其他医生加急问诊"
                 android:textSize="@dimen/sp_16"
                 android:textColor="@color/grey6"
+                android:drawablePadding="@dimen/dimens_5"
                 android:button="@null"
                 android:layout_marginTop="@dimen/dimens_5"
                 android:drawableLeft="@drawable/select_pay_choose"/>

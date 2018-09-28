@@ -105,6 +105,7 @@ public class NotGoodListActivity extends MYBaseActivity {
                 }else {
                     Intent intent = new Intent(this,FindDoctorActivity.class);
                     intent.putExtra("disease",search);
+                    intent.putExtra("isDisease",true);
                     startActivity(intent);
                 }
                 break;
