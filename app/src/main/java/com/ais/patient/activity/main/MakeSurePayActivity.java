@@ -16,9 +16,16 @@ import com.ais.patient.R;
 import com.ais.patient.base.MYBaseActivity;
 import com.ais.patient.been.CheckStatus;
 import com.ais.patient.been.HttpBaseBean;
+import com.ais.patient.been.ImInfo;
 import com.ais.patient.http.BaseCallback;
 import com.ais.patient.http.RetrofitFactory;
+import com.ais.patient.util.ToastUtils;
 import com.bumptech.glide.Glide;
+import com.netease.nim.uikit.business.session.activity.P2PMessageActivity;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.nimlib.sdk.auth.AuthService;
+import com.netease.nimlib.sdk.auth.LoginInfo;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -44,6 +51,7 @@ public class MakeSurePayActivity extends MYBaseActivity {
     private Timer timer;
     private TimerTask timerTask;
     private AlertDialog dialog;
+    private AlertDialog dialog1;
 
     @Override
     protected int getLayoutId() {
@@ -115,13 +123,40 @@ public class MakeSurePayActivity extends MYBaseActivity {
                     timerTask.cancel();
                     timerTask = null;
                     showToast("医生已接诊");
-                    Intent intent = new Intent(MakeSurePayActivity.this, PatientInfomationActivity.class);
-                    intent.putExtra("doctorId", doctorId);
-                    intent.putExtra("recordId", recordId);
-                    if (isShowingProgressDialog()) {
-                        dismissProgressDialog();
-                    }
-                    startActivity(intent);
+                    final Call<HttpBaseBean<ImInfo>> call = RetrofitFactory.getInstance(context).getImInfo(recordId);
+                    new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener<ImInfo>() {
+
+                        @Override
+                        public void onSuccess(ImInfo imInfo, String info) {
+                            if (imInfo != null) {
+                                final String im_doctor_accid = imInfo.getIm_doctor_accid();
+                                LoginInfo loginInfo = new LoginInfo(imInfo.getIm_accid(), imInfo.getIm_token());// config...
+                                NIMClient.getService(AuthService.class).login(loginInfo).setCallback(new RequestCallback<LoginInfo>() {
+                                    @Override
+                                    public void onSuccess(LoginInfo param) {
+                                                    /*NimUIKit.loginSuccess(param.getAccount());
+                                                    NimUIKit.startP2PSession(context,im_doctor_accid);*/
+                                        P2PMessageActivity.start(context, im_doctor_accid, null, null, "0", recordId, doctorId);
+                                    }
+
+                                    @Override
+                                    public void onFailed(int code) {
+                                        ToastUtils.show(context, "登录失败");
+                                    }
+
+                                    @Override
+                                    public void onException(Throwable exception) {
+                                        ToastUtils.show(context, "登录异常");
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(String info) {
+
+                        }
+                    });
                     finish();
                 } else if (status == 2) {
                     timer.cancel();
@@ -179,28 +214,7 @@ public class MakeSurePayActivity extends MYBaseActivity {
                             } else if (type == 3) {
                                 requsetExpressChoose("other");
                                 dialog.dismiss();
-                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                View inflate = LayoutInflater.from(context).inflate(R.layout.dialog_choose_other, null, false);
-                                builder.setView(inflate);
-                                final AlertDialog dialog1 = builder.create();
-                                TextView tv_yes = (TextView) inflate.findViewById(R.id.tv_yes);
-                                TextView tv_no = (TextView) inflate.findViewById(R.id.tv_no);
-                                tv_no.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        dialog1.dismiss();
-                                    }
-                                });
-                                tv_yes.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        Intent intent = new Intent(context, OtherDoctorActivity.class);
-                                        intent.putExtra("doctorId", doctorId);
-                                        startActivity(intent);
-                                        dialog1.dismiss();
-                                    }
-                                });
-                                dialog1.show();
+
                             }
                             dialog.dismiss();
                         }
@@ -222,12 +236,40 @@ public class MakeSurePayActivity extends MYBaseActivity {
         });
     }
 
-    private void requsetExpressChoose(String chooseType) {
+    private void requsetExpressChoose(final String chooseType) {
         Call<HttpBaseBean<Object>> call = RetrofitFactory.getInstance(this).requsetExpressChoose(recordId, chooseType);
         new BaseCallback(call).handleResponse(new BaseCallback.ResponseListener() {
             @Override
             public void onSuccess(Object o, String info) {
                 dialog.dismiss();
+                if (chooseType.equals("other")){
+                    Intent intent = new Intent(context, OtherDoctorActivity.class);
+                    intent.putExtra("doctorId", doctorId);
+                    startActivity(intent);
+                    dialog1.dismiss();
+                    /*AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    View inflate = LayoutInflater.from(context).inflate(R.layout.dialog_choose_other, null, false);
+                    builder.setView(inflate);
+                    dialog1 = builder.create();
+                    TextView tv_yes = (TextView) inflate.findViewById(R.id.tv_yes);
+                    TextView tv_no = (TextView) inflate.findViewById(R.id.tv_no);
+                    tv_no.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog1.dismiss();
+                        }
+                    });
+                    tv_yes.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(context, OtherDoctorActivity.class);
+                            intent.putExtra("doctorId", doctorId);
+                            startActivity(intent);
+                            dialog1.dismiss();
+                        }
+                    });
+                    dialog1.show();*/
+                }
             }
 
             @Override

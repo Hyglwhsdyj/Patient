@@ -935,6 +935,6 @@ public interface IRetrofitServer {
      * @param chooseType
      * @return
      */
-    @PUT("/api/order/inquiry/save_urgent_choose")
+    @PUT("/api/order/inquiry/save_urgent_choose.json")
     Call<HttpBaseBean<Object>> requsetExpressChoose(@Query("recordId") String recordId, @Query("chooseType") String chooseType);
 }

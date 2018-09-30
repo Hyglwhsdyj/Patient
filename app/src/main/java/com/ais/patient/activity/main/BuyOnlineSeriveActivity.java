@@ -252,6 +252,7 @@ public class BuyOnlineSeriveActivity extends MYBaseActivity {
                             alertDialog.dismiss();
                         }
                     });
+                    // 18126158478	 123456
                     tvOk.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

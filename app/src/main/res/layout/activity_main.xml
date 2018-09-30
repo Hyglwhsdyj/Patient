@@ -59,7 +59,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:button="@null"
-            android:text="秘方"
+            android:text="特色专科"
             android:textSize="@dimen/sp_13"
             android:textColor="@color/seleted_color_mian"
             android:gravity="center"
